@@ -67,6 +67,7 @@
   /* rhythm */
   --gutter:clamp(22px,6vw,88px);
   --rail:clamp(0px,11vw,150px);
+  --rail-gap:clamp(20px,3vw,44px);
   --measure:66ch;
   --bay:clamp(76px,11vw,140px);
   --canvas:1240px;
@@ -435,6 +436,25 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .credential-links a:hover{color:var(--accent)}
 @media(max-width:820px){.credentials{grid-template-columns:1fr}}
 
+/* ── 10b · EDITORIAL RAIL — notebook margin + section numbering ───── */
+.railed{position:relative;padding-left:calc(var(--gutter) + var(--rail) + var(--rail-gap))}
+.railed>.rail{position:absolute;left:var(--gutter);top:var(--bay);width:var(--rail);margin:0;
+  font:500 var(--fs-meta)/1.55 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.railed>.rail b{display:block;margin-bottom:.55rem;color:var(--flag);font-family:var(--font-serif);font-weight:400;
+  font-size:clamp(1.55rem,2.3vw,2.15rem);letter-spacing:0;line-height:1;font-variant-numeric:lining-nums tabular-nums}
+.railed>.rail span{display:block;max-width:13ch}
+.railed::before{content:"";display:block;position:absolute;top:0;bottom:0;width:1px;background:var(--line-2);
+  left:calc(var(--gutter) + var(--rail) + var(--rail-gap)/2)}
+.beliefs.railed>.rail{color:color-mix(in srgb,var(--panel-ink) 54%,transparent)}
+.beliefs.railed::before{background:color-mix(in srgb,var(--panel-ink) 20%,transparent)}
+@media(max-width:960px){
+  .railed{padding-left:var(--gutter)}
+  .railed>.rail{position:static;width:auto;margin:0 0 1.25rem;display:flex;align-items:baseline;gap:1.1ch}
+  .railed>.rail b{margin:0;font-size:1.2rem}
+  .railed>.rail span{max-width:none}
+  .railed::before{display:none}
+}
+
 /* ── 11 · FINAL CTA + FOOTER ─────────────────────────────────── */
 .final-cta{position:relative;min-height:620px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1rem;
   padding:var(--bay) var(--gutter);overflow:hidden;background:var(--ground-2);border-top:1px solid var(--line)}
@@ -761,15 +781,16 @@ a.reach-row:hover .reach-value{color:var(--accent)}
     <div><strong>5K/DAY</strong><span>REQUESTS SERVED IN PRODUCTION</span></div>
   </section>
 
-  <section class="manifesto section-shell reveal">
-    <p class="section-kicker">01 / POINT OF VIEW</p>
+  <section class="manifesto section-shell railed reveal">
+    <p class="rail"><b>&sect; 01</b><span>Point of view</span></p>
     <h2>AI demos are easy. <em>Production is where the plot begins.</em></h2>
     <p class="manifesto-copy">Three of them are below, rebuilt as case studies — architecture, trade-offs, and the numbers that came out the other side.</p>
   </section>
 
-  <section id="systems" class="systems section-shell">
+  <section id="systems" class="systems section-shell railed">
+    <p class="rail"><b>&sect; 02</b><span>Selected systems</span></p>
     <div class="section-heading reveal">
-      <div><p class="section-kicker">02 / SELECTED SYSTEMS</p><h2>Evidence, not adjectives.</h2></div>
+      <div><h2>Evidence, not adjectives.</h2></div>
       <p>Production architectures reconstructed as NDA-safe case studies.</p>
     </div>
     <div class="project-list">
@@ -797,9 +818,10 @@ a.reach-row:hover .reach-value{color:var(--accent)}
     </div>
   </section>
 
-  <section id="projects" class="public-work section-shell">
+  <section id="projects" class="public-work section-shell railed">
+    <p class="rail"><b>&sect; 03</b><span>Open source</span></p>
     <div class="section-heading reveal">
-      <div><p class="section-kicker">03 / OPEN SOURCE</p><h2>Applied ML, in public.</h2></div>
+      <div><h2>Applied ML, in public.</h2></div>
       <p>Independent builds across healthcare, media, vision and mobility — curated for depth, not repo count.</p>
     </div>
     <div class="glimpse-stats reveal">
@@ -819,8 +841,9 @@ a.reach-row:hover .reach-value{color:var(--accent)}
     </div>
   </section>
 
-  <section class="explorer section-shell reveal">
-    <div class="explorer-title"><p class="section-kicker">04 / INSIDE THE SYSTEM</p><h2>Trace the intelligence.</h2></div>
+  <section class="explorer section-shell railed reveal">
+    <p class="rail"><b>&sect; 04</b><span>Inside the system</span></p>
+    <div class="explorer-title"><h2>Trace the intelligence.</h2></div>
     <div class="explorer-panel">
       <div class="explorer-tabs" role="tablist" id="explorerTabs" aria-label="System architecture">
         <button role="tab" id="tab-voice" aria-controls="systemPanel" data-mode="voice" aria-selected="true">VOICE AI</button>
@@ -834,9 +857,10 @@ a.reach-row:hover .reach-value{color:var(--accent)}
     </div>
   </section>
 
-  <section class="writing-preview section-shell">
+  <section class="writing-preview section-shell railed">
+    <p class="rail"><b>&sect; 05</b><span>Writing</span></p>
     <div class="section-heading reveal">
-      <div><p class="section-kicker">05 / WRITING</p><h2>Making complex AI harder to misunderstand.</h2></div>
+      <div><h2>Making complex AI harder to misunderstand.</h2></div>
       <a href="#/writing" data-nav="writing">VIEW ALL WRITING →</a>
     </div>
     <div class="article-grid">
@@ -845,8 +869,9 @@ a.reach-row:hover .reach-value{color:var(--accent)}
     </div>
   </section>
 
-  <section class="credentials section-shell reveal">
-    <div class="credential-main"><p class="section-kicker">06 / SIGNAL</p><h2>Built in production.<br />Explained in public.</h2><p>M.Tech, IIT Kharagpur · Senior GenAI &amp; LLM Specialist · Sparkle Award · Star Performer for two consecutive years.</p></div>
+  <section class="credentials section-shell railed reveal">
+    <p class="rail"><b>&sect; 06</b><span>Signal</span></p>
+    <div class="credential-main"><h2>Built in production.<br />Explained in public.</h2><p>M.Tech, IIT Kharagpur · Senior GenAI &amp; LLM Specialist · Sparkle Award · Star Performer for two consecutive years.</p></div>
     <div class="credential-links">
       <a href="https://github.com/AkshayAI007" target="_blank" rel="noreferrer">&lt;/&gt; GITHUB →</a>
       <a href="https://in.linkedin.com/in/akshaybawaliwale" target="_blank" rel="noreferrer">◈ LINKEDIN →</a>
@@ -885,18 +910,20 @@ a.reach-row:hover .reach-value{color:var(--accent)}
       </div>
     </div>
   </section>
-  <section class="beliefs section-shell reveal">
-    <p class="section-kicker">WHAT I BELIEVE</p>
+  <section class="beliefs section-shell railed reveal">
+    <p class="rail"><b>&sect; 01</b><span>On belief</span></p>
     <blockquote>&ldquo;The future of AI will not be decided by the most impressive model. It will be decided by who can design the most reliable system around it.&rdquo;</blockquote>
   </section>
-  <section class="timeline section-shell">
+  <section class="timeline section-shell railed">
+    <p class="rail"><b>&sect; 02</b><span>Trajectory</span></p>
     <article class="reveal"><span>2012&mdash;2016</span><h2>B.E. &middot; MECHANICAL ENGINEERING</h2><p>SSGI, Bhilai. First-principles problem-solving, before the problems were machine-learning ones.</p></article>
     <article class="reveal"><span>2019&mdash;2021</span><h2>M.TECH &middot; IIT KHARAGPUR</h2><p>Earth System Science and Technology; complex data, spatial systems and research discipline.</p></article>
     <article class="reveal"><span>2022</span><h2>CENTRE OF EXCELLENCE IN AI</h2><p>Computer-vision research for satellite imagery, CNNs and U-Net segmentation.</p></article>
     <article class="reveal"><span>2024&mdash;NOW</span><h2>BUZZBOARD &middot; GENAI</h2><p>Agentic systems, enterprise Voice AI, RAG, evaluation and production delivery.</p></article>
     <article class="reveal"><span>NEXT</span><h2>AI &amp; ML ARCHITECTURE</h2><p>Designing intelligence as an accountable system&mdash;not a magical API call.</p></article>
   </section>
-  <section class="about-split section-shell">
+  <section class="about-split section-shell railed">
+    <p class="rail"><b>&sect; 03</b><span>Now</span></p>
     <div class="reveal"><p class="section-kicker">CURRENTLY</p><h2>Senior Generative AI &amp; LLM Specialist</h2><p>Architecting agentic AI and RAG systems in production, while staying hands-on with the <span class="ml-accent">applied ML &mdash; XGBoost, clustering, predictive modelling</span> behind every model choice.</p></div>
     <div class="reveal"><p class="section-kicker">RECOGNITION</p><h2>Sparkle Award<br/>Star Performer &times;2</h2></div>
   </section>
