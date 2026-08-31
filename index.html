@@ -479,25 +479,34 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .index-hero h1,.case-hero h1{margin:1rem 0 1.4rem;max-width:18ch;font-family:var(--font-serif);font-weight:400;font-size:var(--fs-h1);line-height:1;letter-spacing:-.02em}
 .index-hero h1 em,.case-hero h1 em{display:block;font-style:italic;color:var(--accent)}
 .index-hero>p:last-child,.case-hero>p:last-of-type{max-width:56ch;color:var(--ink-2);font-size:var(--fs-lead);font-weight:300;line-height:1.55}
-/* About opens on a full-bleed portrait: image fills the section, copy sits
-   bottom-left over a warm scrim that fades into the page ground. */
-.about-hero-section{display:block;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0}
-.about-hero-banner{position:relative;isolation:isolate;display:flex;align-items:flex-end;
-  min-height:clamp(30rem,82vh,52rem);overflow:hidden;border-bottom:1px solid var(--line)}
-.about-hero-banner>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;
-  z-index:0;border:0;max-height:none;
-  filter:grayscale(1) contrast(1.03) brightness(.9) sepia(.3) hue-rotate(-14deg) saturate(.82)}
-:root[data-theme="light"] .about-hero-banner>img{filter:grayscale(1) contrast(1) brightness(1.02) sepia(.38) saturate(.82)}
+/* About opens on a full-bleed portrait. The studio shot is composed with the
+   subject hard right and deep negative space on the left, so the image is
+   anchored right and the copy sits in that empty space, vertically centred,
+   over a left-edge scrim that fades out well before the figure. */
+.about-hero-section{display:block;padding:0}
+.about-hero-banner{position:relative;isolation:isolate;display:flex;align-items:center;
+  min-height:clamp(28rem,74vh,42rem);overflow:hidden;border-bottom:1px solid var(--line)}
+.about-hero-banner>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:92% center;z-index:0;border:0;max-height:none;
+  filter:grayscale(1) contrast(1.05) brightness(.92) sepia(.24) hue-rotate(-12deg) saturate(.8)}
+:root[data-theme="light"] .about-hero-banner>img{filter:grayscale(1) contrast(1) brightness(1) sepia(.32) saturate(.85)}
 .about-hero-banner::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(20,19,16,.28) 0%,rgba(20,19,16,0) 26%,rgba(20,19,16,.62) 62%,var(--ground) 100%),
-             linear-gradient(90deg,rgba(20,19,16,.72) 0%,rgba(20,19,16,.18) 46%,rgba(20,19,16,0) 78%)}
+  background:linear-gradient(90deg,var(--ground) 0%,rgba(20,19,16,.74) 30%,rgba(20,19,16,.12) 56%,rgba(20,19,16,0) 74%),
+             linear-gradient(0deg,var(--ground) 0%,rgba(20,19,16,0) 20%)}
 :root[data-theme="light"] .about-hero-banner::after{
-  background:linear-gradient(180deg,rgba(244,239,228,.2) 0%,rgba(244,239,228,0) 24%,rgba(244,239,228,.66) 64%,var(--ground) 100%),
-             linear-gradient(90deg,rgba(244,239,228,.82) 0%,rgba(244,239,228,.24) 48%,rgba(244,239,228,0) 80%)}
-.about-hero-copy{position:relative;z-index:2;max-width:46ch;padding:0 var(--gutter) clamp(2.4rem,6vw,4rem)}
-.about-hero-copy h1{margin:1rem 0 1.4rem}
+  background:linear-gradient(90deg,var(--ground) 0%,rgba(244,239,228,.8) 30%,rgba(244,239,228,.14) 56%,rgba(244,239,228,0) 74%),
+             linear-gradient(0deg,var(--ground) 0%,rgba(244,239,228,0) 20%)}
+.about-hero-copy{position:relative;z-index:2;margin-right:auto;width:min(100%,clamp(19rem,42vw,32rem));
+  padding:clamp(2.4rem,6vw,4rem) var(--gutter)}
+.about-hero-copy h1{margin:1rem 0 1.3rem;max-width:none;font-size:clamp(2.15rem,3.7vw,3.15rem);line-height:1.03}
 .about-hero-copy>p:last-child{color:var(--ink-2);font-size:var(--fs-lead);font-weight:300;line-height:1.55}
-@media(max-width:860px){.about-hero-banner{min-height:clamp(26rem,72vh,40rem)}.about-hero-banner>img{object-position:center 18%}}
+@media(max-width:760px){
+  .about-hero-banner{display:block;min-height:0}
+  .about-hero-banner>img{position:relative;height:clamp(14rem,58vw,20rem);object-position:88% 16%}
+  .about-hero-banner::after{display:none}
+  .about-hero-copy{width:auto;max-width:44ch;padding:clamp(1.8rem,7vw,2.6rem) var(--gutter) 0}
+  .about-hero-copy h1{font-size:var(--fs-h1)}
+}
 
 .beliefs{background:var(--panel);color:var(--panel-ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .beliefs .section-kicker{color:var(--accent)}
