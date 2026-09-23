@@ -244,6 +244,14 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
   opacity:.24;mix-blend-mode:luminosity;transform:scale(1.04)}
 :root[data-theme="light"] .hero-ambient img{filter:grayscale(1) brightness(1.05) contrast(.95) sepia(.5);opacity:.14;mix-blend-mode:multiply}
 .hero-ambient::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--ground) 92%),linear-gradient(90deg,var(--ground) 8%,transparent 60%)}
+/* aurora ribbons — WebGL layer; the photo underneath stays as the no-WebGL fallback */
+.hero-aurora{position:absolute;inset:0;z-index:1;pointer-events:none;will-change:transform;opacity:0;transition:opacity 1.8s var(--ease-out);
+  -webkit-mask-image:radial-gradient(120% 90% at 78% 52%,#000 30%,transparent 72%);mask-image:radial-gradient(120% 90% at 78% 52%,#000 30%,transparent 72%)}
+.hero-aurora canvas{display:block;width:100%!important;height:100%!important}
+.hero-aurora.is-live{opacity:1}
+.hero.has-aurora .hero-ambient img{opacity:.1}
+:root[data-theme="light"] .hero.has-aurora .hero-ambient img{opacity:.06}
+@media(max-width:1050px){.hero-aurora{-webkit-mask-image:radial-gradient(140% 60% at 50% 78%,#000 30%,transparent 75%);mask-image:radial-gradient(140% 60% at 50% 78%,#000 30%,transparent 75%)}}
 .hero-parallax-layer{position:absolute;inset:-10%;z-index:1;pointer-events:none;opacity:.5;
   background-image:radial-gradient(circle,color-mix(in srgb,var(--accent) 30%,transparent) 1px,transparent 1.5px);
   background-size:44px 44px;mask-image:radial-gradient(circle at 72% 42%,#000,transparent 66%)}
@@ -732,6 +740,7 @@ a.reach-row:hover .reach-value{color:var(--accent)}
 
   <section class="hero section-shell" id="heroSection">
     <div class="hero-ambient" aria-hidden="true"><img src="https://images.unsplash.com/photo-1543722530-d2c3201371e7?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1543722530-d2c3201371e7?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1543722530-d2c3201371e7?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1543722530-d2c3201371e7?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1543722530-d2c3201371e7?auto=format&fit=crop&q=70&w=1920 1920w" sizes="100vw" alt="" width="1920" height="1280" loading="eager" fetchpriority="high" decoding="async"></div>
+    <div class="hero-aurora" id="heroAurora" aria-hidden="true"></div>
     <div class="hero-parallax-layer" id="heroParallax" aria-hidden="true"></div>
     <div class="hero-copy" id="heroCopy">
       <p class="eyebrow"><span></span> GENERATIVE AI &amp; MACHINE LEARNING ENGINEER · LLM SYSTEMS · APPLIED ML</p>
@@ -1865,6 +1874,140 @@ if (downloadResumeBtn) {
 })();
 
 /* Boot is handled by render({instant:true}) in the router above. */
+</script>
+
+<!-- Aurora ribbons (hero). Port of the React/R3F "AuroraRibbons" component to plain three.js,
+     tinted from the site's own --accent / --accent-2 / --flag tokens. -->
+<script type="module">
+const host = document.getElementById('heroAurora');
+const hero = document.getElementById('heroSection');
+(async () => {
+  if (!host || !hero) return;
+  const probe = document.createElement('canvas');
+  if (!(probe.getContext('webgl2') || probe.getContext('webgl'))) return;
+  let THREE;
+  try { THREE = await import('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js'); }
+  catch (e) { return; } // photo fallback stays
+
+  const RIBBONS = 5, SPEED = 0.55, AMPLITUDE = 0.8;
+  const root = document.documentElement;
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+  renderer.setClearColor(0x000000, 0);
+  host.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+  camera.position.set(0, 0.4, 7.5);
+
+  const VERT = `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`;
+  const FRAG = `uniform vec3 uColorA; uniform vec3 uColorB; uniform float uOpacity; varying vec2 vUv;
+    void main(){ vec3 c = mix(uColorA, uColorB, vUv.x);
+      float along = sin(vUv.x * 3.14159265); float edge = sin(vUv.y * 3.14159265);
+      gl_FragColor = vec4(c, along * pow(edge, 1.6) * uOpacity); }`;
+
+  const group = new THREE.Group();
+  group.rotation.set(-0.12, 0, -0.16);   // slight diagonal sweep toward the neural core
+  group.position.set(1.1, 0.15, 0);
+  scene.add(group);
+
+  const ribbons = [];
+  for (let i = 0; i < RIBBONS; i++) {
+    const geo = new THREE.PlaneGeometry(14, 0.62, 160, 1);
+    const mat = new THREE.ShaderMaterial({
+      vertexShader: VERT, fragmentShader: FRAG, transparent: true, depthWrite: false, side: THREE.DoubleSide,
+      uniforms: { uColorA: { value: new THREE.Color() }, uColorB: { value: new THREE.Color() }, uOpacity: { value: 0.5 } },
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.z = (i - (RIBBONS - 1) / 2) * 0.7;
+    group.add(mesh);
+    const pos = geo.getAttribute('position');
+    const baseY = new Float32Array(pos.count);
+    for (let k = 0; k < pos.count; k++) baseY[k] = pos.getY(k);
+    ribbons.push({ mesh, mat, pos, baseY, phase: (i / RIBBONS) * Math.PI * 2, yOff: (i - (RIBBONS - 1) / 2) * 0.3 });
+  }
+
+  // colours come from the live CSS tokens, so the ribbons follow the theme toggle
+  function applyTheme() {
+    const cs = getComputedStyle(root);
+    const tok = (n, d) => new THREE.Color((cs.getPropertyValue(n).trim() || d));
+    const dark = (root.getAttribute('data-theme') || 'dark') !== 'light';
+    const a = tok('--accent', '#7f9dff'), b = tok('--accent-2', '#a9beff'), f = tok('--flag', '#e8724a');
+    const ink = tok('--ink-3', '#928979');
+    ribbons.forEach((r, i) => {
+      r.mat.uniforms.uColorA.value.copy(a);
+      r.mat.uniforms.uColorB.value.copy(i === 2 ? f : (i % 2 ? ink : b));
+      r.mat.blending = dark ? THREE.AdditiveBlending : THREE.NormalBlending;
+      r.mat.uniforms.uOpacity.value = dark ? (i === 2 ? 0.3 : 0.36) : 0.32;
+      r.mat.needsUpdate = true;
+    });
+  }
+  applyTheme();
+  new MutationObserver(() => { applyTheme(); if (!running) draw(lastT); })
+    .observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+  function resize() {
+    const w = host.clientWidth, h = host.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    // keep the ribbons filling narrow (mobile) heroes
+    const narrow = w / h < 1;
+    camera.fov = narrow ? 46 : 38;
+    camera.updateProjectionMatrix();
+    group.position.set(narrow ? 0 : 2.0, narrow ? -1.6 : 0.05, 0);
+    group.rotation.z = narrow ? -0.22 : -0.14;
+  }
+  new ResizeObserver(() => { resize(); if (!running) draw(lastT); }).observe(host);
+  resize();
+
+  // gentle pointer parallax
+  let px = 0, py = 0, tx = 0, ty = 0;
+  window.addEventListener('pointermove', (e) => {
+    tx = (e.clientX / window.innerWidth - 0.5); ty = (e.clientY / window.innerHeight - 0.5);
+  }, { passive: true });
+
+  let lastT = 0;
+  function draw(t) {
+    for (const r of ribbons) {
+      const { pos, baseY, phase, yOff } = r;
+      for (let k = 0; k < pos.count; k++) {
+        const x = pos.getX(k);
+        const wave = Math.sin(x * 0.5 + t * 0.8 + phase) * AMPLITUDE
+                   + Math.sin(x * 0.85 - t * 0.5 + phase * 1.7) * AMPLITUDE * 0.35;
+        pos.setY(k, baseY[k] + wave + yOff);
+        pos.setZ(k, Math.cos(x * 0.35 + t * 0.35 + phase) * 0.5);
+      }
+      pos.needsUpdate = true;
+    }
+    px += (tx - px) * 0.04; py += (ty - py) * 0.04;
+    camera.position.x = px * 0.6; camera.position.y = 0.4 - py * 0.35;
+    camera.lookAt(0, 0, 0);
+    renderer.render(scene, camera);
+  }
+
+  let running = false, visible = false, raf = 0, clockStart = performance.now(), pausedAt = 0;
+  function loop(now) {
+    lastT = ((now - clockStart) / 1000) * SPEED;
+    draw(lastT);
+    raf = requestAnimationFrame(loop);
+  }
+  function sync() {
+    const should = visible && !document.hidden && !mq.matches;
+    if (should && !running) { running = true; clockStart += performance.now() - pausedAt; raf = requestAnimationFrame(loop); }
+    else if (!should && running) { running = false; pausedAt = performance.now(); cancelAnimationFrame(raf); }
+  }
+  pausedAt = performance.now();
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }).observe(hero);
+  document.addEventListener('visibilitychange', sync);
+  mq.addEventListener?.('change', () => { sync(); if (!running) draw(lastT); });
+
+  draw(2.2); lastT = 2.2;               // a composed still frame for reduced motion
+  host.classList.add('is-live');
+  hero.classList.add('has-aurora');
+})();
 </script>
 </body>
 </html>
