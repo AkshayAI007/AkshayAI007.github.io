@@ -356,6 +356,86 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .tile-body p{color:var(--ink-2);font-size:var(--fs-small);line-height:1.55}
 .tile-body .badge{align-self:flex-start;padding:.4em .7em;border:1px solid var(--line-2);font:500 var(--fs-micro)/1 var(--font-mono);letter-spacing:.1em;color:var(--ink-2)}
 .glimpse-cta{margin-top:2.4rem}
+/* project orbit — four cards on a clockwise ring: front → left → back → right → front */
+.orbit{--w:clamp(260px,30vw,360px);position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:clamp(8px,2vw,28px);margin-top:clamp(1rem,3vw,2rem)}
+.orbit-stage{position:relative;height:calc(var(--w) * 50 / 36 + 90px);perspective:1500px;touch-action:pan-y}
+.orbit-ring{position:absolute;z-index:0;left:50%;bottom:0;width:min(92%,860px);height:120px;transform:translateX(-50%);pointer-events:none;overflow:visible}
+.orbit-ring .r0{fill:color-mix(in srgb,var(--accent) 6%,transparent);stroke:var(--line-2);stroke-width:1;vector-effect:non-scaling-stroke}
+.orbit-ring .r1{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:14 86;vector-effect:non-scaling-stroke;animation:orbit-sweep 12s linear infinite}
+@keyframes orbit-sweep{from{stroke-dashoffset:0}to{stroke-dashoffset:-100}}
+.orbit-card{position:absolute;left:50%;top:10px;width:var(--w);aspect-ratio:36/50;margin-left:calc(var(--w) / -2);
+  overflow:hidden;border-radius:18px;isolation:isolate;color:#f6f1e6;background:#111;
+  box-shadow:0 40px 80px -40px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.06) inset;
+  transform-origin:50% 60%;will-change:transform,opacity,filter;
+  transition:transform .95s cubic-bezier(.65,.02,.25,1),opacity .95s ease,filter .95s ease,box-shadow .6s ease}
+.orbit-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transform:scale(1.12);transition:transform 1.4s cubic-bezier(.2,.7,.2,1),filter .9s ease;filter:saturate(1.05) contrast(1.02)}
+.orbit-shade{position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(0,0,0,.28) 0%,transparent 26%,transparent 42%,color-mix(in srgb,var(--tint) 55%,transparent) 66%,color-mix(in srgb,var(--tint) 92%,#000) 100%)}
+.orbit-top{position:absolute;top:18px;left:20px;right:18px;display:flex;justify-content:space-between;align-items:center}
+.orbit-num{font:500 .78rem/1 var(--font-mono);letter-spacing:.18em;padding:.55em .8em;border-radius:99px;background:rgba(0,0,0,.35);backdrop-filter:blur(8px)}
+.orbit-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:rgba(0,0,0,.35);backdrop-filter:blur(8px)}
+.orbit-icon svg{width:20px;height:20px}
+.orbit-body{position:absolute;left:0;right:0;bottom:0;padding:22px 22px 20px;display:flex;flex-direction:column;gap:.55rem}
+.orbit-tag{font:500 .7rem/1.3 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;opacity:.85}
+.orbit-title{font-family:var(--font-serif);font-size:clamp(1.7rem,2.5vw,2.15rem);line-height:1.02;letter-spacing:-.01em;text-shadow:0 2px 18px rgba(0,0,0,.35)}
+.orbit-desc{font-size:.98rem;line-height:1.45;color:rgba(246,241,230,.86);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.orbit-cta{margin-top:.5rem;display:flex;align-items:center;gap:.7rem;padding:.85rem 1rem;border-radius:12px;
+  background:color-mix(in srgb,#fff 12%,transparent);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(10px);
+  font:500 .78rem/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;transition:background .3s ease}
+.orbit-cta span{flex:1;white-space:nowrap}
+.orbit-cta b{font-weight:500;opacity:.75;font-size:.7rem}
+.orbit-cta svg{width:18px;height:18px;transition:transform .35s cubic-bezier(.34,1.4,.64,1)}
+/* content staggers in on the front card only */
+.orbit-body>*{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.orbit-card[data-slot="0"] .orbit-body>*{opacity:1;transform:none}
+.orbit-card[data-slot="0"] .orbit-body>:nth-child(1){transition-delay:.35s}
+.orbit-card[data-slot="0"] .orbit-body>:nth-child(2){transition-delay:.42s}
+.orbit-card[data-slot="0"] .orbit-body>:nth-child(3){transition-delay:.5s}
+.orbit-card[data-slot="0"] .orbit-body>:nth-child(4){transition-delay:.58s}
+/* the four ring positions */
+.orbit-card[data-slot="0"]{z-index:4;transform:translate3d(0,0,0) rotateY(0) scale(1)}
+.orbit-card[data-slot="1"]{z-index:3;transform:translate3d(78%,-2%,-260px) rotateY(-32deg) scale(.8);filter:brightness(.55) saturate(.7);cursor:pointer}
+.orbit-card[data-slot="3"]{z-index:3;transform:translate3d(-78%,-2%,-260px) rotateY(32deg) scale(.8);filter:brightness(.55) saturate(.7);cursor:pointer}
+.orbit-card[data-slot="2"]{z-index:1;transform:translate3d(0,-12%,-620px) scale(.6);opacity:.35;filter:brightness(.35) saturate(.5) blur(1.5px);cursor:pointer}
+.orbit-card[data-slot="0"] img{transform:scale(1.02)}
+.orbit-card[data-slot="0"]:hover{box-shadow:0 50px 90px -40px color-mix(in srgb,var(--tint) 70%,#000),0 0 0 1px rgba(255,255,255,.12) inset}
+.orbit-card[data-slot="0"]:hover img{transform:scale(1.07)}
+.orbit-card[data-slot="0"]:hover .orbit-cta{background:color-mix(in srgb,#fff 20%,transparent)}
+.orbit-card[data-slot="0"]:hover .orbit-cta svg{transform:translateX(5px)}
+.orbit-card:not([data-slot="0"]):hover{filter:brightness(.75) saturate(.9)}
+/* arrows */
+.orbit-arrow{position:relative;z-index:6;width:58px;height:58px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line-2);color:var(--ink);
+  background:color-mix(in srgb,var(--ground) 70%,transparent);backdrop-filter:blur(10px);transition:border-color .25s,color .25s,transform .35s cubic-bezier(.34,1.4,.64,1),background .25s}
+.orbit-arrow svg{width:22px;height:22px}
+.orbit-arrow:hover{border-color:var(--accent);color:var(--accent);transform:scale(1.08)}
+.orbit-arrow:active{transform:scale(.94)}
+.orbit-prev:hover svg{animation:nudge-l .6s ease}
+.orbit-next:hover svg{animation:nudge-r .6s ease}
+@keyframes nudge-r{50%{transform:translateX(4px)}}
+@keyframes nudge-l{50%{transform:translateX(-4px)}}
+/* rail: counter + clickable index with autoplay progress */
+.orbit-rail{grid-column:1/-1;display:flex;align-items:center;gap:clamp(1rem,3vw,2.4rem);padding-top:1.2rem;border-top:1px solid var(--line);margin-top:.4rem}
+.orbit-count{font:500 var(--fs-meta)/1 var(--font-mono);letter-spacing:.14em;color:var(--ink-3);white-space:nowrap}
+.orbit-count b{color:var(--ink);font-weight:500}
+.orbit-index{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.6rem,1.6vw,1.4rem)}
+.orbit-index button{width:100%;display:flex;flex-direction:column;gap:.6rem;text-align:left;color:var(--ink-3);font:500 var(--fs-micro)/1.3 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;padding:.2rem 0;transition:color .3s}
+.orbit-index i{position:relative;display:block;height:2px;background:var(--line);overflow:hidden}
+.orbit-index i::after{content:"";position:absolute;inset:0;background:var(--accent);transform:scaleX(0);transform-origin:left}
+.orbit-index button:hover{color:var(--ink-2)}
+.orbit-index .is-active button{color:var(--ink)}
+.orbit-index .is-active i::after{transform:scaleX(var(--p,0))}
+.orbit-index .is-done i::after{transform:scaleX(1);opacity:.35}
+@media(max-width:760px){
+  .orbit{grid-template-columns:1fr 1fr}
+  .orbit-stage{grid-column:1/-1;grid-row:1}
+  .orbit-prev{grid-row:2;justify-self:end}.orbit-next{grid-row:2;justify-self:start}
+  .orbit{--w:min(74vw,330px)}
+  .orbit-card[data-slot="1"]{transform:translate3d(58%,0,-240px) rotateY(-30deg) scale(.78)}
+  .orbit-card[data-slot="3"]{transform:translate3d(-58%,0,-240px) rotateY(30deg) scale(.78)}
+  .orbit-index span{display:none}
+}
+@media(prefers-reduced-motion:reduce){.orbit-card,.orbit-card img,.orbit-body>*{transition-duration:.01ms!important}.orbit-ring .r1{animation:none}}
+
 @media(max-width:820px){.glimpse-grid{grid-template-columns:1fr}}
 
 /* ── 8 · EXPLORER ──────────────────────────────────────────────── */
@@ -785,11 +865,65 @@ a.reach-row:hover .reach-value{color:var(--accent)}
       <div><strong>4</strong><span>DOMAINS · HEALTH · MEDIA · VISION · MOBILITY</span></div>
       <div><strong>100%</strong><span>OPEN SOURCE &amp; DOCUMENTED</span></div>
     </div>
-    <div class="glimpse-grid">
-      <a class="glimpse-tile shot-host reveal" href="projects/cardiovascular.html"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg></span><figure class="shot shot-frame"><img src="https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=1920 1920w" sizes="(max-width:760px) 92vw, (max-width:1240px) 46vw, 24vw" alt="Rendering of a DNA double helix" width="1120" height="700" loading="lazy" decoding="async"></figure><div class="tile-body"><span class="tag">SUPERVISED ML · HEALTHCARE</span><h3 class="tile-title">Cardiovascular Risk Prediction</h3><p>XGBoost + SMOTE on Framingham data, tuned for recall over raw accuracy.</p><span class="badge">0.89 ROC-AUC</span></div></a>
-      <a class="glimpse-tile shot-host reveal" href="projects/netflix.html"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18M17 3v18M3 7.5h4M3 12h18M3 16.5h4M17 7.5h4M17 16.5h4"/></svg></span><figure class="shot shot-frame"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=1920 1920w" sizes="(max-width:760px) 92vw, (max-width:1240px) 46vw, 24vw" alt="Empty cinema auditorium seen from the screen" width="1120" height="700" loading="lazy" decoding="async"></figure><div class="tile-body"><span class="tag">RECOMMENDER SYSTEMS · NLP</span><h3 class="tile-title">Netflix AI Recommender</h3><p>A hybrid recommender benchmarked over 11 models across 8,807 titles — tuned for catalogue diversity, not just a top-line score.</p><span class="badge">99.96% P@10</span></div></a>
-      <a class="glimpse-tile shot-host reveal" href="projects/image-enhancer.html"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M5 3v4M3 5h4M19 17v4M17 19h4"/></svg></span><figure class="shot shot-frame"><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=70&w=1920 1920w" sizes="(max-width:760px) 92vw, (max-width:1240px) 46vw, 24vw" alt="Camera body and prime lenses arranged on a dark surface" width="1120" height="700" loading="lazy" decoding="async"></figure><div class="tile-body"><span class="tag">COMPUTER VISION</span><h3 class="tile-title">AI Image Enhancer</h3><p>Real-ESRGAN + RRDBNet super-resolution API — 4&times; upscaling, tiled inference, automatic GPU/CPU fallback.</p><span class="badge">4&times; · RRDBNET</span></div></a>
-      <a class="glimpse-tile shot-host reveal" href="projects/nyc-taxi.html"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h5a4 4 0 0 0 0-8h-4a4 4 0 0 1 0-8h5"/></svg></span><figure class="shot shot-frame"><img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=1920 1920w" sizes="(max-width:760px) 92vw, (max-width:1240px) 46vw, 24vw" alt="Yellow cabs on a Manhattan avenue seen down the street" width="1120" height="700" loading="lazy" decoding="async"></figure><div class="tile-body"><span class="tag">REGRESSION</span><h3 class="tile-title">NYC Taxi Trip Time</h3><p>Feature engineering on pickup/drop-off geometry and time to predict trip duration.</p><span class="badge">REGRESSION</span></div></a>
+    <div class="orbit reveal" id="projectOrbit" role="region" aria-roledescription="carousel" aria-label="Public projects">
+      <button class="orbit-arrow orbit-prev" type="button" aria-label="Previous project" data-dir="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H5"/><path d="M11 5l-7 7 7 7"/></svg></button>
+      <div class="orbit-stage" aria-live="polite">
+        <svg class="orbit-ring" viewBox="0 0 860 120" preserveAspectRatio="none" aria-hidden="true"><ellipse class="r0" cx="430" cy="60" rx="428" ry="58"/><ellipse class="r1" cx="430" cy="60" rx="428" ry="58" pathLength="100"/></svg>
+      <a class="orbit-card" href="projects/cardiovascular.html" style="--tint:#8e3345" data-index="0" aria-roledescription="slide" aria-label="1 of 4: Cardiovascular Risk Prediction">
+        <img src="https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=1920 1920w" sizes="(max-width:760px) 80vw, 380px" alt="Rendering of a DNA double helix" width="760" height="1040" loading="lazy" decoding="async">
+        <span class="orbit-shade" aria-hidden="true"></span>
+        <span class="orbit-top"><span class="orbit-num">01</span><span class="orbit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg></span></span>
+        <span class="orbit-body">
+          <span class="orbit-tag">SUPERVISED ML · HEALTHCARE</span>
+          <span class="orbit-title">Cardiovascular Risk Prediction</span>
+          <span class="orbit-desc">XGBoost + SMOTE on Framingham data, tuned for recall over raw accuracy.</span>
+          <span class="orbit-cta"><span>Case study</span><b>0.89 ROC-AUC</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </span>
+      </a>
+      <a class="orbit-card" href="projects/netflix.html" style="--tint:#5a3c9a" data-index="1" aria-roledescription="slide" aria-label="2 of 4: Netflix AI Recommender">
+        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=1920 1920w" sizes="(max-width:760px) 80vw, 380px" alt="Empty cinema auditorium seen from the screen" width="760" height="1040" loading="lazy" decoding="async">
+        <span class="orbit-shade" aria-hidden="true"></span>
+        <span class="orbit-top"><span class="orbit-num">02</span><span class="orbit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18M17 3v18M3 7.5h4M3 12h18M3 16.5h4M17 7.5h4M17 16.5h4"/></svg></span></span>
+        <span class="orbit-body">
+          <span class="orbit-tag">RECOMMENDER SYSTEMS · NLP</span>
+          <span class="orbit-title">Netflix AI Recommender</span>
+          <span class="orbit-desc">A hybrid recommender benchmarked over 11 models across 8,807 titles — tuned for catalogue diversity, not just a top-line score.</span>
+          <span class="orbit-cta"><span>Case study</span><b>99.96% P@10</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </span>
+      </a>
+      <a class="orbit-card" href="projects/image-enhancer.html" style="--tint:#1f6f6a" data-index="2" aria-roledescription="slide" aria-label="3 of 4: AI Image Enhancer">
+        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=70&w=1920 1920w" sizes="(max-width:760px) 80vw, 380px" alt="Camera body and prime lenses arranged on a dark surface" width="760" height="1040" loading="lazy" decoding="async">
+        <span class="orbit-shade" aria-hidden="true"></span>
+        <span class="orbit-top"><span class="orbit-num">03</span><span class="orbit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M5 3v4M3 5h4M19 17v4M17 19h4"/></svg></span></span>
+        <span class="orbit-body">
+          <span class="orbit-tag">COMPUTER VISION</span>
+          <span class="orbit-title">AI Image Enhancer</span>
+          <span class="orbit-desc">Real-ESRGAN + RRDBNet super-resolution API — 4&times; upscaling, tiled inference, automatic GPU/CPU fallback.</span>
+          <span class="orbit-cta"><span>Case study</span><b>4&times; · RRDBNET</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </span>
+      </a>
+      <a class="orbit-card" href="projects/nyc-taxi.html" style="--tint:#a2621c" data-index="3" aria-roledescription="slide" aria-label="4 of 4: NYC Taxi Trip Time">
+        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=1920 1920w" sizes="(max-width:760px) 80vw, 380px" alt="Yellow cabs on a Manhattan avenue seen down the street" width="760" height="1040" loading="lazy" decoding="async">
+        <span class="orbit-shade" aria-hidden="true"></span>
+        <span class="orbit-top"><span class="orbit-num">04</span><span class="orbit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h5a4 4 0 0 0 0-8h-4a4 4 0 0 1 0-8h5"/></svg></span></span>
+        <span class="orbit-body">
+          <span class="orbit-tag">REGRESSION</span>
+          <span class="orbit-title">NYC Taxi Trip Time</span>
+          <span class="orbit-desc">Feature engineering on pickup/drop-off geometry and time to predict trip duration.</span>
+          <span class="orbit-cta"><span>Case study</span><b>REGRESSION</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </span>
+      </a>
+      </div>
+      <button class="orbit-arrow orbit-next" type="button" aria-label="Next project" data-dir="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="M13 5l7 7-7 7"/></svg></button>
+      <div class="orbit-rail">
+        <span class="orbit-count"><b id="orbitNow">01</b> / 04</span>
+        <ol class="orbit-index">
+          <li><button type="button" data-go="0"><i></i><span>Cardiovascular Risk Prediction</span></button></li>
+          <li><button type="button" data-go="1"><i></i><span>Netflix AI Recommender</span></button></li>
+          <li><button type="button" data-go="2"><i></i><span>AI Image Enhancer</span></button></li>
+          <li><button type="button" data-go="3"><i></i><span>NYC Taxi Trip Time</span></button></li>
+        </ol>
+      </div>
     </div>
     <div class="glimpse-cta reveal">
       <a class="button button-secondary" href="https://github.com/AkshayAI007" target="_blank" rel="noreferrer">EXPLORE ALL ON GITHUB ↗</a>
@@ -1874,6 +2008,79 @@ const hero = document.getElementById('heroSection');
   draw(2.2); lastT = 2.2;               // a composed still frame for reduced motion
   host.classList.add('is-live');
   hero.classList.add('has-aurora');
+})();
+</script>
+
+<script>
+/* Project orbit: clockwise ring carousel (1 → 2 → 3 → 4 → 1). */
+(function(){
+  const root = document.getElementById('projectOrbit');
+  if (!root) return;
+  const cards = [...root.querySelectorAll('.orbit-card')];
+  const items = [...root.querySelectorAll('.orbit-index li')];
+  const now = document.getElementById('orbitNow');
+  const N = cards.length, DWELL = 5200;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let active = 0, t0 = performance.now(), paused = false, visible = false, raf = 0, lock = 0;
+
+  // slot 0 front, 1 right (next), 2 back, 3 left (previous).
+  // Advancing moves every card one step clockwise: front→left→back→right→front.
+  function layout(){
+    cards.forEach((c, i) => {
+      const slot = (i - active + N) % N;
+      c.dataset.slot = slot;
+      c.tabIndex = slot === 0 ? 0 : -1;
+      c.setAttribute('aria-hidden', slot === 0 ? 'false' : 'true');
+    });
+    items.forEach((li, i) => {
+      li.classList.toggle('is-active', i === active);
+      li.classList.toggle('is-done', i < active);
+      li.style.removeProperty('--p');
+    });
+    now.textContent = String(active + 1).padStart(2, '0');
+  }
+  function go(to){
+    const next = ((to % N) + N) % N;
+    if (next === active) return;
+    active = next; t0 = performance.now(); layout();
+  }
+  const step = d => { const n = performance.now(); if (n - lock < 380) return; lock = n; go(active + d); };
+
+  root.querySelectorAll('.orbit-arrow').forEach(b => b.addEventListener('click', () => step(+b.dataset.dir)));
+  items.forEach((li, i) => li.querySelector('button').addEventListener('click', () => go(i)));
+  cards.forEach((c, i) => c.addEventListener('click', e => {
+    const slot = (i - active + N) % N;
+    if (slot === 0) return;                // front card: follow the link
+    e.preventDefault();
+    step(slot === 3 ? -1 : 1);             // side/back cards rotate the ring instead
+  }));
+  root.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); step(-1); }
+  });
+  // swipe
+  let sx = null;
+  const stage = root.querySelector('.orbit-stage');
+  stage.addEventListener('pointerdown', e => { sx = e.clientX; }, { passive: true });
+  stage.addEventListener('pointerup', e => {
+    if (sx === null) return; const dx = e.clientX - sx; sx = null;
+    if (Math.abs(dx) > 45) step(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  // autoplay with a progress bar on the active index item
+  ['mouseenter','focusin'].forEach(ev => root.addEventListener(ev, () => { paused = true; }));
+  ['mouseleave','focusout'].forEach(ev => root.addEventListener(ev, () => { paused = false; t0 = performance.now() - (items[active].__p || 0) * DWELL; }));
+  function tick(n){
+    raf = requestAnimationFrame(tick);
+    if (paused || !visible || document.hidden || reduce.matches) { t0 = n - (items[active].__p || 0) * DWELL; return; }
+    const p = Math.min(1, (n - t0) / DWELL);
+    items[active].__p = p;
+    items[active].style.setProperty('--p', p.toFixed(4));
+    if (p >= 1) { items[active].__p = 0; go(active + 1); }
+  }
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: .35 }).observe(root);
+  layout();
+  raf = requestAnimationFrame(tick);
 })();
 </script>
 </body>
