@@ -277,28 +277,6 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .button-light{background:var(--ink);color:var(--ground);border-color:var(--ink)}
 .button-light:hover{background:transparent;color:var(--ink)}
 
-/* neural stage — quieter, diagrammatic */
-.agent-core-stage{position:relative;z-index:2;min-height:520px;display:grid;place-items:center;overflow:visible}
-.core-grid{position:absolute;width:min(78%,420px);aspect-ratio:1;border:1px solid var(--line);border-radius:50%;
-  background-image:radial-gradient(circle,var(--line) 1px,transparent 1.4px);background-size:24px 24px;
-  mask-image:radial-gradient(circle,#000 8%,transparent 72%)}
-.neural-stage{position:relative;width:min(78vw,440px);aspect-ratio:1;cursor:pointer;transition:transform var(--dur-4) var(--ease-out)}
-.neural-stage:hover{transform:scale(1.04)}
-.neural-breathe{width:100%;height:100%;animation:neural-breathe 7s var(--ease-out) infinite}
-@keyframes neural-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
-.neural-svg{width:100%;height:100%;overflow:visible}
-.mlp-edge{stroke:var(--line-2);stroke-width:1;animation:edge-glow 2.8s var(--ease-out) infinite}
-.mlp-node{fill:var(--ground-3);stroke:var(--line-2);stroke-width:1;animation:node-glow 2.8s var(--ease-out) infinite}
-.mlp-node-out{fill:var(--ground-3);stroke:var(--accent)}
-.neural-pulse{fill:var(--flag);filter:drop-shadow(0 0 5px var(--flag))}
-@keyframes edge-glow{0%,100%{stroke:var(--line-2)}50%{stroke:var(--accent);stroke-width:1.2}}
-@keyframes node-glow{0%,100%{fill:var(--ground-3)}50%{fill:var(--accent);filter:drop-shadow(0 0 6px color-mix(in srgb,var(--accent) 55%,transparent))}}
-.core-label{position:absolute;z-index:3;padding:.5em .7em;border:1px solid var(--line);background:color-mix(in srgb,var(--ground) 78%,transparent);backdrop-filter:blur(8px);
-  font:var(--fs-micro)/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
-.core-label span{display:inline-block;width:5px;height:5px;margin-right:.6ch;border-radius:50%;background:var(--accent)}
-.label-one{top:38%;right:0}.label-two{top:48%;right:0}.label-three{top:58%;right:0}
-.core-caption{position:absolute;bottom:8px;display:flex;gap:.8ch;font:var(--fs-micro)/1 var(--font-mono);letter-spacing:.14em;color:var(--ink-3)}
-
 /* ── 4 · METRIC BAND ─────────────────────────────────────────────── */
 .metric-band{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .metric-band>div{min-height:168px;display:flex;flex-direction:column;justify-content:center;gap:.7rem;padding:1.8rem clamp(1rem,2.4vw,2.4rem);border-right:1px solid var(--line)}
@@ -677,7 +655,6 @@ a.reach-row:hover .reach-value{color:var(--accent)}
 /* ── 19 · RESPONSIVE ──────────────────────────────────────── */
 @media(max-width:1050px){
   .hero{grid-template-columns:1fr;padding-top:clamp(120px,16vh,170px)}
-  .agent-core-stage{min-height:440px;margin-top:1rem}
   .credentials{grid-template-columns:1fr}
 }
 @media(max-width:760px){
@@ -751,22 +728,6 @@ a.reach-row:hover .reach-value{color:var(--accent)}
       </div>
     </div>
 
-    <div class="agent-core-stage" id="agentCore">
-      <div class="core-grid"></div>
-      <div class="neural-stage" id="neuralStage">
-        <div class="neural-breathe">
-          <svg viewBox="0 0 460 460" class="neural-svg" id="neuralSvg" role="img" aria-label="Animated diagram of a layered neural network routing signal from input through hidden layers to three specialised agents">
-            <g id="neuralEdges"></g>
-            <g id="neuralNodes"></g>
-            <g id="neuralPulses"></g>
-          </svg>
-        </div>
-      </div>
-      <div class="core-label label-one"><span></span> SEARCH AGENT</div>
-      <div class="core-label label-two"><span></span> VOICE AGENT</div>
-      <div class="core-label label-three"><span></span> GUARDRAILS</div>
-      <div class="core-caption">&lt;/&gt; NEURAL AGENT CORE / INTERACTIVE</div>
-    </div>
     <div class="hero-index">AKSHAY BAWALIWALE <span>©26</span></div>
   </section>
 
@@ -1192,98 +1153,6 @@ a.reach-row:hover .reach-value{color:var(--accent)}
 </div>
 
 <script>
-(function buildNeuralNetwork(){
-  const SIZE = 460, CENTER = SIZE/2;
-  const svgNS = 'http://www.w3.org/2000/svg';
-  // input -> hidden -> hidden -> agents. Output count/order must match the
-  // three .core-label badges below (SEARCH AGENT, VOICE AGENT, GUARDRAILS).
-  const LAYERS = [5, 6, 6, 3];
-  // MARGIN_X=70 keeps every node inside svg-local [20,440]: the stage's grid
-  // track has a hard floor of `minmax(420px,...)` while the svg itself stays
-  // pinned at 460px above the 1050px breakpoint, so `.agent-core-stage`'s
-  // overflow:hidden clips ~20px off each edge at that floor. A smaller
-  // margin here clipped the labelled output-layer nodes.
-  const MARGIN_X = 70, NODE_GAP = 54, STEP = 0.42;
-  const layerX = LAYERS.map((_, i) => MARGIN_X + i * (SIZE - MARGIN_X * 2) / (LAYERS.length - 1));
-
-  function layerPoints(count, x){
-    const h = (count - 1) * NODE_GAP;
-    return Array.from({length: count}, (_, i) => ({ x, y: CENTER - h / 2 + i * NODE_GAP }));
-  }
-  const layers = LAYERS.map((count, i) => layerPoints(count, layerX[i]));
-  const lastLayer = layers.length - 1;
-
-  const edgesG = document.getElementById('neuralEdges');
-  const nodesG = document.getElementById('neuralNodes');
-  const pulsesG = document.getElementById('neuralPulses');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Edges: fully connect each layer to the next. Delay keyed to the target
-  // layer's index so brightening sweeps left-to-right, same mechanism the
-  // old ring diagram used (stagger via animation-delay), just keyed to
-  // layer position instead of ring position.
-  for (let i = 0; i < lastLayer; i++) {
-    layers[i].forEach((p1) => {
-      layers[i + 1].forEach((p2, k) => {
-        const line = document.createElementNS(svgNS, 'line');
-        line.setAttribute('x1', p1.x); line.setAttribute('y1', p1.y);
-        line.setAttribute('x2', p2.x); line.setAttribute('y2', p2.y);
-        line.setAttribute('class', 'mlp-edge');
-        line.style.animationDelay = ((i + 1) * STEP + (k % 3) * 0.06) + 's';
-        edgesG.appendChild(line);
-      });
-    });
-  }
-
-  // Nodes: input/hidden share one look; the output layer is the three
-  // labelled agents and gets its own larger, steadier-filled treatment.
-  layers.forEach((layer, i) => {
-    layer.forEach((p, j) => {
-      const c = document.createElementNS(svgNS, 'circle');
-      c.setAttribute('cx', p.x); c.setAttribute('cy', p.y);
-      c.setAttribute('r', i === lastLayer ? 7.5 : i === 0 ? 5 : 4.5);
-      c.setAttribute('class', i === lastLayer ? 'mlp-node mlp-node-out' : 'mlp-node');
-      c.style.animationDelay = (i * STEP + (j % 3) * 0.06) + 's';
-      nodesG.appendChild(c);
-    });
-  });
-
-  // Traveling signal: a few dots hop input -> hidden -> hidden -> one of the
-  // three agent outputs (round-robin), each on its own generated keyframe
-  // since every dot's path is a different set of points. Amber, not azure --
-  // this is live machine state (see .flow-line b elsewhere on the site),
-  // not editorial emphasis.
-  if (!reduceMotion) {
-    const outLayer = layers[lastLayer];
-    const DOTS = 6;
-    let css = '';
-    for (let d = 0; d < DOTS; d++) {
-      const path = [layers[0][Math.floor(Math.random() * layers[0].length)]];
-      for (let i = 1; i < lastLayer; i++) path.push(layers[i][Math.floor(Math.random() * layers[i].length)]);
-      path.push(outLayer[d % outLayer.length]);
-      const name = 'mlpTravel' + d;
-      const mid = path.slice(1, -1).map((p, idx) => {
-        const pct = 30 + idx * (62 - 30) / Math.max(1, path.length - 3);
-        return pct + '%{transform:translate(' + p.x + 'px,' + p.y + 'px)}';
-      }).join('');
-      css += '@keyframes ' + name + '{'
-        + '0%{transform:translate(' + path[0].x + 'px,' + path[0].y + 'px);opacity:0}'
-        + '8%{opacity:1}' + mid
-        + '92%{transform:translate(' + path[path.length - 1].x + 'px,' + path[path.length - 1].y + 'px);opacity:1}'
-        + '100%{transform:translate(' + path[path.length - 1].x + 'px,' + path[path.length - 1].y + 'px);opacity:0}'
-        + '}';
-      const dot = document.createElementNS(svgNS, 'circle');
-      dot.setAttribute('r', '3');
-      dot.setAttribute('class', 'neural-pulse');
-      dot.style.animation = name + ' ' + (3.2 + d * 0.15) + 's ' + (d * 0.55) + 's ease-in-out infinite';
-      pulsesG.appendChild(dot);
-    }
-    const styleEl = document.createElement('style');
-    styleEl.textContent = css;
-    document.head.appendChild(styleEl);
-  }
-})();
-
 const glow = document.getElementById('cursorGlow');
 const isFinePointer = window.matchMedia('(pointer: fine)').matches;
 const reduceMotionGlobal = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1305,7 +1174,6 @@ if (isFinePointer && !reduceMotionGlobal) {
 const progressLine = document.getElementById('progressLine');
 const heroSection = document.getElementById('heroSection');
 const heroParallax = document.getElementById('heroParallax');
-const agentCore = document.getElementById('agentCore');
 
 /* Scroll work is batched into one rAF frame. The old handler measured the
    hero on every scroll event, forcing a layout each time (§3 reduce-reflows). */
@@ -1327,7 +1195,6 @@ function onScrollFrame() {
     const p = Math.min(1, Math.max(0, -heroRect.top / heroRect.height));
     heroParallax.style.transform = `translate3d(0, ${p * 140}px, 0)`;
     heroParallax.style.opacity = String(1 - Math.min(1, p / 0.85));
-    agentCore.style.transform = `translate3d(0, ${p * -90}px, 0) scale(${1 - p * 0.18})`;
   }
 }
 
@@ -1909,7 +1776,7 @@ const hero = document.getElementById('heroSection');
       gl_FragColor = vec4(c, along * pow(edge, 1.6) * uOpacity); }`;
 
   const group = new THREE.Group();
-  group.rotation.set(-0.12, 0, -0.16);   // slight diagonal sweep toward the neural core
+  group.rotation.set(-0.12, 0, -0.16);   // slight diagonal sweep across the right of the hero
   group.position.set(1.1, 0.15, 0);
   scene.add(group);
 
@@ -1957,7 +1824,7 @@ const hero = document.getElementById('heroSection');
     const narrow = w / h < 1;
     camera.fov = narrow ? 46 : 38;
     camera.updateProjectionMatrix();
-    group.position.set(narrow ? 0 : 2.0, narrow ? -1.6 : 0.05, 0);
+    group.position.set(narrow ? 0 : 2.0, narrow ? -2.2 : 0.05, 0);
     group.rotation.z = narrow ? -0.22 : -0.14;
   }
   new ResizeObserver(() => { resize(); if (!running) draw(lastT); }).observe(host);
