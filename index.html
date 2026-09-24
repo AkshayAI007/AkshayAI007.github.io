@@ -3,7 +3,21 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Akshay Bawaliwale - AI Systems Architect</title>
+<title>Akshay Bawaliwale — Senior Generative AI &amp; LLM Engineer</title>
+<meta name="description" content="Senior Generative AI &amp; LLM engineer. I design, ship and evaluate production AI systems: multi-agent orchestration, RAG at 3M+ SMB scale, voice AI on LiveKit and Twilio, and LLM-as-Judge evaluation." />
+<meta name="author" content="Akshay Bawaliwale" />
+<meta name="theme-color" content="#141310" />
+<link rel="canonical" href="https://akshayai007.github.io/" />
+<meta property="og:type" content="profile" />
+<meta property="og:site_name" content="Akshay Bawaliwale" />
+<meta property="og:title" content="Akshay Bawaliwale — Senior Generative AI &amp; LLM Engineer" />
+<meta property="og:description" content="Production AI systems, with the numbers: a 2-day service queue cut to 3 minutes, an agent serving 3M+ SMBs in under 3 seconds, and 20+ LLM systems shipped." />
+<meta property="og:url" content="https://akshayai007.github.io/" />
+<meta property="og:locale" content="en_IN" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Akshay Bawaliwale — Senior Generative AI &amp; LLM Engineer" />
+<meta name="twitter:description" content="Multi-agent systems, RAG, voice AI and LLM evaluation — built, shipped and measured in production." />
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Akshay Bawaliwale", "url": "https://akshayai007.github.io/", "jobTitle": "Senior Generative AI & LLM Specialist", "worksFor": {"@type": "Organization", "name": "BuzzBoard"}, "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Indian Institute of Technology Kharagpur"}], "knowsAbout": ["Generative AI", "Large language models", "Multi-agent systems", "Retrieval-augmented generation", "Voice AI", "LLM evaluation", "LangGraph", "LiveKit", "AWS"], "sameAs": ["https://github.com/AkshayAI007", "https://in.linkedin.com/in/akshaybawaliwale", "https://medium.com/@akshay.bawali09"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -309,7 +323,7 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 /* ── 6 · SELECTED SYSTEMS (project-list) ─────────────────────────── */
 .systems{border-bottom:1px solid var(--line)}
 .project-list{border-top:1px solid var(--line)}
-.project-card{position:relative;display:grid;grid-template-columns:2.8rem minmax(120px,150px) minmax(0,1.4fr) minmax(140px,.42fr) 2.6rem;gap:1.6rem;align-items:center;
+.project-card{position:relative;display:grid;grid-template-columns:2.8rem minmax(150px,190px) minmax(0,1.4fr) minmax(140px,.42fr) 2.6rem;gap:1.6rem;align-items:center;
   min-height:260px;padding:2.2rem 0;border-bottom:1px solid var(--line);transition:transform var(--dur-3) var(--ease-out)}
 .project-card:hover{transform:translateX(8px)}
 .project-card::before{display:none}
@@ -328,8 +342,11 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .project-card:hover>a{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);transform:rotate(-40deg)}
 @media(max-width:900px){
   .project-card{grid-template-columns:2.4rem 110px 1fr 2.4rem;min-height:0}
-  .project-impact{display:none}
+  .project-impact{grid-column:3;flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:.3rem 1.2ch;padding-top:.2rem}
+  .project-impact small{flex-basis:100%}
+  .project-impact strong{font-size:1.45rem}
 }
+@media(max-width:600px){.project-impact{grid-column:2}}
 @media(max-width:600px){.project-card{grid-template-columns:2.2rem 1fr;gap:1rem}.project-media{display:none}.project-content span{display:none}}
 
 /* ── 7 · PUBLIC WORK / GLIMPSE GRID ─────────────────────────────── */
@@ -661,9 +678,7 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .case-flow-segment{display:flex;align-items:center;flex:1;min-width:96px}
 .case-flow-segment>div{flex:0 0 128px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;
   border:1px solid var(--line-2);border-radius:50%}
-.case-flow-segment:nth-child(3)>div{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .case-flow-segment span{font:500 var(--fs-micro)/1 var(--font-mono);letter-spacing:.1em;color:var(--accent)}
-.case-flow-segment:nth-child(3) span{color:var(--accent-ink)}
 .case-flow-segment strong{max-width:96px;text-align:center;font:500 var(--fs-micro)/1.3 var(--font-mono);letter-spacing:.06em;text-transform:uppercase}
 .case-flow-segment i{position:relative;flex:1;min-width:14px;height:1px;background:var(--line-2);overflow:hidden}
 .case-flow-segment i b{position:absolute;display:block;width:32%;height:100%;background:var(--accent);animation:signal-flow 2s var(--ease-out) infinite}
@@ -747,6 +762,211 @@ a.reach-row:hover .reach-value{color:var(--accent)}
   .about-split>div,.case-story>div{min-height:0}
 }
 
+
+/* ═══ 20 · PROOF SYSTEM — every number gets an instrument that shows what it means ═══ */
+
+/* hero proof line + contact CTA */
+.hero-proof{display:flex;flex-wrap:wrap;gap:.5rem 0;margin:2rem 0 0;padding:0;list-style:none;max-width:56rem}
+.hero-proof li{display:flex;flex-direction:column;gap:.45rem;padding:0 1.4rem;border-left:1px solid var(--line-2)}
+.hero-proof li:first-child{padding-left:0;border-left:0}
+.hero-proof b{font-family:var(--font-serif);font-weight:400;font-size:1.55rem;letter-spacing:-.01em;color:var(--ink);white-space:nowrap}
+.hero-proof span{font:500 var(--fs-micro)/1.3 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.8rem}
+@media(max-width:560px){.hero-proof{flex-direction:column;gap:.8rem}.hero-proof li{flex-direction:row;align-items:baseline;gap:.9ch;padding:0;border-left:0}.hero-proof b{font-size:1.35rem}}
+
+/* proof board: one business outcome + four instrumented metrics */
+.proof-board{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2.1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proof-lead{display:flex;flex-direction:column;justify-content:space-between;gap:1.4rem;padding:clamp(1.8rem,3.4vw,3rem) var(--gutter);
+  background:var(--panel);color:var(--panel-ink);border-right:1px solid var(--line)}
+.proof-kicker{font:500 var(--fs-micro)/1 var(--font-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--flag)}
+.proof-lead-title{margin:0;font-family:var(--font-serif);font-weight:400;font-size:clamp(2rem,3.4vw,3.1rem);line-height:1.02;letter-spacing:-.02em}
+.proof-lead-note{max-width:30ch;color:var(--ink-2);font-size:var(--fs-small);line-height:1.6}
+.proof-link{display:inline-flex;align-items:center;gap:.8ch;font:500 var(--fs-micro)/1 var(--font-mono);letter-spacing:.14em;color:var(--accent)}
+.proof-link svg{width:14px;height:14px;transition:transform var(--dur-2) var(--ease-out)}
+.proof-link:hover svg{transform:translateX(4px)}
+.proof-grid{display:grid;grid-template-columns:1fr 1fr;margin:0}
+.proof-cell{display:flex;flex-direction:column;gap:.85rem;min-width:0;padding:clamp(1.4rem,2.6vw,2.2rem) clamp(1.2rem,2.6vw,2.4rem);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proof-grid>.proof-cell:nth-child(2n){border-right:0}
+.proof-grid>.proof-cell:nth-last-child(-n+2){border-bottom:0}
+.proof-cell dt{font:500 var(--fs-micro)/1.4 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.proof-cell dd{margin:0}
+.proof-value{display:flex;align-items:baseline;flex-wrap:wrap;gap:.25ch .6ch;font-variant-numeric:tabular-nums lining-nums}
+.proof-value strong{font-family:var(--font-serif);font-weight:400;font-size:clamp(2.2rem,3.6vw,3.3rem);line-height:1;letter-spacing:-.02em;color:var(--ink)}
+.pv-from{font-family:var(--font-serif);font-size:clamp(1.4rem,2.2vw,1.9rem);line-height:1;color:var(--ink-3);text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:var(--flag)}
+.pv-arrow{color:var(--accent);font-size:1.2rem}
+.proof-foot{font:500 var(--fs-micro)/1.5 var(--font-mono);letter-spacing:.08em;color:var(--ink-2)}
+
+/* instrument: before/after collapse bars */
+.viz-collapse{display:grid;gap:.45rem}
+.vc-row{display:grid;grid-template-columns:4.6em 1fr;align-items:center;gap:.8em}
+.vc-row em{font:500 10px/1 var(--font-mono);font-style:normal;letter-spacing:.14em;color:var(--ink-3)}
+.vc-row i{height:6px;background:var(--line)}
+.vc-row b{display:block;height:100%;width:100%;background:var(--ink-3);opacity:.55}
+.vc-after b{background:var(--accent);opacity:1;transition:width 1.5s var(--ease-out) .35s}
+.is-visible .vc-after b{width:max(3px,var(--after))}
+
+/* instrument: latency ruler */
+.viz-ruler i{position:relative;display:block;height:6px;background:var(--line)}
+.viz-ruler b{position:absolute;inset:0 auto 0 0;width:0;background:var(--accent);transition:width 1.3s var(--ease-out) .3s}
+.is-visible .viz-ruler b{width:var(--fill)}
+.viz-ruler u{position:absolute;left:var(--mark);top:-6px;bottom:-6px;width:1px;background:var(--flag)}
+.viz-ruler span{display:flex;justify-content:space-between;margin-top:.55rem}
+.viz-ruler em{font:500 10px/1 var(--font-mono);font-style:normal;letter-spacing:.08em;color:var(--ink-3)}
+
+/* instrument: hit grid (accuracy, fields) */
+.viz-dots,.viz-fields{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;max-width:260px}
+.viz-dots i,.viz-fields i{aspect-ratio:1;background:var(--line);transition:background var(--dur-3) var(--ease-out);transition-delay:calc(var(--d) * 45ms + .3s)}
+.is-visible .viz-dots i{background:var(--accent)}
+.is-visible .viz-dots i.miss{background:transparent;box-shadow:inset 0 0 0 1px var(--flag)}
+.viz-fields{grid-template-columns:repeat(20,1fr);gap:3px;max-width:440px}
+.is-visible .viz-fields i{animation:field-fill .35s var(--ease-out) forwards;animation-delay:calc(var(--d) * 22ms + .3s)}
+.is-visible .viz-fields i.fix{animation:field-fix 2.6s var(--ease-out) forwards;animation-delay:calc(var(--d) * 22ms + .3s)}
+@keyframes field-fill{to{background:var(--accent)}}
+@keyframes field-fix{0%{background:var(--line)}12%,62%{background:var(--flag)}100%{background:var(--accent);box-shadow:0 0 0 1px var(--flag)}}
+
+@media(max-width:1050px){.proof-board{grid-template-columns:1fr}.proof-lead{border-right:0;border-bottom:1px solid var(--line)}}
+@media(max-width:620px){.proof-grid{grid-template-columns:1fr}.proof-cell{border-right:0!important;border-bottom:1px solid var(--line)!important}.proof-grid>.proof-cell:last-child{border-bottom:0!important}}
+
+/* stack ticker */
+.stack-ticker{display:flex;align-items:center;gap:1.6rem;padding:1.1rem 0 1.1rem var(--gutter);border-bottom:1px solid var(--line);overflow:hidden}
+.stack-ticker>p{flex:none;font:500 var(--fs-micro)/1 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--flag)}
+.ticker-window{display:flex;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.ticker-track{display:flex;flex:none;gap:0;margin:0;padding:0;list-style:none;animation:ticker 48s linear infinite}
+.ticker-track li{padding:0 1.2rem;font:500 var(--fs-meta)/1 var(--font-mono);letter-spacing:.08em;color:var(--ink-2);white-space:nowrap;border-right:1px solid var(--line)}
+.stack-ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes ticker{to{transform:translateX(-100%)}}
+@media(max-width:620px){.stack-ticker{flex-direction:column;align-items:flex-start;gap:.8rem;padding-right:0}}
+@media(prefers-reduced-motion:reduce){.ticker-track{animation:none!important;flex-wrap:wrap;row-gap:.6rem}.ticker-track[aria-hidden]{display:none}.ticker-window{mask-image:none;-webkit-mask-image:none}}
+
+/* system cards: topology thumbnails instead of stock photography */
+.topo{height:100%;aspect-ratio:4/5;margin:0;display:grid;place-items:center;background:var(--ground-2);border:1px solid var(--line);transition:border-color var(--dur-3)}
+.project-card:hover .topo{border-color:color-mix(in srgb,var(--accent) 55%,var(--line))}
+.topo svg{width:100%;height:100%;display:block}
+.topo-edge{stroke:var(--line-2);stroke-width:1;fill:none}
+.topo-edge.thin{stroke:var(--line)}
+.topo-flow{stroke:var(--accent);stroke-width:1.5;fill:none;stroke-dasharray:3 11;animation:topo-dash 1.4s linear infinite;animation-play-state:paused;opacity:.9}
+.topo-node{fill:var(--ground-3);stroke:var(--line-2);stroke-width:1}
+.topo-hot{fill:var(--accent)}
+.topo-wave{fill:var(--ink-3);transform-box:fill-box;transform-origin:center;animation:topo-wave 1.1s ease-in-out infinite alternate;animation-play-state:paused}
+.topo-wave:nth-child(3n){animation-delay:-.4s}.topo-wave:nth-child(3n+1){animation-delay:-.8s}
+.topo-loop{fill:none;stroke:var(--accent);stroke-width:1;stroke-dasharray:2 6;transform-box:fill-box;transform-origin:center;animation:spin 14s linear infinite;animation-play-state:paused;opacity:.7}
+.topo-repair{fill:none;stroke:var(--flag);stroke-width:1.2;stroke-dasharray:3 4;animation:topo-dash 1.4s linear infinite reverse;animation-play-state:paused}
+.topo-cell{fill:var(--line-2);transition:fill var(--dur-3);transition-delay:calc(var(--d) * 12ms)}
+.project-card:hover .topo-cell{fill:var(--accent)}
+.topo-label{font:500 7.5px/1 var(--font-mono);letter-spacing:.08em;fill:var(--ink-2)}
+.topo-label.inv{fill:var(--accent-ink)}
+.topo-idx{font:500 7px/1 var(--font-mono);letter-spacing:.1em;fill:var(--ink-3)}
+.topo-idx.flag{fill:var(--flag)}
+.project-card:hover :is(.topo-flow,.topo-wave,.topo-loop,.topo-repair){animation-play-state:running}
+@keyframes topo-dash{to{stroke-dashoffset:-28}}
+@keyframes topo-wave{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+.project-impact em{font:500 var(--fs-micro)/1.4 var(--font-mono);font-style:normal;letter-spacing:.06em;color:var(--accent)}
+.project-impact strong{font-size:1.7rem;font-variant-numeric:tabular-nums}
+.project-card--brief:hover{transform:none}
+.project-brief{width:44px;text-align:center;font:500 9px/1 var(--font-mono);letter-spacing:.14em;color:var(--ink-3)}
+@media(max-width:900px){.project-brief{display:none}}
+
+/* how I work */
+.method{padding-top:var(--bay);padding-bottom:var(--bay);border-bottom:1px solid var(--line)}
+.method-rail{position:relative;overflow-x:clip;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0;padding:0;list-style:none;border-top:1px solid var(--line-2)}
+.method-rail::before{content:"";position:absolute;top:-1px;left:0;width:18%;height:1px;background:var(--accent);animation:method-run 6s var(--ease-out) infinite}
+@keyframes method-run{from{transform:translateX(-100%)}to{transform:translateX(455%)}}
+.method-rail li{position:relative;display:flex;flex-direction:column;gap:.7rem;padding:2rem clamp(.8rem,1.6vw,1.6rem) 0 0}
+.method-rail li::before{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:var(--ground);border:1px solid var(--accent)}
+.method-rail li:nth-child(2)::before{background:var(--accent)}
+.m-step{font:500 var(--fs-micro)/1 var(--font-mono);letter-spacing:.14em;color:var(--accent)}
+.method-rail h3{margin:0;font-family:var(--font-serif);font-weight:400;font-size:var(--fs-h3);line-height:1}
+.method-rail p{color:var(--ink-2);font-size:var(--fs-small);line-height:1.6}
+.method-rail small{margin-top:auto;padding-top:.6rem;font:500 var(--fs-micro)/1.4 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--flag)}
+@media(max-width:1000px){.method-rail{grid-template-columns:1fr;border-top:0;border-left:1px solid var(--line-2);margin-left:4px}
+  .method-rail::before{display:none}.method-rail li{padding:0 0 2rem 1.6rem}.method-rail li::before{top:.1rem;left:-5px}}
+
+/* credential chips */
+.cred-chips{display:flex;flex-wrap:wrap;margin:2rem 0 0;padding:0;list-style:none;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.cred-chips li{flex:1 1 150px;display:flex;flex-direction:column;gap:.45rem;padding:1rem 1.1rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:background var(--dur-2)}
+.cred-chips li:hover{background:var(--ground-2)}
+.cred-chips b{font-family:var(--font-serif);font-weight:400;font-size:1.35rem;line-height:1.05;color:var(--ink)}
+.cred-chips span{font:500 10px/1.3 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+/* case studies: proof, spec, interactive flow, decisions, ledger */
+.case-proof{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);margin-top:clamp(2.4rem,6vw,4rem);border:1px solid var(--line)}
+.case-proof-lead{margin:0;border-right:1px solid var(--line)}
+.case-proof-lead .proof-cell{border:0;padding:clamp(1.6rem,3vw,2.6rem)}
+.proof-cell--xl .proof-value strong{font-size:clamp(3rem,6vw,5rem)}
+.proof-cell--xl .pv-from{font-size:clamp(1.8rem,3vw,2.6rem)}
+.case-proof-support{display:grid;margin:0}
+.case-proof-support>div{display:flex;flex-direction:column;justify-content:center;gap:.5rem;padding:1.2rem 1.6rem;border-bottom:1px solid var(--line)}
+.case-proof-support>div:last-child{border-bottom:0}
+.case-proof-support dt{font:500 var(--fs-micro)/1.3 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.case-proof-support dd{margin:0;font-family:var(--font-serif);font-size:1.7rem;line-height:1.1}
+@media(max-width:820px){.case-proof{grid-template-columns:1fr}.case-proof-lead{border-right:0;border-bottom:1px solid var(--line)}}
+
+.case-spec{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:1.2rem 0 0;border-top:1px solid var(--line)}
+.case-spec>div{padding:1.1rem 1.2rem 0 0}
+.case-spec dt{font:500 10px/1.3 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--flag)}
+.case-spec dd{margin:.45rem 0 0;color:var(--ink-2);font-size:var(--fs-small);line-height:1.45}
+@media(max-width:820px){.case-spec{grid-template-columns:1fr 1fr;row-gap:.4rem}}
+
+.flow-stop{flex:0 0 128px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;border:1px solid var(--line-2);border-radius:50%;
+  cursor:default;transition:background var(--dur-3) var(--ease-out),border-color var(--dur-3),color var(--dur-3),transform var(--dur-3) var(--ease-out)}
+.flow-stop:hover,.flow-stop:focus-visible{transform:scale(1.05);border-color:var(--accent)}
+.flow-stop:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.flow-stop.is-hot{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.flow-stop.is-hot span{color:var(--accent-ink)}
+.flow-readout{display:grid;grid-template-columns:minmax(0,14rem) minmax(0,1fr);gap:.6rem 2rem;align-items:baseline;margin-top:2.4rem;padding-top:1.4rem;border-top:1px solid var(--line-2);min-height:4.6rem}
+.flow-readout b{font:500 var(--fs-meta)/1.4 var(--font-mono);letter-spacing:.12em;color:var(--accent)}
+.flow-readout span{max-width:60ch;font-size:var(--fs-body);line-height:1.6}
+.flow-hint{margin-top:.8rem;font:500 10px/1 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;opacity:.55}
+@media(max-width:820px){.flow-stop{flex-basis:104px}.flow-readout{grid-template-columns:1fr}}
+
+.decision-lede{margin-top:.4rem;color:var(--ink-2);font-size:var(--fs-small)}
+.decision-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin:0;padding:0;list-style:none;background:var(--line);border:1px solid var(--line)!important}
+@media(max-width:900px){.decision-list{grid-template-columns:1fr}}
+.case-decisions--cards{grid-template-columns:1fr}
+.case-decisions .decision{position:relative;min-height:0;align-items:start;display:grid;grid-template-columns:3rem minmax(0,1fr);gap:.4rem 1rem;padding:1.6rem 1.6rem 1.6rem 1.2rem;background:var(--ground);transition:background var(--dur-2)}
+.case-decisions .decision:hover{background:var(--ground-2)}
+.d-num{font:500 var(--fs-micro)/1.9 var(--font-mono);letter-spacing:.1em;color:var(--accent)}
+.decision h3{margin:0;font-family:var(--font-serif);font-weight:400;font-size:1.45rem;line-height:1.15}
+.decision dl{grid-column:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem 1.6rem;margin:1rem 0 0}
+.decision dt{font:500 10px/1.3 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.decision dl>div:first-child dt{color:var(--flag)}
+.decision dd{margin:.45rem 0 0;color:var(--ink-2);font-size:.95rem;line-height:1.55}
+.decision dl>div:first-child dd{text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--flag) 60%,transparent)}
+.decision dl{grid-template-columns:1fr}
+@media(max-width:560px){.case-decisions .decision{grid-template-columns:1fr}.decision dl{grid-column:1}}
+
+.case-ledger{padding-top:var(--bay);padding-bottom:var(--bay);background:var(--panel);color:var(--panel-ink);border-bottom:1px solid var(--line)}
+.ledger-lede{max-width:30ch;margin:0 0 clamp(1.8rem,4vw,2.8rem);font-family:var(--font-serif);font-size:clamp(1.8rem,3.6vw,2.8rem);line-height:1.1;letter-spacing:-.01em}
+.ledger{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.ledger th,.ledger td{padding:1rem 1.2rem 1rem 0;text-align:left;border-bottom:1px solid var(--line);vertical-align:baseline}
+.ledger thead th{font:500 10px/1.3 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);border-bottom-color:var(--line-2)}
+.ledger tbody th{font:500 var(--fs-micro)/1.4 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);font-weight:500}
+.ledger td{font-family:var(--font-serif);font-size:1.3rem;line-height:1.2}
+.ledger td:last-child{color:var(--accent)}
+@media(max-width:700px){
+  .ledger thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .ledger tr{display:block;padding:1rem 0;border-bottom:1px solid var(--line)}
+  .ledger th,.ledger td{display:flex;justify-content:space-between;gap:1rem;padding:.3rem 0;border:0}
+  .ledger td::before{content:attr(data-label);font:500 10px/1.8 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+  .ledger td{font-size:1.1rem;text-align:right}
+}
+
+/* about timeline proof + recognition */
+.tl-proof{display:block;margin-bottom:.6rem;font:500 var(--fs-micro)/1.4 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--flag)}
+
+/* resume spec table */
+.spec-table{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.spec-table>div{display:flex;flex-direction:column;gap:.6rem;padding:1.6rem clamp(1rem,2.4vw,2.4rem);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.spec-table>div:nth-child(3n){border-right:0}
+.spec-table>div:nth-last-child(-n+3){border-bottom:0}
+.spec-table dt{font:500 10px/1.3 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.spec-table dd{margin:0;font-family:var(--font-serif);font-size:clamp(1.4rem,2.2vw,1.9rem);line-height:1.12}
+@media(max-width:820px){.spec-table{grid-template-columns:1fr 1fr}.spec-table>div{border-right:1px solid var(--line)!important;border-bottom:1px solid var(--line)!important}.spec-table>div:nth-child(2n){border-right:0!important}}
+@media(max-width:520px){.spec-table{grid-template-columns:1fr}.spec-table>div{border-right:0!important}}
+
+/* lab note */
+.lab-sim-note{margin-top:1rem;font:500 10px/1.5 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--flag)}
+
 /* preview banner (if present) */
 .preview-banner{position:sticky;top:0;z-index:500;background:var(--flag);color:#12100c;font:500 var(--fs-micro)/1 var(--font-mono);letter-spacing:.14em;text-align:center;padding:8px 12px}
 </style>
@@ -771,7 +991,7 @@ a.reach-row:hover .reach-value{color:var(--accent)}
 </header>
 
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Site navigation" inert>
-  <div class="mobile-menu-meta"><span>AKSHAY BAWALIWALE</span><span>AI SYSTEMS ARCHITECT</span></div>
+  <div class="mobile-menu-meta"><span>AKSHAY BAWALIWALE</span><span>SENIOR GENAI &amp; LLM ENGINEER</span></div>
   <button id="mobileMenuClose" aria-label="Close navigation"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   <nav aria-label="Mobile navigation">
     <div><span>01</span><a href="#/" data-nav="home">Home</a></div>
@@ -802,70 +1022,129 @@ a.reach-row:hover .reach-value{color:var(--accent)}
     <div class="hero-aurora" id="heroAurora" aria-hidden="true"></div>
     <div class="hero-parallax-layer" id="heroParallax" aria-hidden="true"></div>
     <div class="hero-copy" id="heroCopy">
-      <p class="eyebrow"><span></span> GENERATIVE AI &amp; MACHINE LEARNING ENGINEER · LLM SYSTEMS · APPLIED ML</p>
+      <p class="eyebrow"><span></span> SENIOR GENERATIVE AI &amp; LLM ENGINEER · AGENTIC SYSTEMS · VOICE AI · RAG</p>
       <h1>I architect AI systems that <em>survive reality.</em></h1>
-      <p class="hero-subcopy">Multi-agent workflows, Voice AI, RAG and evaluation — plus the applied ML underneath every model choice. I turn promising demos into systems that stay reliable in production.</p>
+      <p class="hero-subcopy">I design, ship and evaluate production AI &mdash; multi-agent orchestration, RAG, voice AI and LLM evaluation &mdash; from the client call that scopes it to the system that runs it.</p>
+      <ul class="hero-proof" aria-label="Headline results">
+        <li><b>2 days &rarr; 3 min</b><span>Service queue</span></li>
+        <li><b>3M+</b><span>SMBs served · &lt;3s TTFT</span></li>
+        <li><b>20+</b><span>Production LLM systems</span></li>
+      </ul>
       <div class="hero-actions">
         <a href="#systems" class="button button-primary" data-scroll="#systems">EXPLORE THE SYSTEMS ↘</a>
+        <a href="#/reach" class="button button-secondary">GET IN TOUCH →</a>
       </div>
     </div>
 
     <div class="hero-index">AKSHAY BAWALIWALE <span>©26</span></div>
   </section>
 
-  <section class="metric-band reveal" aria-label="Key outcomes">
-    <div><strong>99.9%</strong><span>QUEUE LATENCY REDUCTION</span></div>
-    <div><strong>87.5%</strong><span>FASTER FULFILMENT</span></div>
-    <div><strong>MONTHS → DAYS</strong><span>SALES INTELLIGENCE</span></div>
-    <div><strong>5K/DAY</strong><span>REQUESTS SERVED IN PRODUCTION</span></div>
+  <section class="proof-board reveal" aria-label="Measured outcomes">
+    <div class="proof-lead">
+      <p class="proof-kicker">Business outcome</p>
+      <p class="proof-lead-title">Won a major enterprise contract.</p>
+      <p class="proof-lead-note">On the Voice AI proof of concept I scoped and demoed &mdash; then built into the system below.</p>
+      <a href="#/case/voice-ai" class="proof-link">READ THE CASE STUDY <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <dl class="proof-grid">
+      <div class="proof-cell"><dt>Service-queue latency · Voice AI</dt><dd class="proof-value"><span class="pv-from">2 days</span><span class="pv-arrow" aria-hidden="true">&rarr;</span><strong aria-hidden="true" data-seq="2 days|1 day|12 h|3 h|40 min|3 min">3 min</strong><span class="visually-hidden">from 2 days to 3 minutes</span></dd><dd class="viz-collapse" aria-hidden="true" style="--after:1.5%"><span class="vc-row"><em>BEFORE</em><i><b></b></i></span><span class="vc-row vc-after"><em>AFTER</em><i><b></b></i></span></dd><dd class="proof-foot">&minus;99.9% queue latency · 87.5% faster fulfilment</dd></div>
+      <div class="proof-cell"><dt>Time to first token · ReAct agent</dt><dd class="proof-value"><strong>&lt;3s</strong></dd><dd class="viz-ruler" aria-hidden="true" style="--fill:54%;--mark:60%"><i><b></b><u></u></i><span><em>0s</em><em>1</em><em>2</em><em>3</em><em>4</em><em>5s</em></span></dd><dd class="proof-foot">Across 3M+ US SMBs · 10 tools · 10 data sources</dd></div>
+      <div class="proof-cell"><dt>Output accuracy · hybrid retrieval</dt><dd class="proof-value"><strong aria-hidden="true" data-count="95" data-prefix="&gt;" data-suffix="%">&gt;95%</strong><span class="visually-hidden">more than 95 percent</span></dd><dd class="viz-dots" aria-hidden="true"><i style="--d:0"></i><i style="--d:1"></i><i style="--d:2"></i><i style="--d:3"></i><i style="--d:4"></i><i style="--d:5"></i><i style="--d:6"></i><i style="--d:7"></i><i style="--d:8"></i><i style="--d:9"></i><i style="--d:10"></i><i style="--d:11"></i><i style="--d:12"></i><i style="--d:13"></i><i style="--d:14"></i><i style="--d:15"></i><i style="--d:16"></i><i style="--d:17"></i><i style="--d:18"></i><i class="miss" style="--d:19"></i></dd><dd class="proof-foot">Hybrid search + re-ranking over SMB records</dd></div>
+      <div class="proof-cell"><dt>Ad delivery · Google &amp; Meta ads agent</dt><dd class="proof-value"><span class="pv-from">days</span><span class="pv-arrow" aria-hidden="true">&rarr;</span><strong aria-hidden="true" data-seq="days|1 day|6 h|1 h|&lt;10 min">&lt;10 min</strong><span class="visually-hidden">from days to under 10 minutes</span></dd><dd class="viz-collapse" aria-hidden="true" style="--after:1%"><span class="vc-row"><em>BEFORE</em><i><b></b></i></span><span class="vc-row vc-after"><em>AFTER</em><i><b></b></i></span></dd><dd class="proof-foot">Across 2,000+ SMB ad accounts</dd></div>
+    </dl>
+  </section>
+
+  <section class="stack-ticker" aria-label="Production stack">
+    <p>In production with</p>
+    <div class="ticker-window">
+      <ul class="ticker-track"><li>LangGraph</li><li>CrewAI</li><li>Claude SDK</li><li>Pydantic</li><li>MCP</li><li>LiveKit</li><li>Twilio SIP</li><li>Salesforce</li><li>LlamaIndex</li><li>Pinecone</li><li>FAISS</li><li>LangSmith</li><li>MLflow</li><li>FastAPI</li><li>AWS</li><li>Vertex AI</li><li>Docker</li></ul>
+      <ul class="ticker-track" aria-hidden="true"><li>LangGraph</li><li>CrewAI</li><li>Claude SDK</li><li>Pydantic</li><li>MCP</li><li>LiveKit</li><li>Twilio SIP</li><li>Salesforce</li><li>LlamaIndex</li><li>Pinecone</li><li>FAISS</li><li>LangSmith</li><li>MLflow</li><li>FastAPI</li><li>AWS</li><li>Vertex AI</li><li>Docker</li></ul>
+    </div>
   </section>
 
   <section class="manifesto section-shell reveal">
     <p class="section-kicker">Point of view</p>
     <h2>AI demos are easy. <em>Production is where the plot begins.</em></h2>
-    <p class="manifesto-copy">Three of them are below, rebuilt as case studies — architecture, trade-offs, and the numbers that came out the other side.</p>
+    <p class="manifesto-copy">Three production systems below, rebuilt as NDA-safe case studies &mdash; the architecture, the decisions behind it, and the numbers that came out the other side.</p>
   </section>
 
   <section id="systems" class="systems section-shell">
     <div class="section-heading reveal">
       <div><p class="section-kicker">Selected systems</p><h2>Evidence, not adjectives.</h2></div>
-      <p>Production architectures reconstructed as NDA-safe case studies.</p>
+      <p>Production systems I built at BuzzBoard, reconstructed as NDA-safe case studies.</p>
     </div>
     <div class="project-list">
       <article class="shot-host project-card project-red reveal">
         <div class="project-number">01</div>
-        <div class="project-media"><figure class="shot shot-frame"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&q=70&w=1920 1920w" sizes="(max-width:760px) 92vw, (max-width:1050px) 150px, 220px" alt="Studio microphone lit by warm stage light" width="880" height="1100" loading="lazy" decoding="async"></figure></div>
-        <div class="project-content"><p>VOICE AI · MULTI-AGENT</p><h3>Autonomous customer care that collapsed a two-day queue into three minutes.</h3><span>A verification, care and compliance agent architecture integrating LiveKit, Twilio and Salesforce for secure, real-time service fulfilment.</span></div>
-        <div class="project-impact"><small>IMPACT</small><strong>99.9% lower queue latency</strong></div>
-        <a href="#/case/voice-ai" data-nav="voice-ai" aria-label="Read the case study — Voice AI: from a two-day queue to three minutes">→</a>
+        <div class="project-media"><figure class="topo" aria-hidden="true"><svg viewBox="0 0 200 250" focusable="false"><rect x="62" y="23.0" width="3" height="6" rx="1.5" class="topo-wave"/><rect x="69" y="20.0" width="3" height="12" rx="1.5" class="topo-wave"/><rect x="76" y="16.0" width="3" height="20" rx="1.5" class="topo-wave"/><rect x="83" y="21.0" width="3" height="10" rx="1.5" class="topo-wave"/><rect x="90" y="13.0" width="3" height="26" rx="1.5" class="topo-wave"/><rect x="97" y="18.0" width="3" height="16" rx="1.5" class="topo-wave"/><rect x="104" y="22.0" width="3" height="8" rx="1.5" class="topo-wave"/><rect x="111" y="15.0" width="3" height="22" rx="1.5" class="topo-wave"/><rect x="118" y="19.0" width="3" height="14" rx="1.5" class="topo-wave"/><rect x="125" y="23.0" width="3" height="6" rx="1.5" class="topo-wave"/><rect x="132" y="21.0" width="3" height="10" rx="1.5" class="topo-wave"/><rect x="139" y="24.0" width="3" height="4" rx="1.5" class="topo-wave"/><text x="100" y="54" class="topo-label" text-anchor="middle">CALLER</text>
+<line x1="100" y1="62" x2="100" y2="206" class="topo-edge"/><line x1="100" y1="62" x2="100" y2="206" class="topo-flow"/>
+<circle cx="100" cy="88" r="12" class="topo-node"/><circle cx="100" cy="132" r="15" class="topo-hot"/><circle cx="100" cy="176" r="12" class="topo-node"/>
+<text x="124" y="91" class="topo-label" text-anchor="start">VERIFY</text><text x="124" y="135" class="topo-label" text-anchor="start">CARE</text><text x="124" y="179" class="topo-label" text-anchor="start">COMPLIANCE</text>
+<text x="76" y="91" class="topo-idx" text-anchor="end">01</text><text x="76" y="135" class="topo-idx" text-anchor="end">02</text><text x="76" y="179" class="topo-idx" text-anchor="end">03</text>
+<rect x="58" y="206" width="84" height="24" rx="2" class="topo-node"/><text x="100" y="221" class="topo-label" text-anchor="middle">SALESFORCE</text></svg></figure></div>
+        <div class="project-content"><p>VOICE AI · MULTI-AGENT</p><h3>Autonomous customer care that collapsed a two-day queue into three minutes.</h3><span>Verification, care and compliance agents on LiveKit, Twilio SIP and Salesforce. The proof of concept I scoped and demoed won a major enterprise contract.</span></div>
+        <div class="project-impact"><small>QUEUE LATENCY</small><strong>2 days &rarr; 3 min</strong><em>&minus;99.9% · 87.5% faster fulfilment</em></div>
+        <a href="#/case/voice-ai" aria-label="Read the case study — Voice AI: from a two-day queue to three minutes">&rarr;</a>
       </article>
       <article class="shot-host project-card project-blue reveal">
         <div class="project-number">02</div>
-        <div class="project-media"><figure class="shot shot-frame"><img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=70&w=1920 1920w" sizes="(max-width:760px) 92vw, (max-width:1050px) 150px, 220px" alt="Analytics dashboards showing conversion and quality-score metrics" width="880" height="1100" loading="lazy" decoding="async"></figure></div>
-        <div class="project-content"><p>AGENTIC AI · B2B</p><h3>Prospect intelligence orchestrated across search, knowledge and the live web.</h3><span>A ReAct-style multi-agent system that turns fragmented business signals into contextual SWOT and gap analysis for sales teams.</span></div>
-        <div class="project-impact"><small>IMPACT</small><strong>Months to days</strong></div>
-        <a href="#/case/b2b" data-nav="b2b" aria-label="Read the case study — B2B intelligence: a prospect view assembled by agents">→</a>
+        <div class="project-media"><figure class="topo" aria-hidden="true"><svg viewBox="0 0 200 250" focusable="false"><rect x="58" y="10" width="84" height="20" rx="2" class="topo-node"/><text x="100" y="23" class="topo-label" text-anchor="middle">GUARDRAIL</text>
+<line x1="100" y1="118" x2="121.6" y2="51.4" class="topo-edge thin"/><line x1="100" y1="118" x2="156.6" y2="76.9" class="topo-edge thin"/><line x1="100" y1="118" x2="170.0" y2="118.0" class="topo-edge thin"/><line x1="100" y1="118" x2="156.6" y2="159.1" class="topo-edge thin"/><line x1="100" y1="118" x2="121.6" y2="184.6" class="topo-edge thin"/><line x1="100" y1="118" x2="78.4" y2="184.6" class="topo-edge thin"/><line x1="100" y1="118" x2="43.4" y2="159.1" class="topo-edge thin"/><line x1="100" y1="118" x2="30.0" y2="118.0" class="topo-edge thin"/><line x1="100" y1="118" x2="43.4" y2="76.9" class="topo-edge thin"/><line x1="100" y1="118" x2="78.4" y2="51.4" class="topo-edge thin"/><line x1="100" y1="30" x2="100" y2="98" class="topo-flow"/><line x1="100" y1="138" x2="100" y2="206" class="topo-flow"/>
+<circle cx="100" cy="118" r="31" class="topo-loop"/><circle cx="121.6" cy="51.4" r="5" class="topo-node tool" style="--d:0"/><circle cx="156.6" cy="76.9" r="5" class="topo-node tool" style="--d:1"/><circle cx="170.0" cy="118.0" r="5" class="topo-node tool" style="--d:2"/><circle cx="156.6" cy="159.1" r="5" class="topo-node tool" style="--d:3"/><circle cx="121.6" cy="184.6" r="5" class="topo-node tool" style="--d:4"/><circle cx="78.4" cy="184.6" r="5" class="topo-node tool" style="--d:5"/><circle cx="43.4" cy="159.1" r="5" class="topo-node tool" style="--d:6"/><circle cx="30.0" cy="118.0" r="5" class="topo-node tool" style="--d:7"/><circle cx="43.4" cy="76.9" r="5" class="topo-node tool" style="--d:8"/><circle cx="78.4" cy="51.4" r="5" class="topo-node tool" style="--d:9"/>
+<circle cx="100" cy="118" r="19" class="topo-hot"/><text x="100" y="121" class="topo-label inv" text-anchor="middle">REACT</text>
+<rect x="62" y="206" width="76" height="20" rx="2" class="topo-node"/><text x="100" y="219" class="topo-label" text-anchor="middle">MEMORY</text><text x="100" y="244" class="topo-idx" text-anchor="middle">10 TOOLS · 10 SOURCES</text></svg></figure></div>
+        <div class="project-content"><p>AGENTIC AI · RETRIEVAL AT SCALE</p><h3>An autonomous agent answering for 3M+ SMBs in under three seconds.</h3><span>A ReAct agent with guardrail filtering and long-term memory, choosing among 10 tools over 10 data sources, grounded by hybrid retrieval and re-ranking.</span></div>
+        <div class="project-impact"><small>TIME TO FIRST TOKEN</small><strong>&lt;3s</strong><em>&gt;95% output accuracy</em></div>
+        <a href="#/case/agent" aria-label="Read the case study — an autonomous agent for 3M+ SMBs">&rarr;</a>
       </article>
       <article class="shot-host project-card project-ivory reveal">
         <div class="project-number">03</div>
-        <div class="project-media"><figure class="shot shot-frame"><img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=70&w=1920 1920w" sizes="(max-width:760px) 92vw, (max-width:1050px) 150px, 220px" alt="Blackboard covered in hand-written equations and diagrams" width="880" height="1100" loading="lazy" decoding="async"></figure></div>
-        <div class="project-content"><p>LLMOPS · EVALUATION</p><h3>Evaluation systems built for the gap between a good demo and a reliable product.</h3><span>Benchmarking response quality, latency, cost and tool-use reliability to guide model selection and production handover.</span></div>
-        <div class="project-impact"><small>IMPACT</small><strong>Quality × latency × cost</strong></div>
-        <a href="#/case/eval" data-nav="eval" aria-label="Read the case study — LLM evaluation: making model choice an engineering decision">→</a>
+        <div class="project-media"><figure class="topo" aria-hidden="true"><svg viewBox="0 0 200 250" focusable="false"><rect x="56" y="10" width="88" height="20" rx="2" class="topo-node"/><text x="100" y="23" class="topo-label" text-anchor="middle">BUSINESS</text>
+<path d="M100 30 L44 70 M100 30 L100 70 M100 30 L156 70" class="topo-edge"/><path d="M100 30 L44 70 M100 30 L100 70 M100 30 L156 70" class="topo-flow"/>
+<path d="M44 94 L92 140 M100 94 L100 136 M156 94 L108 140" class="topo-edge"/><path d="M44 94 L92 140 M100 94 L100 136 M156 94 L108 140" class="topo-flow"/>
+<circle cx="44" cy="82" r="12" class="topo-node"/><circle cx="100" cy="82" r="12" class="topo-node"/><circle cx="156" cy="82" r="12" class="topo-node"/>
+<text x="44" y="110" class="topo-label" text-anchor="middle">INFO</text><text x="105" y="110" class="topo-label" text-anchor="start">VISUAL</text><text x="172" y="85" class="topo-label" text-anchor="start">VOICE</text>
+<path d="M84 154 C 34 160 14 124 32 96" class="topo-repair"/><text x="22" y="150" class="topo-idx flag" text-anchor="middle">REPAIR</text>
+<circle cx="100" cy="152" r="16" class="topo-hot"/><text x="122" y="156" class="topo-label" text-anchor="start">VALIDATOR</text>
+<line x1="100" y1="168" x2="100" y2="198" class="topo-edge"/><line x1="100" y1="168" x2="100" y2="198" class="topo-flow"/>
+<rect x="52" y="198" width="96" height="22" rx="2" class="topo-node"/><text x="100" y="213" class="topo-label" text-anchor="middle">60 FIELDS</text><text x="100" y="242" class="topo-idx" text-anchor="middle">LLM-AS-JUDGE · 10 PARAMS</text></svg></figure></div>
+        <div class="project-content"><p>MULTI-AGENT · LLM EVALUATION</p><h3>Four agents that build a validated business profile &mdash; and a rubric that grades them.</h3><span>Information, visual and voice agents run in parallel on LangGraph; a validator repairs whatever fails. Every profile is scored on a 10-parameter LLM-as-Judge rubric.</span></div>
+        <div class="project-impact"><small>PER PROFILE</small><strong>60 fields</strong><em>10-parameter LLM-as-Judge</em></div>
+        <a href="#/case/onboarding" aria-label="Read the case study — four-agent business onboarding">&rarr;</a>
+      </article>
+      <article class="shot-host project-card project-blue project-card--brief reveal">
+        <div class="project-number">04</div>
+        <div class="project-media"><figure class="topo" aria-hidden="true"><svg viewBox="0 0 200 250" focusable="false"><rect x="14" y="12" width="80" height="20" rx="2" class="topo-node"/><text x="54" y="25" class="topo-label" text-anchor="middle">SEO · SPYFU</text>
+<rect x="106" y="12" width="80" height="20" rx="2" class="topo-node"/><text x="146" y="25" class="topo-label" text-anchor="middle">KEYWORDS</text>
+<path d="M54 32 L92 76 M146 32 L108 76" class="topo-edge"/><path d="M54 32 L92 76 M146 32 L108 76" class="topo-flow"/>
+<circle cx="100" cy="88" r="16" class="topo-hot"/><text x="124" y="92" class="topo-label" text-anchor="start">AD COPY</text>
+<line x1="100" y1="104" x2="100" y2="136" class="topo-edge"/><line x1="100" y1="104" x2="100" y2="136" class="topo-flow"/>
+<line x1="35" y1="140" x2="165" y2="140" class="topo-edge"/><rect x="30" y="150" width="10" height="10" class="topo-cell" style="--d:0"/><rect x="48" y="150" width="10" height="10" class="topo-cell" style="--d:1"/><rect x="66" y="150" width="10" height="10" class="topo-cell" style="--d:2"/><rect x="84" y="150" width="10" height="10" class="topo-cell" style="--d:3"/><rect x="102" y="150" width="10" height="10" class="topo-cell" style="--d:4"/><rect x="120" y="150" width="10" height="10" class="topo-cell" style="--d:5"/><rect x="138" y="150" width="10" height="10" class="topo-cell" style="--d:6"/><rect x="156" y="150" width="10" height="10" class="topo-cell" style="--d:7"/><rect x="30" y="166" width="10" height="10" class="topo-cell" style="--d:8"/><rect x="48" y="166" width="10" height="10" class="topo-cell" style="--d:9"/><rect x="66" y="166" width="10" height="10" class="topo-cell" style="--d:10"/><rect x="84" y="166" width="10" height="10" class="topo-cell" style="--d:11"/><rect x="102" y="166" width="10" height="10" class="topo-cell" style="--d:12"/><rect x="120" y="166" width="10" height="10" class="topo-cell" style="--d:13"/><rect x="138" y="166" width="10" height="10" class="topo-cell" style="--d:14"/><rect x="156" y="166" width="10" height="10" class="topo-cell" style="--d:15"/><rect x="30" y="182" width="10" height="10" class="topo-cell" style="--d:16"/><rect x="48" y="182" width="10" height="10" class="topo-cell" style="--d:17"/><rect x="66" y="182" width="10" height="10" class="topo-cell" style="--d:18"/><rect x="84" y="182" width="10" height="10" class="topo-cell" style="--d:19"/><rect x="102" y="182" width="10" height="10" class="topo-cell" style="--d:20"/><rect x="120" y="182" width="10" height="10" class="topo-cell" style="--d:21"/><rect x="138" y="182" width="10" height="10" class="topo-cell" style="--d:22"/><rect x="156" y="182" width="10" height="10" class="topo-cell" style="--d:23"/><rect x="30" y="198" width="10" height="10" class="topo-cell" style="--d:24"/><rect x="48" y="198" width="10" height="10" class="topo-cell" style="--d:25"/><rect x="66" y="198" width="10" height="10" class="topo-cell" style="--d:26"/><rect x="84" y="198" width="10" height="10" class="topo-cell" style="--d:27"/><rect x="102" y="198" width="10" height="10" class="topo-cell" style="--d:28"/><rect x="120" y="198" width="10" height="10" class="topo-cell" style="--d:29"/><rect x="138" y="198" width="10" height="10" class="topo-cell" style="--d:30"/><rect x="156" y="198" width="10" height="10" class="topo-cell" style="--d:31"/><rect x="30" y="214" width="10" height="10" class="topo-cell" style="--d:32"/><rect x="48" y="214" width="10" height="10" class="topo-cell" style="--d:33"/><rect x="66" y="214" width="10" height="10" class="topo-cell" style="--d:34"/><rect x="84" y="214" width="10" height="10" class="topo-cell" style="--d:35"/><rect x="102" y="214" width="10" height="10" class="topo-cell" style="--d:36"/><rect x="120" y="214" width="10" height="10" class="topo-cell" style="--d:37"/><rect x="138" y="214" width="10" height="10" class="topo-cell" style="--d:38"/><rect x="156" y="214" width="10" height="10" class="topo-cell" style="--d:39"/><text x="100" y="244" class="topo-idx" text-anchor="middle">2,000+ ACCOUNTS</text></svg></figure></div>
+        <div class="project-content"><p>AI CONTENT · ADS AUTOMATION</p><h3>An ads agent that turned days of campaign work into ten minutes.</h3><span>The AI content layer for the Google and Meta Ads Agent: ad-copy generation, SpyFu-based SEO intelligence and keyword recommendation.</span></div>
+        <div class="project-impact"><small>AD DELIVERY</small><strong>days &rarr; &lt;10 min</strong><em>2,000+ SMB accounts</em></div>
+        <span class="project-brief" aria-hidden="true">BRIEF</span>
       </article>
     </div>
+  </section>
+
+  <section class="method section-shell reveal" aria-labelledby="methodTitle">
+    <div class="section-heading">
+      <div><p class="section-kicker">How I work</p><h2 id="methodTitle">From the client call to the system in production.</h2></div>
+      <p>One owner across the whole lifecycle &mdash; so the thing that gets demoed is the thing that ships.</p>
+    </div>
+    <ol class="method-rail">
+      <li><span class="m-step">01</span><h3>Scope</h3><p>Feedback calls with VPs, PMs and product owners turn a vague ask into a use case with a target.</p><small>Feature owner · Zylo product line</small></li>
+      <li><span class="m-step">02</span><h3>Prove</h3><p>A working proof of concept, demoed to the buyer &mdash; not a slide.</p><small>Voice AI POC &rarr; enterprise contract</small></li>
+      <li><span class="m-step">03</span><h3>Build</h3><p>Multi-agent systems on LangGraph and CrewAI, typed with structured outputs, wired to tools over MCP.</p><small>20+ production LLM systems</small></li>
+      <li><span class="m-step">04</span><h3>Evaluate</h3><p>Custom LLM-as-Judge rubrics before a model choice becomes a production dependency.</p><small>10-parameter rubric · MLflow</small></li>
+      <li><span class="m-step">05</span><h3>Operate</h3><p>CI/CD on AWS with FastAPI and MLflow &mdash; and engineers coached on agentic design.</p><small>3 engineers mentored</small></li>
+    </ol>
   </section>
 
   <section id="projects" class="public-work section-shell">
     <div class="section-heading reveal">
       <div><p class="section-kicker">Open source</p><h2>Applied ML, in public.</h2></div>
       <p>Independent builds across healthcare, media, vision and mobility — curated for depth, not repo count.</p>
-    </div>
-    <div class="glimpse-stats reveal">
-      <div><strong>04</strong><span>PUBLIC PROJECTS</span></div>
-      <div><strong>0.89</strong><span>BEST MODEL ROC-AUC</span></div>
-      <div><strong>4</strong><span>DOMAINS · HEALTH · MEDIA · VISION · MOBILITY</span></div>
-      <div><strong>100%</strong><span>OPEN SOURCE &amp; DOCUMENTED</span></div>
     </div>
     <div class="orbit reveal" id="projectOrbit" role="region" aria-roledescription="carousel" aria-label="Public projects">
       <button class="orbit-arrow orbit-prev" type="button" aria-label="Previous project" data-dir="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H5"/><path d="M11 5l-7 7 7 7"/></svg></button>
@@ -880,8 +1159,8 @@ a.reach-row:hover .reach-value{color:var(--accent)}
         <span class="orbit-body">
           <span class="orbit-tag">SUPERVISED ML · HEALTHCARE</span>
           <span class="orbit-title">Cardiovascular Risk Prediction</span>
-          <span class="orbit-desc">XGBoost + SMOTE on Framingham data, tuned for recall over raw accuracy.</span>
-          <span class="orbit-cta"><span>Case study</span><b>0.89 ROC-AUC</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          <span class="orbit-desc">Nine classifiers behind a leakage-safe pipeline with Platt calibration &mdash; logistic regression won, and it ships as a live app.</span>
+          <span class="orbit-cta"><span>Case study</span><b>0.714 ROC-AUC</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </span>
         <span class="orbit-gloss" aria-hidden="true"></span>
         </span>
@@ -894,8 +1173,8 @@ a.reach-row:hover .reach-value{color:var(--accent)}
         <span class="orbit-body">
           <span class="orbit-tag">RECOMMENDER SYSTEMS · NLP</span>
           <span class="orbit-title">Netflix AI Recommender</span>
-          <span class="orbit-desc">A hybrid recommender benchmarked over 11 models across 8,807 titles — tuned for catalogue diversity, not just a top-line score.</span>
-          <span class="orbit-cta"><span>Case study</span><b>99.96% P@10</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          <span class="orbit-desc">Eleven models on 8,807 titles. The shipped hybrid held 99.96% genre precision and returned 43% more diverse picks.</span>
+          <span class="orbit-cta"><span>Case study</span><b>+43% DIVERSITY</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </span>
         <span class="orbit-gloss" aria-hidden="true"></span>
         </span>
@@ -920,10 +1199,10 @@ a.reach-row:hover .reach-value{color:var(--accent)}
         <span class="orbit-shade" aria-hidden="true"></span>
         <span class="orbit-top"><span class="orbit-num">04</span><span class="orbit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h5a4 4 0 0 0 0-8h-4a4 4 0 0 1 0-8h5"/></svg></span></span>
         <span class="orbit-body">
-          <span class="orbit-tag">REGRESSION</span>
+          <span class="orbit-tag">REGRESSION · MOBILITY</span>
           <span class="orbit-title">NYC Taxi Trip Time</span>
-          <span class="orbit-desc">Feature engineering on pickup/drop-off geometry and time to predict trip duration.</span>
-          <span class="orbit-cta"><span>Case study</span><b>REGRESSION</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          <span class="orbit-desc">Eight regressors compared. Geo and time features plus LightGBM lifted R² from a 0.55 linear baseline to 0.74.</span>
+          <span class="orbit-cta"><span>Case study</span><b>R² 0.74</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </span>
         <span class="orbit-gloss" aria-hidden="true"></span>
         </span>
@@ -951,8 +1230,8 @@ a.reach-row:hover .reach-value{color:var(--accent)}
     <div class="explorer-panel">
       <div class="explorer-tabs" role="tablist" id="explorerTabs" aria-label="System architecture">
         <button role="tab" id="tab-voice" aria-controls="systemPanel" data-mode="voice" aria-selected="true">VOICE AI</button>
-        <button role="tab" id="tab-sales" aria-controls="systemPanel" data-mode="sales" aria-selected="false" tabindex="-1">B2B INTELLIGENCE</button>
-        <button role="tab" id="tab-rag" aria-controls="systemPanel" data-mode="rag" aria-selected="false" tabindex="-1">PRODUCTION RAG</button>
+        <button role="tab" id="tab-agent" aria-controls="systemPanel" data-mode="agent" aria-selected="false" tabindex="-1">SMB AGENT</button>
+        <button role="tab" id="tab-onboard" aria-controls="systemPanel" data-mode="onboard" aria-selected="false" tabindex="-1">ONBOARDING</button>
       </div>
       <div class="system-map" id="systemPanel" role="tabpanel" aria-labelledby="tab-voice" tabindex="0">
         <div class="system-flow" id="systemFlow"></div>
@@ -973,7 +1252,17 @@ a.reach-row:hover .reach-value{color:var(--accent)}
   </section>
 
   <section class="credentials section-shell reveal">
-    <div class="credential-main"><p class="section-kicker">Signal</p><h2>Built in production.<br />Explained in public.</h2><p>M.Tech, IIT Kharagpur · Senior GenAI &amp; LLM Specialist · Sparkle Award · Star Performer for two consecutive years.</p></div>
+    <div class="credential-main"><p class="section-kicker">Signal</p><h2>Built in production.<br />Explained in public.</h2><p>Senior Generative AI &amp; LLM Specialist at BuzzBoard, shipping AI systems for US SMB clients.</p>
+      <ul class="cred-chips" aria-label="Credentials">
+        <li><b>IIT Kharagpur</b><span>M.Tech</span></li>
+        <li><b>AIR 1</b><span>IIST&ndash;ISRO entrance</span></li>
+        <li><b>GATE &times;8</b><span>Qualified</span></li>
+        <li><b>Top 0.1%</b><span>AlmaX cohort</span></li>
+        <li><b>Senior</b><span>Promoted Jan 2026</span></li>
+        <li><b>Sparkle Award</b><span>Recognition</span></li>
+        <li><b>3 engineers</b><span>Mentored</span></li>
+      </ul>
+    </div>
     <div class="credential-links">
       <a href="https://github.com/AkshayAI007" target="_blank" rel="noreferrer">&lt;/&gt; GITHUB →</a>
       <a href="https://in.linkedin.com/in/akshaybawaliwale" target="_blank" rel="noreferrer">◈ LINKEDIN →</a>
@@ -1018,14 +1307,15 @@ a.reach-row:hover .reach-value{color:var(--accent)}
   </section>
   <section class="timeline section-shell">
     <article class="reveal"><span>2012&mdash;2016</span><h2>B.E. &middot; MECHANICAL ENGINEERING</h2><p>SSGI, Bhilai. First-principles problem-solving, before the problems were machine-learning ones.</p></article>
-    <article class="reveal"><span>2019&mdash;2021</span><h2>M.TECH &middot; IIT KHARAGPUR</h2><p>Earth System Science and Technology; complex data, spatial systems and research discipline.</p></article>
-    <article class="reveal"><span>2022</span><h2>CENTRE OF EXCELLENCE IN AI</h2><p>Computer-vision research for satellite imagery, CNNs and U-Net segmentation.</p></article>
-    <article class="reveal"><span>2024&mdash;NOW</span><h2>BUZZBOARD &middot; GENAI</h2><p>Agentic systems, enterprise Voice AI, RAG, evaluation and production delivery.</p></article>
+    <article class="reveal"><span>2019&mdash;2021</span><h2>M.TECH &middot; IIT KHARAGPUR</h2><p><b class="tl-proof">GATE qualified &times;8 · AIR 1, IIST&ndash;ISRO entrance</b>Earth System Science and Technology; complex data, spatial systems and research discipline.</p></article>
+    <article class="reveal"><span>2022</span><h2>CENTRE OF EXCELLENCE IN AI</h2><p><b class="tl-proof">72% LULC prediction accuracy</b>CNN research for satellite image processing and upscaling.</p></article>
+    <article class="reveal"><span>2023&mdash;2024</span><h2>ALMABETTER &middot; DATA &amp; ML</h2><p><b class="tl-proof">Top 0.1% of the AlmaX cohort</b>Shipped a deployed cardiovascular-risk app: nine classifiers, a leakage-safe pipeline, calibrated probabilities.</p></article>
+    <article class="reveal"><span>2024&mdash;NOW</span><h2>BUZZBOARD &middot; GENAI</h2><p><b class="tl-proof">20+ production LLM systems · Senior since Jan 2026</b>Agentic systems, enterprise voice AI, retrieval at 3M-SMB scale, evaluation and production delivery.</p></article>
     <article class="reveal"><span>NEXT</span><h2>AI &amp; ML ARCHITECTURE</h2><p>Designing intelligence as an accountable system&mdash;not a magical API call.</p></article>
   </section>
   <section class="about-split section-shell">
     <div class="reveal"><p class="section-kicker">CURRENTLY</p><h2>Senior Generative AI &amp; LLM Specialist</h2><p>Architecting agentic AI and RAG systems in production, while staying hands-on with the <span class="ml-accent">applied ML &mdash; XGBoost, clustering, predictive modelling</span> behind every model choice.</p></div>
-    <div class="reveal"><p class="section-kicker">RECOGNITION</p><h2>Sparkle Award<br/>Star Performer &times;2</h2></div>
+    <div class="reveal"><p class="section-kicker">RECOGNITION</p><h2>Sparkle Award<br/>Promoted to Senior, 2026</h2><p>Mentoring 3 engineers on agentic system design.</p></div>
   </section>
   <section class="next-case reveal">
     <p>CURRENTLY OPEN TO SENIOR GENAI, ML ENGINEERING &amp; AI ARCHITECTURE ROLES.</p>
@@ -1079,7 +1369,7 @@ a.reach-row:hover .reach-value{color:var(--accent)}
   </section>
 
   <section class="lab-module evaluation-lab section-shell reveal">
-    <div class="lab-copy"><p class="section-kicker">EXPERIMENT 02 / EVALUATION CONSOLE</p><h2>A model is more than its answer.</h2><p>Run a representative evaluation across the four axes I use when reasoning about production model choice.</p><button id="runEvalBtn"><span id="runEvalIcon">&#9654;</span> <span id="runEvalLabel">RUN EVALUATION</span></button></div>
+    <div class="lab-copy"><p class="section-kicker">EXPERIMENT 02 / EVALUATION CONSOLE</p><h2>A model is more than its answer.</h2><p>A simulated run across four of the axes I weigh before a model becomes a production dependency. The real rubric scores ten.</p><p class="lab-sim-note">Illustrative scores &middot; not a live benchmark</p><button id="runEvalBtn"><span id="runEvalIcon">&#9654;</span> <span id="runEvalLabel">RUN EVALUATION</span></button></div>
     <div class="score-console" id="scoreConsole"></div>
   </section>
 
@@ -1089,10 +1379,10 @@ a.reach-row:hover .reach-value{color:var(--accent)}
       <p>The public repositories, recorded the way a bench log records them &mdash; method, stack, and the number that mattered.</p>
     </div>
     <ol class="bench-log">
-      <li class="reveal"><a href="projects/cardiovascular.html"><span class="bench-run">01</span><div class="bench-body"><span class="bench-tag">HEALTHCARE &middot; SUPERVISED</span><h3>Cardiovascular Risk Prediction</h3><p class="bench-note">XGBoost over Framingham cohort data with SMOTE rebalancing &mdash; tuned for recall, because a missed positive costs more than a false alarm.</p><p class="bench-stack"><span>XGBoost</span><span>SMOTE</span><span>scikit-learn</span><span>Pandas</span></p></div><div class="bench-metric"><strong>0.89</strong><span>ROC-AUC</span></div><span class="bench-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
-      <li class="reveal"><a href="projects/netflix.html"><span class="bench-run">02</span><div class="bench-body"><span class="bench-tag">MEDIA &middot; RECOMMENDERS</span><h3>Netflix AI Recommender</h3><p class="bench-note">Eleven models benchmarked across 8,807 titles, then a hybrid re-ranker (NMF + LDA + content) tuned for catalogue diversity over a single score.</p><p class="bench-stack"><span>NMF / LDA</span><span>TF-IDF</span><span>K-Means</span><span>scikit-learn</span></p></div><div class="bench-metric"><strong>99.96%</strong><span>PRECISION@10</span></div><span class="bench-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+      <li class="reveal"><a href="projects/cardiovascular.html"><span class="bench-run">01</span><div class="bench-body"><span class="bench-tag">HEALTHCARE &middot; SUPERVISED</span><h3>Cardiovascular Risk Prediction</h3><p class="bench-note">Nine classifiers on Framingham data behind a leakage-safe split, SMOTE and Platt calibration. Plain logistic regression beat XGBoost &mdash; and ships as a live app.</p><p class="bench-stack"><span>Logistic Regression</span><span>SMOTE</span><span>scikit-learn</span><span>FastAPI</span></p></div><div class="bench-metric"><strong>0.714</strong><span>ROC-AUC</span></div><span class="bench-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+      <li class="reveal"><a href="projects/netflix.html"><span class="bench-run">02</span><div class="bench-body"><span class="bench-tag">MEDIA &middot; RECOMMENDERS</span><h3>Netflix AI Recommender</h3><p class="bench-note">Eleven models on 8,807 titles. Two clustering models hit a perfect Precision@10 by recommending one genre back &mdash; rejected. The shipped hybrid kept 99.96% and added 43% diversity.</p><p class="bench-stack"><span>NMF / LDA</span><span>TF-IDF</span><span>K-Means</span><span>scikit-learn</span></p></div><div class="bench-metric"><strong>+43%</strong><span>DIVERSITY</span></div><span class="bench-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
       <li class="reveal"><a href="projects/image-enhancer.html"><span class="bench-run">03</span><div class="bench-body"><span class="bench-tag">VISION &middot; SUPER-RESOLUTION</span><h3>AI Image Enhancer</h3><p class="bench-note">Real-ESRGAN + RRDBNet behind a FastAPI service &mdash; 4&times; upscaling, tiled inference, FP16, thread-safe model loading, automatic GPU/CPU fallback.</p><p class="bench-stack"><span>Real-ESRGAN</span><span>RRDBNet</span><span>PyTorch</span><span>FastAPI</span></p></div><div class="bench-metric is-term"><strong>4&times; · GPU/CPU</strong><span>UPSCALE · FALLBACK</span></div><span class="bench-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
-      <li class="reveal"><a href="projects/nyc-taxi.html"><span class="bench-run">04</span><div class="bench-body"><span class="bench-tag">MOBILITY &middot; REGRESSION</span><h3>NYC Taxi Trip Time Prediction</h3><p class="bench-note">Pickup and drop-off geometry engineered against time-of-day signal &mdash; most of the accuracy arrived before the estimator did.</p><p class="bench-stack"><span>scikit-learn</span><span>Pandas</span><span>Matplotlib</span></p></div><div class="bench-metric is-term"><strong>GEO + TIME</strong><span>CORE FEATURES</span></div><span class="bench-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+      <li class="reveal"><a href="projects/nyc-taxi.html"><span class="bench-run">04</span><div class="bench-body"><span class="bench-tag">MOBILITY &middot; REGRESSION</span><h3>NYC Taxi Trip Time Prediction</h3><p class="bench-note">Eight regressors compared. Engineered geo and time features did most of the work; LightGBM took R&sup2; from a 0.55 linear baseline to 0.74.</p><p class="bench-stack"><span>LightGBM</span><span>scikit-learn</span><span>Pandas</span></p></div><div class="bench-metric"><strong>0.74</strong><span>R&sup2; &middot; LIGHTGBM</span></div><span class="bench-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
     </ol>
   </section>
   <section class="next-case reveal">
@@ -1106,80 +1396,104 @@ a.reach-row:hover .reach-value{color:var(--accent)}
 <div class="page" data-page="voice-ai" hidden>
 <main class="detail-page">
   <section class="case-hero section-shell reveal">
-    <p class="section-kicker">CASE STUDY 01 / VOICE AI &middot; MULTI-AGENT &middot; ENTERPRISE AUTOMATION</p>
+    <p class="section-kicker">CASE STUDY 01 / VOICE AI &middot; MULTI-AGENT &middot; ENTERPRISE</p>
     <h1>From a two-day service queue to three minutes.</h1>
-    <p>A production Voice AI architecture that verifies callers, understands service intent, enforces compliance and creates actionable records without leaving the conversation.</p>
-    <div class="case-impact"><div class="reveal"><strong>99.9%</strong><span>QUEUE LATENCY REDUCTION</span></div><div class="reveal"><strong>87.5%</strong><span>FASTER FULFILMENT</span></div><div class="reveal"><strong>24/7</strong><span>AUTONOMOUS AVAILABILITY</span></div></div>
-    <figure class="case-cover shot-host reveal"><figure class="shot shot-frame"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&q=70&w=1920 1920w" sizes="100vw" alt="Studio microphone lit by warm stage light" width="1920" height="732" loading="lazy" decoding="async"></figure><figcaption>IRIS · VOICE AI · LIVEKIT + TWILIO + SALESFORCE</figcaption></figure>
+    <p>A three-agent voice workflow that verifies the caller, understands the request, enforces compliance and files the Salesforce ticket before the call ends. I scoped the use case and demoed the proof of concept that won the contract.</p>
+    <div class="case-proof reveal"><dl class="case-proof-lead"><div class="proof-cell proof-cell--xl"><dt>Service-queue latency</dt><dd class="proof-value"><span class="pv-from">2 days</span><span class="pv-arrow" aria-hidden="true">&rarr;</span><strong aria-hidden="true" data-seq="2 days|1 day|12 h|3 h|40 min|3 min">3 min</strong><span class="visually-hidden">from 2 days to 3 minutes</span></dd><dd class="viz-collapse" aria-hidden="true" style="--after:1.5%"><span class="vc-row"><em>BEFORE</em><i><b></b></i></span><span class="vc-row vc-after"><em>AFTER</em><i><b></b></i></span></dd><dd class="proof-foot">&minus;99.9% queue latency</dd></div></dl><dl class="case-proof-support"><div><dt>Fulfilment time</dt><dd>87.5% faster</dd></div><div><dt>Specialised agents</dt><dd>3</dd></div><div><dt>Commercial</dt><dd>Major enterprise contract won</dd></div></dl></div>
+    <dl class="case-spec reveal"><div><dt>Role</dt><dd>Use-case scoping, POC demo, architecture</dd></div><div><dt>Stack</dt><dd>LiveKit · Twilio SIP · Salesforce</dd></div><div><dt>Guardrails</dt><dd>Real-time, aligned to HIPAA &amp; PCI DSS</dd></div><div><dt>Client</dt><dd>Enterprise, under NDA</dd></div></dl>
   </section>
   <section class="case-story section-shell">
-    <div class="reveal"><p class="section-kicker">THE CONTEXT</p><h2>Two days, for a phone call.</h2><p>Inbound service requests were entering a manual queue. Customers waited up to two days before work even began, while identity checks, information capture and ticket creation crossed multiple systems and teams.</p></div>
-    <div class="reveal"><p class="section-kicker">THE CONSTRAINT</p><h2>Real-time doesn't forgive mistakes.</h2><p>The system needed real-time latency, resilient handoffs, PII protection, HIPAA- and PCI-DSS-aware guardrails and enough observability for enterprise production support.</p></div>
+    <div class="reveal"><p class="section-kicker">THE CONTEXT</p><h2>Two days, for a phone call.</h2><p>Inbound service requests entered a manual queue. Customers waited up to two days before work began, while identity checks, information capture and ticket creation crossed several systems and teams.</p></div>
+    <div class="reveal"><p class="section-kicker">THE CONSTRAINT</p><h2>Real-time doesn&rsquo;t forgive mistakes.</h2><p>The system had to hold a live conversation, hand off between agents without losing state, keep PII out of reach until identity was proven, and stay observable enough for enterprise production support.</p></div>
   </section>
   <section class="case-architecture section-shell reveal">
     <p class="section-kicker">THE ARCHITECTURE</p><h2>Three agents. Five checkpoints.</h2>
-    <div class="case-flow"><div class="case-flow-segment"><div><span>01</span><strong>CALLER</strong></div><i><b></b></i></div><div class="case-flow-segment"><div><span>02</span><strong>VERIFICATION</strong></div><i><b></b></i></div><div class="case-flow-segment"><div><span>03</span><strong>CARE AGENT</strong></div><i><b></b></i></div><div class="case-flow-segment"><div><span>04</span><strong>COMPLIANCE</strong></div><i><b></b></i></div><div class="case-flow-segment"><div><span>05</span><strong>SALESFORCE</strong></div></div></div>
+    <div class="case-flow"><div class="case-flow-segment"><div class="flow-stop" tabindex="0" aria-describedby="readout-voice-ai" data-detail="Inbound call over Twilio SIP, streamed through LiveKit for real-time turn-taking and interruption handling."><span>01</span><strong>CALLER</strong></div><i><b></b></i></div><div class="case-flow-segment"><div class="flow-stop" tabindex="0" aria-describedby="readout-voice-ai" data-detail="URL lookup and OTP validation. No account context enters the conversation until identity is proven."><span>02</span><strong>VERIFICATION</strong></div><i><b></b></i></div><div class="case-flow-segment"><div class="flow-stop is-hot" tabindex="0" aria-describedby="readout-voice-ai" data-detail="Understands the service request and gathers what fulfilment needs, in natural conversation."><span>03</span><strong>CARE AGENT</strong></div><i><b></b></i></div><div class="case-flow-segment"><div class="flow-stop" tabindex="0" aria-describedby="readout-voice-ai" data-detail="Real-time guardrails aligned to HIPAA and PCI DSS check what is said, captured and stored."><span>04</span><strong>COMPLIANCE</strong></div><i><b></b></i></div><div class="case-flow-segment"><div class="flow-stop" tabindex="0" aria-describedby="readout-voice-ai" data-detail="Validated intent becomes a structured ticket through a controlled tool call &mdash; no re-keying."><span>05</span><strong>SALESFORCE</strong></div></div></div>
+    <p class="flow-readout" id="readout-voice-ai" aria-live="polite"><b>03 · CARE AGENT</b><span>Understands the service request and gathers what fulfilment needs, in natural conversation.</span></p>
+    <p class="flow-hint">Hover or tab through the stages</p>
   </section>
-  <section class="case-decisions section-shell">
-    <div class="reveal"><p class="section-kicker">KEY DECISIONS</p><h2>Verification comes before the conversation does.</h2></div>
-    <ol><li class="reveal"><span style="color:var(--signal)">&#10003;</span><span>01</span><p>Separated verification, service fulfilment and compliance into specialised agents with explicit ownership.</p></li><li class="reveal"><span style="color:var(--signal)">&#10003;</span><span>02</span><p>Integrated LiveKit and Twilio for real-time voice orchestration, interruption handling and call routing.</p></li><li class="reveal"><span style="color:var(--signal)">&#10003;</span><span>03</span><p>Used URL lookups and OTP validation before exposing protected account context.</p></li><li class="reveal"><span style="color:var(--signal)">&#10003;</span><span>04</span><p>Converted validated intent into structured Salesforce tickets through controlled tool calls.</p></li></ol>
+  <section class="case-decisions case-decisions--cards section-shell">
+    <div class="reveal"><p class="section-kicker">KEY DECISIONS</p><h2>Verification comes before the conversation does.</h2><p class="decision-lede">Each call, the alternative it beat, and what it cost.</p></div>
+    <ol class="decision-list"><li class="decision reveal"><span class="d-num">01</span><h3>Split verification, care and compliance into three agents.</h3>
+          <dl><div><dt>Instead of</dt><dd>One voice agent carrying every policy in a single prompt.</dd></div><div><dt>Because</dt><dd>Compliance rules stop competing with conversation flow for the same context, and each agent can be tested on its own.</dd></div><div><dt>Trade-off</dt><dd>More handoffs to engineer &mdash; each one a latency and state-transfer risk.</dd></div></dl></li><li class="decision reveal"><span class="d-num">02</span><h3>Prove identity before any account context is exposed.</h3>
+          <dl><div><dt>Instead of</dt><dd>Verifying lazily, once the caller asks for something sensitive.</dd></div><div><dt>Because</dt><dd>PII never enters the model&rsquo;s context for an unverified caller, which is what HIPAA and PCI DSS alignment demands.</dd></div><div><dt>Trade-off</dt><dd>A few seconds of friction at the start of every call.</dd></div></dl></li><li class="decision reveal"><span class="d-num">03</span><h3>Run the whole exchange in real time on LiveKit and Twilio SIP.</h3>
+          <dl><div><dt>Instead of</dt><dd>Capturing the request and calling back once it was processed.</dd></div><div><dt>Because</dt><dd>Resolving the request on the first call is what removes the queue entirely.</dd></div><div><dt>Trade-off</dt><dd>A strict latency budget that constrains every model and tool choice.</dd></div></dl></li><li class="decision reveal"><span class="d-num">04</span><h3>File tickets through a controlled, structured tool call.</h3>
+          <dl><div><dt>Instead of</dt><dd>A free-text call summary for a human to re-key.</dd></div><div><dt>Because</dt><dd>The ticket is actionable the moment the call ends, and every field is validated.</dd></div><div><dt>Trade-off</dt><dd>Schemas must be kept in sync with Salesforce, with a fallback when intent is ambiguous.</dd></div></dl></li></ol>
   </section>
-  <section class="case-result section-shell reveal"><p class="section-kicker">THE OUTCOME</p><blockquote>The autonomous workflow reduced queue latency from two days to three minutes and shortened overall fulfilment time by 87.5%, while maintaining a clear path for escalation and production handover.</blockquote></section>
-  <section class="next-case reveal"><p>EXPLORE ANOTHER SYSTEM</p><a href="#/case/b2b" data-nav="b2b">NEXT CASE STUDY &rarr;</a></section>
+  <section class="case-ledger section-shell reveal"><p class="section-kicker">THE OUTCOME</p><p class="ledger-lede">The queue stopped being a queue &mdash; and the proof of concept became a signed contract.</p>
+    <table class="ledger"><caption class="visually-hidden">Voice AI outcomes, before and after</caption><thead><tr><th scope="col">Metric</th><th scope="col">Before</th><th scope="col">After</th><th scope="col">Change</th></tr></thead><tbody><tr><th scope="row">Service-queue latency</th><td data-label="Before">2 days</td><td data-label="After">3 minutes</td><td data-label="Change">&minus;99.9%</td></tr><tr><th scope="row">Fulfilment time</th><td data-label="Before">Manual, multi-team</td><td data-label="After">Autonomous, with escalation</td><td data-label="Change">87.5% faster</td></tr><tr><th scope="row">Availability</th><td data-label="Before">Queue-bound</td><td data-label="After">24/7</td><td data-label="Change">Always on</td></tr><tr><th scope="row">Commercial</th><td data-label="Before">Proof of concept</td><td data-label="After">Major enterprise contract</td><td data-label="Change">Won</td></tr></tbody></table>
+  </section>
+  <section class="next-case reveal"><p>EXPLORE ANOTHER SYSTEM</p><a href="#/case/agent">NEXT: AN AGENT FOR 3M+ SMBS &rarr;</a></section>
 </main>
 </div>
 
-<!-- ============ CASE STUDY: B2B INTELLIGENCE ============ -->
-<div class="page" data-page="b2b" hidden>
+<!-- ============ CASE STUDY: AUTONOMOUS REACT AGENT ============ -->
+<div class="page" data-page="agent" hidden>
 <main class="detail-page">
   <section class="case-hero section-shell reveal">
-    <p class="section-kicker">CASE STUDY 02 / AGENTIC AI &middot; B2B SALES INTELLIGENCE</p>
-    <h1>A prospect view assembled by agents, not tabs.</h1>
-    <p>A ReAct-style system that coordinates structured business retrieval, contextual interpretation and current web intelligence to give sales teams a decision-ready prospect narrative.</p>
-    <div class="case-impact"><div class="reveal"><strong>MONTHS</strong><span>BEFORE</span></div><div class="reveal"><strong>DAYS</strong><span>AFTER</span></div><div class="reveal"><strong>03</strong><span>SPECIALISED AGENTS</span></div></div>
-    <figure class="case-cover shot-host reveal"><figure class="shot shot-frame"><img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=70&w=1920 1920w" sizes="100vw" alt="Analytics dashboards showing conversion and quality-score metrics" width="1920" height="732" loading="lazy" decoding="async"></figure><figcaption>REACT ORCHESTRATION · SEARCH + KNOWLEDGE + LIVE WEB</figcaption></figure>
+    <p class="section-kicker">CASE STUDY 02 / AGENTIC AI &middot; RETRIEVAL AT SCALE</p>
+    <h1>An autonomous agent answering for 3M+ SMBs in under three seconds.</h1>
+    <p>A ReAct agent that filters queries through guardrails, remembers the conversation and chooses among 10 tools across 10 data sources &mdash; with hybrid retrieval and re-ranking lifting output accuracy above 95%.</p>
+    <div class="case-proof reveal"><dl class="case-proof-lead"><div class="proof-cell proof-cell--xl"><dt>Time to first token</dt><dd class="proof-value"><strong>&lt;3s</strong></dd><dd class="viz-ruler" aria-hidden="true" style="--fill:54%;--mark:60%"><i><b></b><u></u></i><span><em>0s</em><em>1</em><em>2</em><em>3</em><em>4</em><em>5s</em></span></dd><dd class="proof-foot">Budget held across 3M+ US SMB records</dd></div></dl><dl class="case-proof-support"><div><dt>Businesses covered</dt><dd>3M+ US SMBs</dd></div><div><dt>Output accuracy</dt><dd>&gt;95%</dd></div><div><dt>Tools · data sources</dt><dd>10 · 10</dd></div></dl></div>
+    <dl class="case-spec reveal"><div><dt>Role</dt><dd>Engineered end to end</dd></div><div><dt>Pattern</dt><dd>Autonomous ReAct agent</dd></div><div><dt>Retrieval</dt><dd>Hybrid search + re-ranking</dd></div><div><dt>Memory</dt><dd>Long-term, follow-up aware</dd></div></dl>
   </section>
   <section class="case-story section-shell">
-    <div class="reveal"><p class="section-kicker">THE CONTEXT</p><h2>Research that took longer than the sale.</h2><p>Representatives were manually connecting internal business data, scattered prospect information and current market signals before they could form a useful pre-sales view.</p></div>
-    <div class="reveal"><p class="section-kicker">THE CONSTRAINT</p><h2>Fresh isn't the same as trustworthy.</h2><p>Every insight needed traceable evidence, stable orchestration and concise output without allowing live-web noise to overwrite trusted internal context.</p></div>
+    <div class="reveal"><p class="section-kicker">THE CONTEXT</p><h2>Ten sources, one question.</h2><p>A useful answer about a business meant pulling from up to ten data sources across 3M+ SMB records &mdash; too slow to do by hand, too broad for a single prompt.</p></div>
+    <div class="reveal"><p class="section-kicker">THE CONSTRAINT</p><h2>Fast, grounded, in context.</h2><p>The agent had to reach a first token in under three seconds, tell a new question from a follow-up, stay inside its scope, and match business names, categories and locations exactly.</p></div>
   </section>
   <section class="case-architecture section-shell reveal">
-    <p class="section-kicker">THE ARCHITECTURE</p><h2>The web gets a vote, never the final word.</h2>
-    <div class="case-flow"><div class="case-flow-segment"><div><span>01</span><strong>USER FILTER</strong></div><i><b></b></i></div><div class="case-flow-segment"><div><span>02</span><strong>SEARCH AGENT</strong></div><i><b></b></i></div><div class="case-flow-segment"><div><span>03</span><strong>KNOWLEDGE</strong></div><i><b></b></i></div><div class="case-flow-segment"><div><span>04</span><strong>WEB AGENT</strong></div><i><b></b></i></div><div class="case-flow-segment"><div><span>05</span><strong>SWOT + GAPS</strong></div></div></div>
+    <p class="section-kicker">THE ARCHITECTURE</p><h2>The agent decides. The guardrails decide first.</h2>
+    <div class="case-flow"><div class="case-flow-segment"><div class="flow-stop" tabindex="0" aria-describedby="readout-agent" data-detail="A natural-language question about one business or many."><span>01</span><strong>QUERY</strong></div><i><b></b></i></div><div class="case-flow-segment"><div class="flow-stop" tabindex="0" aria-describedby="readout-agent" data-detail="Query filtering rejects out-of-scope requests before any tool call or token budget is spent."><span>02</span><strong>GUARDRAIL</strong></div><i><b></b></i></div><div class="case-flow-segment"><div class="flow-stop" tabindex="0" aria-describedby="readout-agent" data-detail="Long-term memory decides whether this is a standalone question or a follow-up that needs earlier context."><span>03</span><strong>MEMORY</strong></div><i><b></b></i></div><div class="case-flow-segment"><div class="flow-stop is-hot" tabindex="0" aria-describedby="readout-agent" data-detail="The agent reasons, picks among 10 tools over 10 data sources, observes the result and repeats until it can answer."><span>04</span><strong>REACT · 10 TOOLS</strong></div><i><b></b></i></div><div class="case-flow-segment"><div class="flow-stop" tabindex="0" aria-describedby="readout-agent" data-detail="Dense and keyword search combined, then re-ranked &mdash; the step that lifted output accuracy above 95%."><span>05</span><strong>HYBRID + RERANK</strong></div><i><b></b></i></div><div class="case-flow-segment"><div class="flow-stop" tabindex="0" aria-describedby="readout-agent" data-detail="A grounded response, first token in under three seconds."><span>06</span><strong>ANSWER</strong></div></div></div>
+    <p class="flow-readout" id="readout-agent" aria-live="polite"><b>04 · REACT · 10 TOOLS</b><span>The agent reasons, picks among 10 tools over 10 data sources, observes the result and repeats until it can answer.</span></p>
+    <p class="flow-hint">Hover or tab through the stages</p>
   </section>
-  <section class="case-decisions section-shell">
-    <div class="reveal"><p class="section-kicker">KEY DECISIONS</p><h2>Inspectable beats impressive.</h2></div>
-    <ol><li class="reveal"><span style="color:var(--signal)">&#10003;</span><span>01</span><p>Assigned discovery, interpretation and live enrichment to distinct agents instead of one oversized prompt.</p></li><li class="reveal"><span style="color:var(--signal)">&#10003;</span><span>02</span><p>Used explicit routing and ReAct-style tool selection to keep actions inspectable.</p></li><li class="reveal"><span style="color:var(--signal)">&#10003;</span><span>03</span><p>Prioritised trusted business context while using the web only to enrich time-sensitive claims.</p></li><li class="reveal"><span style="color:var(--signal)">&#10003;</span><span>04</span><p>Structured the final output around SWOT, opportunity gaps and next-best sales actions.</p></li></ol>
+  <section class="case-decisions case-decisions--cards section-shell">
+    <div class="reveal"><p class="section-kicker">KEY DECISIONS</p><h2>Scope is decided before the model is.</h2><p class="decision-lede">Each call, the alternative it beat, and what it cost.</p></div>
+    <ol class="decision-list"><li class="decision reveal"><span class="d-num">01</span><h3>Filter queries with guardrails before the agent loop.</h3>
+          <dl><div><dt>Instead of</dt><dd>Asking the system prompt to refuse off-scope requests.</dd></div><div><dt>Because</dt><dd>Rejecting early is cheaper than reasoning, and keeps the tool budget for questions worth answering.</dd></div><div><dt>Trade-off</dt><dd>Filters need tuning so valid questions aren&rsquo;t turned away.</dd></div></dl></li><li class="decision reveal"><span class="d-num">02</span><h3>Classify standalone vs follow-up before retrieval.</h3>
+          <dl><div><dt>Instead of</dt><dd>Appending the full conversation history to every call.</dd></div><div><dt>Because</dt><dd>Follow-ups resolve against memory; new questions don&rsquo;t drag stale context along, which keeps prompts short and TTFT low.</dd></div><div><dt>Trade-off</dt><dd>A misclassified question retrieves with the wrong context.</dd></div></dl></li><li class="decision reveal"><span class="d-num">03</span><h3>Combine hybrid search with re-ranking.</h3>
+          <dl><div><dt>Instead of</dt><dd>Dense vector search on its own.</dd></div><div><dt>Because</dt><dd>Business names, categories and locations need exact matches that embeddings blur. This is what took accuracy above 95%.</dd></div><div><dt>Trade-off</dt><dd>An extra ranking pass inside a three-second budget.</dd></div></dl></li><li class="decision reveal"><span class="d-num">04</span><h3>Give the agent ten narrow tools, one per source.</h3>
+          <dl><div><dt>Instead of</dt><dd>One broad tool that queries everything at once.</dd></div><div><dt>Because</dt><dd>Each tool has a clear contract the ReAct loop can choose between and that can be tested on its own.</dd></div><div><dt>Trade-off</dt><dd>More routing decisions per question.</dd></div></dl></li></ol>
   </section>
-  <section class="case-result section-shell reveal"><p class="section-kicker">THE OUTCOME</p><blockquote>Personalised prospect intelligence compressed lead research and conversion preparation from months to days while giving representatives a more complete, consistent basis for action.</blockquote></section>
-  <section class="next-case reveal"><p>EXPLORE ANOTHER SYSTEM</p><a href="#/case/eval" data-nav="eval">NEXT CASE STUDY &rarr;</a></section>
+  <section class="case-ledger section-shell reveal"><p class="section-kicker">THE OUTCOME</p><p class="ledger-lede">Scale and speed held together: 3M+ businesses, answered in under three seconds, above 95% accuracy.</p>
+    <table class="ledger"><caption class="visually-hidden">ReAct agent results</caption><thead><tr><th scope="col">Dimension</th><th scope="col">Result</th><th scope="col">What made it possible</th></tr></thead><tbody><tr><th scope="row">Coverage</th><td data-label="Result">3M+ US SMBs</td><td data-label="What made it possible">10 tools over 10 data sources</td></tr><tr><th scope="row">Latency</th><td data-label="Result">&lt;3s to first token</td><td data-label="What made it possible">Guardrails and memory routing keep prompts short</td></tr><tr><th scope="row">Accuracy</th><td data-label="Result">&gt;95% output accuracy</td><td data-label="What made it possible">Hybrid search + re-ranking</td></tr><tr><th scope="row">Continuity</th><td data-label="Result">Follow-ups answered in context</td><td data-label="What made it possible">Long-term memory</td></tr></tbody></table>
+  </section>
+  <section class="next-case reveal"><p>EXPLORE ANOTHER SYSTEM</p><a href="#/case/onboarding">NEXT: FOUR-AGENT ONBOARDING &rarr;</a></section>
 </main>
 </div>
 
-<!-- ============ CASE STUDY: LLM EVALUATION ============ -->
-<div class="page" data-page="eval" hidden>
+<!-- ============ CASE STUDY: FOUR-AGENT ONBOARDING ============ -->
+<div class="page" data-page="onboarding" hidden>
 <main class="detail-page">
   <section class="case-hero section-shell reveal">
-    <p class="section-kicker">CASE STUDY 03 / LLMOPS &middot; EVALUATION &middot; PRODUCTION HANDOVER</p>
-    <h1>Making model choice an engineering decision.</h1>
-    <p>A repeatable, 20-parameter evaluation framework — response quality, latency, cost and tool-use reliability, scored with Ragas and human review instead of leaderboard position or one impressive prompt.</p>
-    <div class="case-impact"><div class="reveal"><strong>20</strong><span>SCORED PARAMETERS</span></div><div class="reveal"><strong>TRACE</strong><span>EVERY TOOL CALL</span></div><div class="reveal"><strong>RAGAS</strong><span>+ HUMAN REVIEW</span></div></div>
-    <figure class="case-cover shot-host reveal"><figure class="shot shot-frame"><img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=70&w=1920 1920w" sizes="100vw" alt="Blackboard covered in hand-written equations and diagrams" width="1920" height="732" loading="lazy" decoding="async"></figure><figcaption>LLMOPS · QUALITY × LATENCY × COST × TOOL USE</figcaption></figure>
+    <p class="section-kicker">CASE STUDY 03 / MULTI-AGENT &middot; STRUCTURED OUTPUT &middot; LLM EVALUATION</p>
+    <h1>Four agents, one validated business profile.</h1>
+    <p>A LangGraph system where business-information, visual and voice agents work in parallel and a validator agent repairs whatever fails &mdash; producing 60 business-specific fields per profile, scored on a 10-parameter LLM-as-Judge rubric and monitored in MLflow.</p>
+    <div class="case-proof reveal"><dl class="case-proof-lead"><div class="proof-cell proof-cell--xl"><dt>Fields per business profile</dt><dd class="proof-value"><strong aria-hidden="true" data-count="60" data-prefix="" data-suffix="">60</strong><span class="visually-hidden">60</span></dd><dd class="viz-fields" aria-hidden="true"><i style="--d:0"></i><i style="--d:1"></i><i style="--d:2"></i><i style="--d:3"></i><i style="--d:4"></i><i style="--d:5"></i><i style="--d:6"></i><i class="fix" style="--d:7"></i><i style="--d:8"></i><i style="--d:9"></i><i style="--d:10"></i><i style="--d:11"></i><i style="--d:12"></i><i style="--d:13"></i><i style="--d:14"></i><i style="--d:15"></i><i style="--d:16"></i><i style="--d:17"></i><i style="--d:18"></i><i class="fix" style="--d:19"></i><i style="--d:20"></i><i style="--d:21"></i><i style="--d:22"></i><i style="--d:23"></i><i style="--d:24"></i><i style="--d:25"></i><i style="--d:26"></i><i style="--d:27"></i><i style="--d:28"></i><i style="--d:29"></i><i style="--d:30"></i><i style="--d:31"></i><i style="--d:32"></i><i class="fix" style="--d:33"></i><i style="--d:34"></i><i style="--d:35"></i><i style="--d:36"></i><i style="--d:37"></i><i style="--d:38"></i><i style="--d:39"></i><i style="--d:40"></i><i style="--d:41"></i><i style="--d:42"></i><i style="--d:43"></i><i style="--d:44"></i><i style="--d:45"></i><i class="fix" style="--d:46"></i><i style="--d:47"></i><i style="--d:48"></i><i style="--d:49"></i><i style="--d:50"></i><i style="--d:51"></i><i class="fix" style="--d:52"></i><i style="--d:53"></i><i style="--d:54"></i><i style="--d:55"></i><i style="--d:56"></i><i style="--d:57"></i><i style="--d:58"></i><i style="--d:59"></i></dd><dd class="proof-foot">Outlined fields failed validation and were repaired in the loop</dd></div></dl><dl class="case-proof-support"><div><dt>Agents</dt><dd>4</dd></div><div><dt>Evaluation</dt><dd>10-parameter LLM-as-Judge</dd></div><div><dt>Execution</dt><dd>Async, self-correcting</dd></div></dl></div>
+    <dl class="case-spec reveal"><div><dt>Role</dt><dd>Orchestration &amp; architecture</dd></div><div><dt>Stack</dt><dd>LangGraph · Claude SDKs</dd></div><div><dt>Output</dt><dd>Pydantic-typed, 60 fields</dd></div><div><dt>Monitoring</dt><dd>MLflow</dd></div></dl>
   </section>
   <section class="case-story section-shell">
-    <div class="reveal"><p class="section-kicker">THE CONTEXT</p><h2>Confident answers, unreliable systems.</h2><p>Model behaviour varied across realistic conversations, tool sequences and production load. A response could sound excellent while being too slow, too expensive or unreliable when action was required.</p></div>
-    <div class="reveal"><p class="section-kicker">THE CONSTRAINT</p><h2>Sounding right and being right are different problems.</h2><p>The evaluation needed to reflect business-critical scenarios, capture regressions and remain understandable to both engineering and product stakeholders.</p></div>
+    <div class="reveal"><p class="section-kicker">THE CONTEXT</p><h2>A profile is more than a form.</h2><p>Onboarding a business means describing who it is, how it looks and how it sounds. Assembled by hand it is slow; generated in one prompt it is inconsistent and hard to check.</p></div>
+    <div class="reveal"><p class="section-kicker">THE CONSTRAINT</p><h2>Sixty fields, and each one has to hold up.</h2><p>Every field needed a type, a validation rule and a way to be fixed without regenerating the whole profile &mdash; plus a score that engineers and stakeholders could both read.</p></div>
   </section>
   <section class="case-architecture section-shell reveal">
-    <p class="section-kicker">THE ARCHITECTURE</p><h2>Every score traces back to a transcript.</h2>
-    <div class="case-flow"><div class="case-flow-segment"><div><span>01</span><strong>TEST SET</strong></div><i><b></b></i></div><div class="case-flow-segment"><div><span>02</span><strong>MODEL RUN</strong></div><i><b></b></i></div><div class="case-flow-segment"><div><span>03</span><strong>TOOL TRACE</strong></div><i><b></b></i></div><div class="case-flow-segment"><div><span>04</span><strong>SCORING</strong></div><i><b></b></i></div><div class="case-flow-segment"><div><span>05</span><strong>DECISION</strong></div></div></div>
+    <p class="section-kicker">THE ARCHITECTURE</p><h2>Generate in parallel. Validate. Repair only what failed.</h2>
+    <div class="case-flow"><div class="case-flow-segment"><div class="flow-stop" tabindex="0" aria-describedby="readout-onboarding" data-detail="Source information about the business being onboarded."><span>01</span><strong>BUSINESS INPUT</strong></div><i><b></b></i></div><div class="case-flow-segment"><div class="flow-stop" tabindex="0" aria-describedby="readout-onboarding" data-detail="Three agents run asynchronously, each returning Pydantic-typed structured output."><span>02</span><strong>INFO · VISUAL · VOICE</strong></div><i><b></b></i></div><div class="case-flow-segment"><div class="flow-stop is-hot" tabindex="0" aria-describedby="readout-onboarding" data-detail="The validator agent checks every field against its schema and rules."><span>03</span><strong>VALIDATOR</strong></div><i><b></b></i></div><div class="case-flow-segment"><div class="flow-stop" tabindex="0" aria-describedby="readout-onboarding" data-detail="Failed fields go back to the agent that owns them &mdash; a self-correcting loop, not a full regeneration."><span>04</span><strong>REPAIR LOOP</strong></div><i><b></b></i></div><div class="case-flow-segment"><div class="flow-stop" tabindex="0" aria-describedby="readout-onboarding" data-detail="A complete, validated business profile."><span>05</span><strong>60-FIELD PROFILE</strong></div><i><b></b></i></div><div class="case-flow-segment"><div class="flow-stop" tabindex="0" aria-describedby="readout-onboarding" data-detail="Scored on a custom 10-parameter rubric and tracked in MLflow, run over run."><span>06</span><strong>LLM-AS-JUDGE</strong></div></div></div>
+    <p class="flow-readout" id="readout-onboarding" aria-live="polite"><b>03 · VALIDATOR</b><span>The validator agent checks every field against its schema and rules.</span></p>
+    <p class="flow-hint">Hover or tab through the stages</p>
   </section>
-  <section class="case-decisions section-shell">
-    <div class="reveal"><p class="section-kicker">KEY DECISIONS</p><h2>Benchmarks don't catch what production does.</h2></div>
-    <ol><li class="reveal"><span style="color:var(--signal)">&#10003;</span><span>01</span><p>Created representative scenario sets instead of relying only on generic benchmark questions.</p></li><li class="reveal"><span style="color:var(--signal)">&#10003;</span><span>02</span><p>Measured semantic quality alongside latency, token cost and tool completion.</p></li><li class="reveal"><span style="color:var(--signal)">&#10003;</span><span>03</span><p>Separated deterministic checks from rubric-based LLM and human review.</p></li><li class="reveal"><span style="color:var(--signal)">&#10003;</span><span>04</span><p>Used traces and failure categories to guide production handover and future regression testing.</p></li></ol>
+  <section class="case-decisions case-decisions--cards section-shell">
+    <div class="reveal"><p class="section-kicker">KEY DECISIONS</p><h2>Structure first, so quality can be measured.</h2><p class="decision-lede">Each call, the alternative it beat, and what it cost.</p></div>
+    <ol class="decision-list"><li class="decision reveal"><span class="d-num">01</span><h3>Type every agent&rsquo;s output with Pydantic.</h3>
+          <dl><div><dt>Instead of</dt><dd>Free-form text, parsed afterwards.</dd></div><div><dt>Because</dt><dd>Sixty fields need types the validator can check and downstream systems can trust.</dd></div><div><dt>Trade-off</dt><dd>A schema change ripples through every agent that produces it.</dd></div></dl></li><li class="decision reveal"><span class="d-num">02</span><h3>Run the three generator agents in parallel.</h3>
+          <dl><div><dt>Instead of</dt><dd>A sequential chain, one agent after another.</dd></div><div><dt>Because</dt><dd>The agents are independent, so wall-clock time is bound by the slowest one, not the sum.</dd></div><div><dt>Trade-off</dt><dd>Conflicts between agents surface at the validator and must be resolved there.</dd></div></dl></li><li class="decision reveal"><span class="d-num">03</span><h3>Repair failed fields in a self-correcting loop.</h3>
+          <dl><div><dt>Instead of</dt><dd>Failing the whole profile, or regenerating it end to end.</dd></div><div><dt>Because</dt><dd>Only the broken fields are redone, which saves tokens and time.</dd></div><div><dt>Trade-off</dt><dd>The loop needs a cap so a stubborn field can&rsquo;t run up cost.</dd></div></dl></li><li class="decision reveal"><span class="d-num">04</span><h3>Score profiles with a 10-parameter LLM-as-Judge rubric in MLflow.</h3>
+          <dl><div><dt>Instead of</dt><dd>Spot-checking outputs by hand.</dd></div><div><dt>Because</dt><dd>A prompt or model change shows up as a score change before it shows up in production.</dd></div><div><dt>Trade-off</dt><dd>The judge needs its own calibration against human review.</dd></div></dl></li></ol>
   </section>
-  <section class="case-result section-shell reveal"><p class="section-kicker">THE OUTCOME</p><blockquote>Model selection became a transparent trade-off supported by scenario evidence, while handover teams received clearer failure modes, monitoring priorities and operational expectations.</blockquote></section>
-  <section class="next-case reveal"><p>EXPLORE ANOTHER SYSTEM</p><a href="#/case/voice-ai" data-nav="voice-ai">NEXT CASE STUDY &rarr;</a></section>
+  <section class="case-ledger section-shell reveal"><p class="section-kicker">THE OUTCOME</p><p class="ledger-lede">Profiles arrive complete, typed and scored &mdash; with regressions visible run over run.</p>
+    <table class="ledger"><caption class="visually-hidden">Onboarding system results</caption><thead><tr><th scope="col">Dimension</th><th scope="col">Result</th><th scope="col">Mechanism</th></tr></thead><tbody><tr><th scope="row">Output</th><td data-label="Result">60 business-specific fields per profile</td><td data-label="Mechanism">Pydantic structured outputs</td></tr><tr><th scope="row">Throughput</th><td data-label="Result">Agents run concurrently</td><td data-label="Mechanism">Asynchronous LangGraph execution</td></tr><tr><th scope="row">Reliability</th><td data-label="Result">Failed fields self-correct</td><td data-label="Mechanism">Validator + repair loop</td></tr><tr><th scope="row">Quality</th><td data-label="Result">Every profile scored</td><td data-label="Mechanism">10-parameter LLM-as-Judge, monitored in MLflow</td></tr></tbody></table>
+  </section>
+  <section class="next-case reveal"><p>EXPLORE ANOTHER SYSTEM</p><a href="#/case/voice-ai">NEXT: VOICE AI &rarr;</a></section>
 </main>
 </div>
 
@@ -1225,7 +1539,7 @@ a.reach-row:hover .reach-value{color:var(--accent)}
   <section class="index-hero section-shell reveal">
     <p class="section-kicker">RESUME / THE ONE-PAGE VERSION</p>
     <h1>Everything above, <em>compressed to one page.</em></h1>
-    <p>Generative AI &amp; Machine Learning Engineer — LLM applications, agentic systems, RAG and applied ML. 2.5+ years shipping production intelligence, condensed into a single downloadable PDF.</p>
+    <p>Senior Generative AI &amp; LLM engineer &mdash; agentic systems, RAG, voice AI and LLM evaluation. 2.5 years and 20+ production LLM systems, condensed into one downloadable PDF.</p>
     <div class="hero-actions">
       <button class="button button-primary resume-download" id="downloadResumeBtn">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>
@@ -1236,43 +1550,54 @@ a.reach-row:hover .reach-value{color:var(--accent)}
     <p class="resume-note" id="downloadResumeNote"></p>
   </section>
 
-  <section class="metric-band reveal" aria-label="Resume highlights">
-    <div><strong>2.5+</strong><span>YEARS IN GENERATIVE AI</span></div>
-    <div><strong>20+</strong><span>PRODUCTION LLM SYSTEMS SHIPPED</span></div>
-    <div><strong>92%</strong><span>RAG RETRIEVAL ACCURACY</span></div>
-    <div><strong>50%</strong><span>COST / REVIEW EFFORT CUT</span></div>
+  <section class="section-shell reveal" aria-label="Resume highlights">
+    <dl class="spec-table">
+      <div><dt>Production LLM systems</dt><dd>20+</dd></div>
+      <div><dt>Service-queue latency</dt><dd>2 days &rarr; 3 min</dd></div>
+      <div><dt>Scale served</dt><dd>3M+ US SMBs · &lt;3s TTFT</dd></div>
+      <div><dt>Output accuracy</dt><dd>&gt;95%</dd></div>
+      <div><dt>Ad delivery</dt><dd>Days &rarr; &lt;10 min · 2,000+ accounts</dd></div>
+      <div><dt>Commercial</dt><dd>Voice AI POC won a major enterprise contract</dd></div>
+    </dl>
   </section>
 
   <section class="resume-skills section-shell reveal">
     <div class="resume-skill-group">
-      <h2>LLM &amp; AGENTIC SYSTEMS</h2>
-      <div class="resume-chip-row"><span class="resume-chip">LangGraph</span><span class="resume-chip">LangChain</span><span class="resume-chip">CrewAI</span><span class="resume-chip">LlamaIndex</span><span class="resume-chip">MCP</span><span class="resume-chip">RAG</span><span class="resume-chip">ReAct Agents</span><span class="resume-chip">Tool Calling</span><span class="resume-chip">Structured Output</span><span class="resume-chip">Prompt Engineering</span><span class="resume-chip">LLM Guardrails</span><span class="resume-chip">Hugging Face</span><span class="resume-chip">Ollama</span><span class="resume-chip">PEFT / RLHF</span></div>
+      <h2>AGENTIC AI &amp; ORCHESTRATION</h2>
+      <div class="resume-chip-row"><span class="resume-chip">LangGraph</span><span class="resume-chip">LangChain</span><span class="resume-chip">CrewAI</span><span class="resume-chip">Claude SDK</span><span class="resume-chip">Multi-Agent Systems</span><span class="resume-chip">ReAct Agents</span><span class="resume-chip">Tool Calling</span><span class="resume-chip">Structured Outputs</span><span class="resume-chip">Pydantic</span><span class="resume-chip">MCP</span></div>
     </div>
     <div class="resume-skill-group">
-      <h2>VOICE AI &amp; EVALUATION</h2>
-      <div class="resume-chip-row"><span class="resume-chip">LiveKit</span><span class="resume-chip">Twilio (SIP)</span><span class="resume-chip">Salesforce</span><span class="resume-chip">LangSmith</span><span class="resume-chip">MLflow</span><span class="resume-chip">Ragas</span><span class="resume-chip">20-Parameter Eval Framework</span><span class="resume-chip">A/B Testing</span><span class="resume-chip">Latency/Cost/Quality Benchmarking</span></div>
+      <h2>VOICE AI</h2>
+      <div class="resume-chip-row"><span class="resume-chip">LiveKit</span><span class="resume-chip">Twilio SIP</span><span class="resume-chip">Salesforce Integration</span><span class="resume-chip">Production Voice Agents</span></div>
     </div>
     <div class="resume-skill-group">
-      <h2>VECTOR DBs &amp; SERVING</h2>
-      <div class="resume-chip-row"><span class="resume-chip">Pinecone</span><span class="resume-chip">FAISS</span><span class="resume-chip">ChromaDB</span><span class="resume-chip">AWS S3</span><span class="resume-chip">Vertex AI</span><span class="resume-chip">Azure</span><span class="resume-chip">CI/CD</span></div>
+      <h2>RAG &amp; VECTOR DATABASES</h2>
+      <div class="resume-chip-row"><span class="resume-chip">LlamaIndex</span><span class="resume-chip">Pinecone</span><span class="resume-chip">FAISS</span><span class="resume-chip">ChromaDB</span><span class="resume-chip">Hybrid Search</span><span class="resume-chip">Re-ranking</span><span class="resume-chip">Embeddings</span></div>
     </div>
     <div class="resume-skill-group">
-      <h2>APPLIED ML &amp; MODELS</h2>
-      <div class="resume-chip-row"><span class="resume-chip">Recommender Systems</span><span class="resume-chip">NMF / LDA</span><span class="resume-chip">CNN / U-Net</span><span class="resume-chip">Real-ESRGAN / RRDBNet</span><span class="resume-chip">XGBoost</span><span class="resume-chip">KNN</span><span class="resume-chip">Clustering</span><span class="resume-chip">Anomaly Detection</span><span class="resume-chip">PyTorch</span><span class="resume-chip">Scikit-learn</span><span class="resume-chip">NLTK</span><span class="resume-chip">R</span><span class="resume-chip">FastAPI</span><span class="resume-chip">Flask</span></div>
+      <h2>LLMOPS &amp; EVALUATION</h2>
+      <div class="resume-chip-row"><span class="resume-chip">LangSmith</span><span class="resume-chip">MLflow</span><span class="resume-chip">LLM-as-Judge</span><span class="resume-chip">Model Benchmarking</span><span class="resume-chip">Prompt Optimization</span><span class="resume-chip">FastAPI</span><span class="resume-chip">CI/CD</span><span class="resume-chip">Git</span></div>
+    </div>
+    <div class="resume-skill-group">
+      <h2>CLOUD &amp; PRODUCT</h2>
+      <div class="resume-chip-row"><span class="resume-chip">AWS</span><span class="resume-chip">Google Vertex AI</span><span class="resume-chip">Docker</span><span class="resume-chip">Requirements Gathering</span><span class="resume-chip">Feature Ownership</span><span class="resume-chip">Stakeholder Communication</span></div>
+    </div>
+    <div class="resume-skill-group">
+      <h2>APPLIED ML</h2>
+      <div class="resume-chip-row"><span class="resume-chip">Python</span><span class="resume-chip">SQL</span><span class="resume-chip">Logistic Regression</span><span class="resume-chip">XGBoost</span><span class="resume-chip">LightGBM</span><span class="resume-chip">SMOTE</span><span class="resume-chip">NMF / LDA</span><span class="resume-chip">CNN</span><span class="resume-chip">Real-ESRGAN</span><span class="resume-chip">PyTorch</span><span class="resume-chip">scikit-learn</span><span class="resume-chip">RLHF / PEFT</span></div>
     </div>
   </section>
 
   <section class="timeline section-shell reveal">
-    <article class="reveal"><span>01/2026 &mdash; PRESENT</span><h2>SENIOR GENAI &amp; LLM SPECIALIST &middot; BUZZBOARD</h2><p>Designed and deployed IRIS, a three-agent Voice AI workflow across LiveKit, Twilio SIP and Salesforce — cutting request-queue latency from two days to three minutes (99.9%) and fulfilment time by 87.5%, with real-time HIPAA and PCI DSS guardrails. Led LLM evaluation and LLMOps on a 20-parameter framework with Ragas, and RAG pipelines serving 5,000 requests/day at 92% retrieval accuracy, cutting manual review effort by 50%. Built CI/CD on AWS (FastAPI, MLflow) and mentored 3 engineers; 2&times; Star Performer, Sparkle Award.</p></article>
-    <article class="reveal"><span>04/2024 &mdash; 01/2026</span><h2>GENAI &amp; LLM SPECIALIST &middot; BUZZBOARD</h2><p>Architected and delivered 20+ production agentic systems for BuzzBoard’s US SMB client base — multi-agent BrandKit generation, Voice AI customer service, conversational agents and social-content pipelines — owning each from architecture through production handover. Built a ReAct-based B2B sales-intelligence platform (Search, Knowledge and Web agents), cutting prospect research and lead-conversion cycles from months to days and manual research effort by 75%.</p></article>
-    <article class="reveal"><span>04/2023 &mdash; 03/2024</span><h2>FULL STACK DATA SCIENCE TRAINEE &middot; ALMABETTER</h2><p>800+ hours across Python, SQL, EDA and predictive modelling; delivered 50+ end-to-end data science and ML projects from problem formulation to business insight.</p></article>
-    <article class="reveal"><span>07/2022 &mdash; 10/2022</span><h2>RESEARCH STAFF &middot; CENTRE OF EXCELLENCE IN AI, IIT KHARAGPUR</h2><p>Built image-processing and preprocessing algorithms and contributed to satellite-imagery annotation for a U-Net semantic-segmentation pipeline, improving model accuracy by 86%.</p></article>
+    <article class="reveal"><span>04/2024 &mdash; PRESENT</span><h2>SENIOR GENAI &amp; LLM SPECIALIST &middot; BUZZBOARD</h2><p><b class="tl-proof">Promoted to Senior, Jan 2026 · 3 engineers mentored</b>Own feature delivery for the Zylo product line and run client feedback calls with VPs, PMs and product owners. Scoped and demoed a three-agent voice AI POC (LiveKit, Twilio SIP, Salesforce) that won a major enterprise contract, cutting request-queue latency from 2 days to 3 minutes (&minus;99.9%) and fulfilment time by 87.5%. Engineered an autonomous ReAct agent serving 3M+ US SMBs at &lt;3s time-to-first-token with &gt;95% output accuracy; orchestrated a four-agent onboarding system producing 60 fields per profile, scored on a 10-parameter LLM-as-Judge rubric; cut ad delivery from days to &lt;10 minutes for 2,000+ SMB accounts.</p></article>
+    <article class="reveal"><span>11/2023 &mdash; 03/2024</span><h2>DATA ANALYST TRAINEE &middot; ALMABETTER</h2><p><b class="tl-proof">Top 0.1% of the AlmaX cohort</b>Built and deployed a full-stack cardiovascular-risk app (FastAPI, Render): nine classifiers, a leakage-safe pipeline with SMOTE and Platt calibration, 0.714 ROC-AUC.</p></article>
+    <article class="reveal"><span>07/2022 &mdash; 10/2022</span><h2>RESEARCH STAFF &middot; CENTRE OF EXCELLENCE IN AI, IIT KHARAGPUR</h2><p><b class="tl-proof">72% LULC prediction accuracy</b>Researched a CNN architecture for satellite image processing and upscaling, with augmentation and preprocessing.</p></article>
   </section>
 
   <section class="reach-links section-shell reveal">
     <a class="reach-row" href="projects/netflix.html">
       <span class="reach-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18M17 3v18M3 7.5h4M3 12h18M3 16.5h4M17 7.5h4M17 16.5h4"/></svg></span>
-      <div class="reach-text"><span class="reach-label">FEATURED PROJECT</span><span class="reach-value">Netflix AI Recommender — 99.96% Precision@10 ensemble re-ranker</span></div>
+      <div class="reach-text"><span class="reach-label">FEATURED PROJECT</span><span class="reach-value">Netflix AI Recommender — 11 models benchmarked, +43% diversity at 99.96% genre precision</span></div>
       <span class="reach-arrow">&#8599;</span>
     </a>
     <a class="reach-row" href="projects/image-enhancer.html">
@@ -1284,7 +1609,7 @@ a.reach-row:hover .reach-value{color:var(--accent)}
 
   <section class="about-split section-shell reveal">
     <div class="reveal"><p class="section-kicker">EDUCATION</p><h2>M.Tech, Earth System Science &amp; Technology</h2><p>IIT Kharagpur &middot; 2019–2021</p><p>B.E., Mechanical Engineering &middot; SSGI, Bhilai &middot; 2012–2016</p></div>
-    <div class="reveal"><p class="section-kicker">RESEARCH</p><h2>Computer Vision, Centre of Excellence in AI</h2><p>IIT Kharagpur &middot; CNN / U-Net segmentation for satellite imagery, 86% accuracy gain</p></div>
+    <div class="reveal"><p class="section-kicker">RESEARCH</p><h2>Computer Vision, Centre of Excellence in AI</h2><p>IIT Kharagpur &middot; CNN for satellite image processing and upscaling &middot; 72% LULC prediction accuracy</p></div>
   </section>
 
   <section class="credentials section-shell reveal">
@@ -1544,8 +1869,8 @@ document.getElementById('runEvalBtn').addEventListener('click', () => {
 /* ===== Explorer: real system-mode switching (matches production) ===== */
 const systemModes = {
   voice: { label: 'VOICE AI', nodes: ['CALL','VERIFY','CARE AGENT','COMPLIANCE','SALESFORCE'], note: 'REAL-TIME · HIPAA / PCI-DSS GUARDRAILS · 24/7' },
-  sales: { label: 'B2B INTELLIGENCE', nodes: ['QUERY','SEARCH','KNOWLEDGE','WEB AGENT','INSIGHT'], note: 'REACT ORCHESTRATION · LIVE CONTEXT · SWOT' },
-  rag: { label: 'PRODUCTION RAG', nodes: ['INTENT','ROUTER','RETRIEVAL','EVALUATION','ANSWER'], note: 'CONTEXT ENGINEERING · CITATIONS · TRACING' }
+  agent: { label: 'SMB AGENT', nodes: ['QUERY','GUARDRAIL','REACT · 10 TOOLS','HYBRID + RERANK','ANSWER'], note: '3M+ SMBS · <3S TO FIRST TOKEN · >95% ACCURACY' },
+  onboard: { label: 'ONBOARDING', nodes: ['BUSINESS','3 AGENTS','VALIDATOR','REPAIR LOOP','60 FIELDS'], note: 'LANGGRAPH · PYDANTIC · 10-PARAMETER LLM-AS-JUDGE' }
 };
 function renderSystemFlow(mode){
   const m = systemModes[mode];
@@ -1562,11 +1887,57 @@ document.querySelectorAll('#explorerTabs button').forEach(b => {
 });
 renderSystemFlow('voice');
 
+
+/* ===== Proof instruments: count-down sequences, count-ups, flow readouts ===== */
+(function proofInstruments(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const seqEls = [...document.querySelectorAll('[data-seq]')];
+  const cntEls = [...document.querySelectorAll('[data-count]')];
+  if (!reduce && 'IntersectionObserver' in window) {
+    // Park each value at its starting state; the reveal plays it forward.
+    seqEls.forEach(el => { el.dataset.final = el.innerHTML; el.innerHTML = el.dataset.seq.split('|')[0]; });
+    cntEls.forEach(el => { el.dataset.final = el.innerHTML; el.innerHTML = el.dataset.prefix + '0' + el.dataset.suffix; });
+    const run = (el) => {
+      if (el.dataset.seq) {
+        const steps = el.dataset.seq.split('|');
+        steps.forEach((s, i) => setTimeout(() => { el.innerHTML = s; }, 350 + i * 230));
+        setTimeout(() => { el.innerHTML = el.dataset.final; }, 350 + steps.length * 230);
+      } else {
+        const end = parseFloat(el.dataset.count), t0 = performance.now() + 300, dur = 1100;
+        (function step(now){
+          const p = Math.min(1, Math.max(0, (now - t0) / dur));
+          const e = 1 - Math.pow(1 - p, 3);
+          el.innerHTML = el.dataset.prefix + Math.round(end * e) + el.dataset.suffix;
+          if (p < 1) requestAnimationFrame(step); else el.innerHTML = el.dataset.final;
+        })(performance.now());
+      }
+    };
+    const pio = new IntersectionObserver((entries) => {
+      entries.forEach(en => { if (en.isIntersecting) { run(en.target); pio.unobserve(en.target); } });
+    }, { threshold: 0.6 });
+    [...seqEls, ...cntEls].forEach(el => pio.observe(el));
+  }
+
+  // Case-study architecture: hover or tab a stage to read what it owns.
+  document.querySelectorAll('.case-architecture').forEach(sec => {
+    const stops = [...sec.querySelectorAll('.flow-stop')];
+    const out = sec.querySelector('.flow-readout');
+    if (!out) return;
+    const show = (stop) => {
+      stops.forEach(s => s.classList.toggle('is-hot', s === stop));
+      out.querySelector('b').textContent = stop.querySelector('span').textContent + ' · ' + stop.querySelector('strong').textContent;
+      out.querySelector('span').innerHTML = stop.dataset.detail;
+    };
+    stops.forEach(s => { s.addEventListener('mouseenter', () => show(s)); s.addEventListener('focus', () => show(s)); });
+  });
+})();
+
 /* ===== Portfolio chat (real canned Q&A, matches production PortfolioChat) ===== */
 const chatPrompts = [
-  ['Why Akshay?', 'Akshay combines hands-on GenAI engineering with architectural ownership: multi-agent orchestration, enterprise integration, evaluation and production handover—backed by measurable business outcomes.'],
-  ['Voice AI impact', 'His three-agent Voice AI workflow reduced request queue latency from two days to three minutes and improved fulfilment time by 87.5%.'],
-  ['Core expertise', 'Agentic AI, production RAG, Voice AI, LLM evaluation, context engineering, tool calling, observability and cost-performance optimisation.'],
+  ['Why Akshay?', 'He owns the whole path: scoping with stakeholders, proving it with a working POC, then building, evaluating and operating it. 20+ production LLM systems so far, including a Voice AI proof of concept that won a major enterprise contract.'],
+  ['Voice AI impact', 'A three-agent Voice AI workflow on LiveKit, Twilio SIP and Salesforce cut request-queue latency from two days to three minutes (99.9%) and fulfilment time by 87.5%, with real-time HIPAA- and PCI-DSS-aligned guardrails.'],
+  ['Scale', 'An autonomous ReAct agent serving 3M+ US SMBs at under three seconds to first token, calling 10 tools across 10 data sources, with hybrid retrieval and re-ranking lifting output accuracy above 95%.'],
+  ['Core expertise', 'Multi-agent orchestration (LangGraph, CrewAI), RAG with hybrid search and re-ranking, voice AI (LiveKit, Twilio SIP), structured outputs, LLM-as-Judge evaluation, MLflow and AWS deployment.'],
 ];
 const chatPanel = document.getElementById('chatPanel');
 document.getElementById('chatPrompts').innerHTML = chatPrompts.map(([label]) =>
@@ -1633,13 +2004,13 @@ document.getElementById('mobileMenuClose').addEventListener('click', closeMobile
    Every section is now deep-linkable:  index.html#/case/voice-ai
    ═══════════════════════════════════════════════════════════════════════ */
 const PAGE_TITLES = {
-  home: 'Akshay Bawaliwale — AI Systems Architect',
+  home: 'Akshay Bawaliwale — Senior Generative AI & LLM Engineer',
   about: 'About | Akshay Bawaliwale',
   writing: 'Writing | Akshay Bawaliwale',
   lab: 'AI Lab | Akshay Bawaliwale',
-  'voice-ai': 'From a two-day service queue to three minutes. | Akshay Bawaliwale',
-  b2b: 'A prospect view assembled by agents, not tabs. | Akshay Bawaliwale',
-  eval: 'Making model choice an engineering decision. | Akshay Bawaliwale',
+  'voice-ai': 'Voice AI: a two-day queue to three minutes | Akshay Bawaliwale',
+  agent: 'An autonomous agent for 3M+ SMBs | Akshay Bawaliwale',
+  onboarding: 'Four-agent business onboarding | Akshay Bawaliwale',
   reach: 'Reach Out | Akshay Bawaliwale',
   resume: 'Resume | Akshay Bawaliwale'
 };
@@ -1655,8 +2026,10 @@ const ROUTES = {
   'reach':           { page: 'reach' },
   'resume':          { page: 'resume' },
   'case/voice-ai':   { page: 'voice-ai' },
-  'case/b2b':        { page: 'b2b' },
-  'case/eval':       { page: 'eval' }
+  'case/agent':      { page: 'agent' },
+  'case/onboarding': { page: 'onboarding' },
+  'case/b2b':        { page: 'agent' },       // old links keep working
+  'case/eval':       { page: 'onboarding' }
 };
 const routeVeil = document.getElementById('routeVeil');
 const routeAnnouncer = document.getElementById('routeAnnouncer');

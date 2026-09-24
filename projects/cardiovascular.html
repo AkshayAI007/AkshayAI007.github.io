@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Cardiovascular Risk Prediction</title>
+<title>Cardiovascular Risk Prediction | Akshay Bawaliwale</title>
+<meta name="description" content="Nine classifiers, a leakage-safe pipeline and Platt calibration on the Framingham Heart Study. Logistic regression won at 0.714 ROC-AUC and ships as a live app." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -172,6 +173,34 @@ html.reveal-js .reveal.in{opacity:1;transform:none}
   .reveal{opacity:1!important;transform:none!important}
   .cover img,.cover:hover img{transform:none}
 }
+
+/* ── benchmark instruments (added with the proof overhaul) ── */
+.bench{margin:0 0 clamp(56px,8vw,96px);padding:clamp(1.4rem,3vw,2.4rem);border:1px solid var(--line);background:var(--ground-2)}
+.bench figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem 2rem;margin-bottom:1.6rem}
+.bench figcaption b{font-family:var(--font-serif);font-weight:400;font-size:clamp(1.4rem,2.4vw,1.9rem);line-height:1.15;max-width:34ch}
+.bench figcaption span{font:500 var(--fs-micro)/1.5 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.bench ol{display:grid;gap:.55rem;margin:0;padding:0;list-style:none}
+.bench li{display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr) 4.2rem;gap:1rem;align-items:center}
+.bench li>span{font:500 var(--fs-micro)/1.3 var(--font-mono);letter-spacing:.06em;color:var(--ink-2)}
+.bench li>i{position:relative;display:block;height:10px;background:var(--line)}
+.bench li>i b{position:absolute;inset:0 auto 0 0;width:0;background:var(--ink-3);opacity:.7;transition:width 1.1s var(--ease-out);transition-delay:calc(var(--d) * 70ms + .2s)}
+.bench.in li>i b{width:var(--w)}
+.bench li>strong{text-align:right;font:500 var(--fs-meta)/1 var(--font-mono);font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.bench li.win>span,.bench li.win>strong{color:var(--accent)}
+.bench li.win>i b{background:var(--accent);opacity:1}
+.bench li.flag>span{color:var(--flag)}
+.bench li.flag>i b{background:var(--flag);opacity:.8}
+.bench li em{grid-column:2/-1;margin-top:-.25rem;font:500 10px/1.4 var(--font-mono);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--flag)}
+.bench .axis{display:flex;justify-content:space-between;margin:.8rem 0 0 calc(min(11rem,40%) + 1rem);margin-right:5.2rem;font:500 10px/1 var(--font-mono);letter-spacing:.08em;color:var(--ink-3)}
+.bench svg{display:block;width:100%;height:auto;overflow:visible}
+.bench .sc-dot{fill:var(--ink-3);opacity:.8}
+.bench .sc-win{fill:var(--accent)}
+.bench .sc-flag{fill:none;stroke:var(--flag);stroke-width:1.5}
+.bench .sc-grid{stroke:var(--line);stroke-width:1}
+.bench .sc-t{font:500 9px var(--font-mono);letter-spacing:.06em;fill:var(--ink-3)}
+.bench .sc-t.win{fill:var(--accent)}.bench .sc-t.flag{fill:var(--flag)}
+.bench .note{margin-top:1.2rem;max-width:70ch;color:var(--ink-2);font-size:.95rem;line-height:1.6}
+@media(max-width:640px){.bench li{grid-template-columns:minmax(0,7.5rem) minmax(0,1fr) 3.4rem;gap:.6rem}.bench .axis{margin-left:8.1rem;margin-right:4rem}}
 </style>
 <script>try{var t=localStorage.getItem('ab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
@@ -189,21 +218,19 @@ html.reveal-js .reveal.in{opacity:1;transform:none}
       <span class="chip accent">SUPERVISED ML</span><span class="chip">HEALTHCARE</span><span class="chip">A/01</span>
     </div>
     <h1 class="reveal">Estimating a patient's ten-year cardiovascular risk, <em>before it becomes an emergency.</em></h1>
-    <p class="lede reveal">An evidence-led machine learning pipeline that turns clinical and lifestyle variables from the Framingham Heart Study into a calibrated cardiovascular disease risk score — engineered to catch at-risk patients, not just to look accurate on paper.</p>
+    <p class="lede reveal">Nine classifiers on the Framingham Heart Study, behind a leakage-safe pipeline with SMOTE, Platt calibration and a recall-weighted threshold. Plain logistic regression won &mdash; and it ships as a live risk-scoring app.</p>
     <div class="hero-actions reveal">
       <a class="btn btn-primary" href="https://github.com/AkshayAI007/Cardiovascular-disease-risk-prediction-using-Machine-learning" target="_blank" rel="noreferrer">VIEW CODE ON GITHUB ↗</a>
-      <a class="btn btn-ghost" href="../index.html">← BACK TO PORTFOLIO</a>
+      <a class="btn btn-ghost" href="https://cardiovascular-risk-predictor.onrender.com" target="_blank" rel="noreferrer">OPEN THE LIVE APP ↗</a>
     </div>
   </section>
 
 
-  <figure class="cover reveal"><img src="https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=1920 1920w" sizes="100vw" alt="Rendering of a DNA double helix" width="1920" height="732" loading="lazy" decoding="async"><figcaption>FRAMINGHAM HEART STUDY · XGBOOST + SMOTE · RECALL-WEIGHTED</figcaption></figure>
+  <figure class="cover reveal"><img src="https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=70&w=1920 1920w" sizes="100vw" alt="Rendering of a DNA double helix" width="1920" height="732" loading="lazy" decoding="async"><figcaption>FRAMINGHAM HEART STUDY · 9 CLASSIFIERS · PLATT-CALIBRATED</figcaption></figure>
   <div class="stats reveal">
-    <div><strong>0.89</strong><span>ROC-AUC</span></div>
-    <div><strong>0.89</strong><span>ACCURACY</span></div>
-    <div><strong>0.92</strong><span>PRECISION</span></div>
-    <div><strong>0.85</strong><span>RECALL</span></div>
+    <div><strong>0.714</strong><span>ROC-AUC · held-out test</span></div><div><strong>75 / 102</strong><span>At-risk patients caught</span></div><div><strong>9</strong><span>Classifiers compared</span></div><div><strong>LIVE</strong><span>FastAPI app on Render</span></div>
   </div>
+  <figure class="bench reveal"><figcaption><b>The obvious model came sixth.</b><span>ROC-AUC on the held-out test set · 678 patients</span></figcaption><ol><li class="win"><span>Logistic Regression</span><i><b style="--w:85.6%;--d:0"></b></i><strong>0.714</strong></li><li><span>Stacking</span><i><b style="--w:85.2%;--d:1"></b></i><strong>0.713</strong></li><li><span>Naive Bayes</span><i><b style="--w:82.0%;--d:2"></b></i><strong>0.705</strong></li><li><span>AdaBoost</span><i><b style="--w:66.4%;--d:3"></b></i><strong>0.666</strong></li><li><span>Random Forest</span><i><b style="--w:58.8%;--d:4"></b></i><strong>0.647</strong></li><li class="flag"><span>XGBoost</span><i><b style="--w:42.0%;--d:5"></b></i><strong>0.605</strong><em>The default pick — sixth of nine</em></li><li><span>KNN</span><i><b style="--w:32.8%;--d:6"></b></i><strong>0.582</strong></li><li><span>Gradient Boosting</span><i><b style="--w:22.8%;--d:7"></b></i><strong>0.557</strong></li><li><span>SVC</span><i><b style="--w:22.4%;--d:8"></b></i><strong>0.556</strong></li></ol><div class="axis" aria-hidden="true"><span>0.50 · CHANCE</span><span>0.55</span><span>0.60</span><span>0.65</span><span>0.70</span><span>0.75</span></div><p class="note">Same data, same split, same tuning budget. A calibrated linear model beat every ensemble &mdash; a result you only trust when the test set was never touched during training.</p></figure>
 
   <section>
     <div class="two-col">
@@ -214,8 +241,8 @@ html.reveal-js .reveal.in{opacity:1;transform:none}
       </div>
       <div class="reveal">
         <p class="kicker">THE APPROACH</p>
-        <h2>Engineer for recall, not vanity metrics.</h2>
-        <p>Working from the Framingham Heart Study dataset, the pipeline runs structured EDA and feature engineering (pulse pressure, BMI banding, age interactions), corrects the class imbalance with SMOTE so the minority "at-risk" class isn't drowned out, and benchmarks several classifiers before settling on a tuned XGBoost model — selected specifically for the precision/recall trade-off that matters in a screening context.</p>
+        <h2>Build the pipeline so the score can be trusted.</h2>
+        <p>A stratified 60/20/20 split keeps the test set untouched until the end. Feature engineering adds pulse pressure and drops collinear inputs; SMOTE oversamples the training fold only. Nine classifiers are tuned with GridSearchCV on AUC, the winner is Platt-calibrated so a &ldquo;30% risk&rdquo; means roughly 30%, and the decision threshold is tuned on validation by F2 &mdash; recall weighted twice over precision, with a precision floor.</p>
       </div>
     </div>
   </section>
@@ -223,23 +250,13 @@ html.reveal-js .reveal.in{opacity:1;transform:none}
   <section>
     <p class="kicker reveal">UNDER THE HOOD</p>
     <h2 class="reveal">From raw records to a risk score.</h2>
-    <div class="flow reveal">
-      <div class="flow-seg"><div><span>01</span><strong>FRAMINGHAM DATA</strong></div></div>
-      <div class="flow-line"><b></b></div>
-      <div class="flow-seg"><div><span>02</span><strong>FEATURE ENG.</strong></div></div>
-      <div class="flow-line"><b></b></div>
-      <div class="flow-seg hl"><div><span>03</span><strong>SMOTE BALANCE</strong></div></div>
-      <div class="flow-line"><b></b></div>
-      <div class="flow-seg"><div><span>04</span><strong>XGBOOST</strong></div></div>
-      <div class="flow-line"><b></b></div>
-      <div class="flow-seg"><div><span>05</span><strong>RISK SCORE</strong></div></div>
-    </div>
+    <div class="flow reveal"><div class="flow-seg"><div><span>01</span><strong>FRAMINGHAM DATA</strong></div></div><div class="flow-line"><b></b></div><div class="flow-seg"><div><span>02</span><strong>LEAKAGE-SAFE SPLIT</strong></div></div><div class="flow-line"><b></b></div><div class="flow-seg"><div><span>03</span><strong>SMOTE (TRAIN ONLY)</strong></div></div><div class="flow-line"><b></b></div><div class="flow-seg hl"><div><span>04</span><strong>9 MODELS · GRIDSEARCH</strong></div></div><div class="flow-line"><b></b></div><div class="flow-seg"><div><span>05</span><strong>PLATT + F2 THRESHOLD</strong></div></div><div class="flow-line"><b></b></div><div class="flow-seg"><div><span>06</span><strong>LIVE APP</strong></div></div></div>
   </section>
 
   <section>
     <p class="kicker reveal">STACK</p>
     <div class="chipgrid reveal">
-      <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">scikit-learn</span><span class="chip">XGBoost</span><span class="chip">imbalanced-learn (SMOTE)</span><span class="chip">Matplotlib / Seaborn</span>
+      <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">scikit-learn</span><span class="chip">Logistic Regression</span><span class="chip">XGBoost</span><span class="chip">FastAPI</span><span class="chip">Render</span><span class="chip">imbalanced-learn (SMOTE)</span><span class="chip">Matplotlib / Seaborn</span>
     </div>
   </section>
 </main>
@@ -247,7 +264,7 @@ html.reveal-js .reveal.in{opacity:1;transform:none}
 <div class="result">
   <div class="shell reveal">
     <p class="kicker">THE USP</p>
-    <blockquote>The model is tuned for the cost of a missed diagnosis, not for a leaderboard score — trading a small amount of precision for a recall of 0.85, so fewer at-risk patients slip through.</blockquote>
+    <blockquote>XGBoost came sixth. A calibrated logistic regression caught 75 of 102 at-risk patients on data it had never seen &mdash; and every score it returns means what it says.</blockquote>
   </div>
 </div>
 

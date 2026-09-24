@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Netflix AI Recommender</title>
+<title>Netflix AI Recommender | Akshay Bawaliwale</title>
+<meta name="description" content="Eleven recommender models benchmarked on 8,807 titles. The shipped hybrid kept 99.96% genre precision, added 43% diversity and serves in 6.91 ms." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -172,6 +173,34 @@ html.reveal-js .reveal.in{opacity:1;transform:none}
   .reveal{opacity:1!important;transform:none!important}
   .cover img,.cover:hover img{transform:none}
 }
+
+/* ── benchmark instruments (added with the proof overhaul) ── */
+.bench{margin:0 0 clamp(56px,8vw,96px);padding:clamp(1.4rem,3vw,2.4rem);border:1px solid var(--line);background:var(--ground-2)}
+.bench figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem 2rem;margin-bottom:1.6rem}
+.bench figcaption b{font-family:var(--font-serif);font-weight:400;font-size:clamp(1.4rem,2.4vw,1.9rem);line-height:1.15;max-width:34ch}
+.bench figcaption span{font:500 var(--fs-micro)/1.5 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.bench ol{display:grid;gap:.55rem;margin:0;padding:0;list-style:none}
+.bench li{display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr) 4.2rem;gap:1rem;align-items:center}
+.bench li>span{font:500 var(--fs-micro)/1.3 var(--font-mono);letter-spacing:.06em;color:var(--ink-2)}
+.bench li>i{position:relative;display:block;height:10px;background:var(--line)}
+.bench li>i b{position:absolute;inset:0 auto 0 0;width:0;background:var(--ink-3);opacity:.7;transition:width 1.1s var(--ease-out);transition-delay:calc(var(--d) * 70ms + .2s)}
+.bench.in li>i b{width:var(--w)}
+.bench li>strong{text-align:right;font:500 var(--fs-meta)/1 var(--font-mono);font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.bench li.win>span,.bench li.win>strong{color:var(--accent)}
+.bench li.win>i b{background:var(--accent);opacity:1}
+.bench li.flag>span{color:var(--flag)}
+.bench li.flag>i b{background:var(--flag);opacity:.8}
+.bench li em{grid-column:2/-1;margin-top:-.25rem;font:500 10px/1.4 var(--font-mono);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--flag)}
+.bench .axis{display:flex;justify-content:space-between;margin:.8rem 0 0 calc(min(11rem,40%) + 1rem);margin-right:5.2rem;font:500 10px/1 var(--font-mono);letter-spacing:.08em;color:var(--ink-3)}
+.bench svg{display:block;width:100%;height:auto;overflow:visible}
+.bench .sc-dot{fill:var(--ink-3);opacity:.8}
+.bench .sc-win{fill:var(--accent)}
+.bench .sc-flag{fill:none;stroke:var(--flag);stroke-width:1.5}
+.bench .sc-grid{stroke:var(--line);stroke-width:1}
+.bench .sc-t{font:500 9px var(--font-mono);letter-spacing:.06em;fill:var(--ink-3)}
+.bench .sc-t.win{fill:var(--accent)}.bench .sc-t.flag{fill:var(--flag)}
+.bench .note{margin-top:1.2rem;max-width:70ch;color:var(--ink-2);font-size:.95rem;line-height:1.6}
+@media(max-width:640px){.bench li{grid-template-columns:minmax(0,7.5rem) minmax(0,1fr) 3.4rem;gap:.6rem}.bench .axis{margin-left:8.1rem;margin-right:4rem}}
 </style>
 <script>try{var t=localStorage.getItem('ab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
@@ -199,10 +228,9 @@ html.reveal-js .reveal.in{opacity:1;transform:none}
 
   <figure class="cover reveal"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=70&w=1920 1920w" sizes="100vw" alt="Empty cinema auditorium seen from the screen" width="1920" height="732" loading="lazy" decoding="async"><figcaption>HYBRID RE-RANKER · TF-IDF + NMF + LDA · 8,807 TITLES</figcaption></figure>
   <div class="stats reveal">
-    <div><strong>99.96%</strong><span>PRECISION@10</span></div>
-    <div><strong>+43%</strong><span>CONTENT DIVERSITY</span></div>
-    <div><strong>6.91 ms</strong><span>PER RECOMMENDATION</span></div>
+    <div><strong>+43%</strong><span>Diversity vs previous hybrid</span></div><div><strong>99.96%</strong><span>Genre Precision@10</span></div><div><strong>6.91 ms</strong><span>Per recommendation</span></div><div><strong>11</strong><span>Models benchmarked</span></div>
   </div>
+  <figure class="bench reveal"><figcaption><b>Precision was easy. Precision with variety was the job.</b><span>11 models · 500-title holdout · relevance = shares a genre</span></figcaption><svg viewBox="0 0 640 320" role="img" aria-label="Scatter of eleven recommender models: genre precision against intra-list diversity. Two clustering models reach perfect precision with near-zero diversity; the shipped hybrid keeps 99.96% precision with 43% more diversity than the previous production model."><line x1="44" x2="624" y1="286.0" y2="286.0" class="sc-grid"/><text x="36" y="289.0" class="sc-t" text-anchor="end">0.00</text><line x1="44" x2="624" y1="224.5" y2="224.5" class="sc-grid"/><text x="36" y="227.5" class="sc-t" text-anchor="end">0.25</text><line x1="44" x2="624" y1="163.0" y2="163.0" class="sc-grid"/><text x="36" y="166.0" class="sc-t" text-anchor="end">0.50</text><line x1="44" x2="624" y1="101.5" y2="101.5" class="sc-grid"/><text x="36" y="104.5" class="sc-t" text-anchor="end">0.75</text><line x1="44" x2="624" y1="40.0" y2="40.0" class="sc-grid"/><text x="36" y="43.0" class="sc-t" text-anchor="end">1.00</text><text x="44.0" y="302" class="sc-t" text-anchor="middle">0.0</text><text x="172.9" y="302" class="sc-t" text-anchor="middle">0.2</text><text x="301.8" y="302" class="sc-t" text-anchor="middle">0.4</text><text x="430.7" y="302" class="sc-t" text-anchor="middle">0.6</text><text x="559.6" y="302" class="sc-t" text-anchor="middle">0.8</text><circle cx="54.3" cy="40.0" r="6" class="sc-flag"><title>KMeans: P@10 1.0, ILD 0.016</title></circle><circle cx="54.3" cy="40.0" r="6" class="sc-flag"><title>BisectingKMeans: P@10 1.0, ILD 0.016</title></circle><circle cx="57.1" cy="40.1" r="6" class="sc-win"><title>Hybrid V3 (shipped): P@10 0.9996, ILD 0.0203</title></circle><circle cx="53.2" cy="40.1" r="4" class="sc-dot"><title>Hybrid (prev prod): P@10 0.9996, ILD 0.0142</title></circle><circle cx="63.8" cy="40.1" r="4" class="sc-dot"><title>Hybrid V2: P@10 0.9994, ILD 0.0308</title></circle><circle cx="55.0" cy="40.1" r="4" class="sc-dot"><title>Weighted hybrid: P@10 0.9994, ILD 0.0171</title></circle><circle cx="54.3" cy="40.2" r="4" class="sc-dot"><title>NMF: P@10 0.9992, ILD 0.016</title></circle><circle cx="239.7" cy="74.4" r="4" class="sc-dot"><title>GMM: P@10 0.86, ILD 0.3036</title></circle><circle cx="549.0" cy="188.0" r="4" class="sc-dot"><title>BM25: P@10 0.3984, ILD 0.7836</title></circle><circle cx="554.5" cy="190.6" r="4" class="sc-dot"><title>TF-IDF cosine: P@10 0.3878, ILD 0.7922</title></circle><circle cx="601.8" cy="221.9" r="4" class="sc-dot"><title>LDA: P@10 0.2606, ILD 0.8656</title></circle><text x="64.3" y="30.0" class="sc-t flag">KMEANS · PERFECT PRECISION, ONE GENRE</text><text x="67.1" y="56.1" class="sc-t win">SHIPPED HYBRID · +43% DIVERSITY VS PREV</text><text x="548.5" y="210.6" class="sc-t" text-anchor="end">TEXT BASELINES · DIVERSE, IRRELEVANT</text><text x="624" y="318" class="sc-t" text-anchor="end">INTRA-LIST DIVERSITY (ILD) →</text><text x="14" y="12" class="sc-t">↑ GENRE PRECISION@10</text></svg><p class="note">Precision@10 here counts a recommendation as relevant when it shares at least one genre with the query title &mdash; a generous proxy, which is exactly why a perfect score was a warning sign rather than a win.</p></figure>
 
   <section>
     <div class="two-col">

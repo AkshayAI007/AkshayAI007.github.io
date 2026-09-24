@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NYC Taxi Trip Time Prediction</title>
+<title>NYC Taxi Trip Time Prediction | Akshay Bawaliwale</title>
+<meta name="description" content="Eight regressors compared on NYC taxi trips. Engineered geo and time features plus LightGBM lifted R² from a 0.55 linear baseline to 0.74, with a 2.84-minute MAE." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -172,6 +173,34 @@ html.reveal-js .reveal.in{opacity:1;transform:none}
   .reveal{opacity:1!important;transform:none!important}
   .cover img,.cover:hover img{transform:none}
 }
+
+/* ── benchmark instruments (added with the proof overhaul) ── */
+.bench{margin:0 0 clamp(56px,8vw,96px);padding:clamp(1.4rem,3vw,2.4rem);border:1px solid var(--line);background:var(--ground-2)}
+.bench figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem 2rem;margin-bottom:1.6rem}
+.bench figcaption b{font-family:var(--font-serif);font-weight:400;font-size:clamp(1.4rem,2.4vw,1.9rem);line-height:1.15;max-width:34ch}
+.bench figcaption span{font:500 var(--fs-micro)/1.5 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.bench ol{display:grid;gap:.55rem;margin:0;padding:0;list-style:none}
+.bench li{display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr) 4.2rem;gap:1rem;align-items:center}
+.bench li>span{font:500 var(--fs-micro)/1.3 var(--font-mono);letter-spacing:.06em;color:var(--ink-2)}
+.bench li>i{position:relative;display:block;height:10px;background:var(--line)}
+.bench li>i b{position:absolute;inset:0 auto 0 0;width:0;background:var(--ink-3);opacity:.7;transition:width 1.1s var(--ease-out);transition-delay:calc(var(--d) * 70ms + .2s)}
+.bench.in li>i b{width:var(--w)}
+.bench li>strong{text-align:right;font:500 var(--fs-meta)/1 var(--font-mono);font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.bench li.win>span,.bench li.win>strong{color:var(--accent)}
+.bench li.win>i b{background:var(--accent);opacity:1}
+.bench li.flag>span{color:var(--flag)}
+.bench li.flag>i b{background:var(--flag);opacity:.8}
+.bench li em{grid-column:2/-1;margin-top:-.25rem;font:500 10px/1.4 var(--font-mono);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--flag)}
+.bench .axis{display:flex;justify-content:space-between;margin:.8rem 0 0 calc(min(11rem,40%) + 1rem);margin-right:5.2rem;font:500 10px/1 var(--font-mono);letter-spacing:.08em;color:var(--ink-3)}
+.bench svg{display:block;width:100%;height:auto;overflow:visible}
+.bench .sc-dot{fill:var(--ink-3);opacity:.8}
+.bench .sc-win{fill:var(--accent)}
+.bench .sc-flag{fill:none;stroke:var(--flag);stroke-width:1.5}
+.bench .sc-grid{stroke:var(--line);stroke-width:1}
+.bench .sc-t{font:500 9px var(--font-mono);letter-spacing:.06em;fill:var(--ink-3)}
+.bench .sc-t.win{fill:var(--accent)}.bench .sc-t.flag{fill:var(--flag)}
+.bench .note{margin-top:1.2rem;max-width:70ch;color:var(--ink-2);font-size:.95rem;line-height:1.6}
+@media(max-width:640px){.bench li{grid-template-columns:minmax(0,7.5rem) minmax(0,1fr) 3.4rem;gap:.6rem}.bench .axis{margin-left:8.1rem;margin-right:4rem}}
 </style>
 <script>try{var t=localStorage.getItem('ab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
@@ -189,7 +218,7 @@ html.reveal-js .reveal.in{opacity:1;transform:none}
       <span class="chip accent">REGRESSION</span><span class="chip">TRANSPORTATION</span><span class="chip">A/04</span>
     </div>
     <h1 class="reveal">Estimating how long a taxi ride will actually take, <em>before the meter starts.</em></h1>
-    <p class="lede reveal">A regression pipeline that predicts NYC taxi trip duration from pickup and drop-off details — built around the belief that in this problem, the feature engineering does more work than the choice of model.</p>
+    <p class="lede reveal">A regression pipeline that predicts NYC taxi trip duration from pickup and drop-off details. Eight models compared; engineered geo and time features plus LightGBM lifted R&sup2; from a 0.55 linear baseline to 0.74.</p>
     <div class="hero-actions reveal">
       <a class="btn btn-primary" href="https://github.com/AkshayAI007/NYC-TAXI-TRIP-TIME-PREDICTION" target="_blank" rel="noreferrer">VIEW CODE ON GITHUB ↗</a>
       <a class="btn btn-ghost" href="../index.html">← BACK TO PORTFOLIO</a>
@@ -199,10 +228,9 @@ html.reveal-js .reveal.in{opacity:1;transform:none}
 
   <figure class="cover reveal"><img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=960 960w, https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=1920 1920w" sizes="100vw" alt="Yellow cabs on a Manhattan avenue seen down the street" width="1920" height="732" loading="lazy" decoding="async"><figcaption>PICKUP / DROP-OFF GEOMETRY · TEMPORAL FEATURES · REGRESSION</figcaption></figure>
   <div class="stats reveal">
-    <div><strong>REGRESSION</strong><span>PROBLEM TYPE</span></div>
-    <div><strong>GEO + TIME</strong><span>CORE FEATURES</span></div>
-    <div><strong>PYTHON</strong><span>STACK</span></div>
+    <div><strong>0.74</strong><span>R² · LightGBM</span></div><div><strong>2.84 min</strong><span>Mean absolute error</span></div><div><strong>87%</strong><span>Accuracy (1 − MAPE)</span></div><div><strong>8</strong><span>Regressors compared</span></div>
   </div>
+  <figure class="bench reveal"><figcaption><b>Every linear model hit the same ceiling.</b><span>R² on the hold-out set</span></figcaption><ol><li class="win"><span>LightGBM</span><i><b style="--w:85.0%;--d:0"></b></i><strong>0.74</strong></li><li><span>XGBoost</span><i><b style="--w:82.5%;--d:1"></b></i><strong>0.73</strong></li><li><span>Random Forest</span><i><b style="--w:82.5%;--d:2"></b></i><strong>0.73</strong></li><li><span>Decision Tree</span><i><b style="--w:72.5%;--d:3"></b></i><strong>0.69</strong></li><li class="flag"><span>Linear</span><i><b style="--w:37.5%;--d:4"></b></i><strong>0.55</strong><em>Baseline — distance alone is not enough</em></li><li><span>Ridge</span><i><b style="--w:37.5%;--d:5"></b></i><strong>0.55</strong></li><li><span>Lasso</span><i><b style="--w:37.5%;--d:6"></b></i><strong>0.55</strong></li><li><span>Elastic Net</span><i><b style="--w:37.5%;--d:7"></b></i><strong>0.55</strong></li></ol><div class="axis" aria-hidden="true"><span>0.40</span><span>0.50</span><span>0.60</span><span>0.70</span><span>0.80</span></div><p class="note">Four linear models landed on identical scores &mdash; the signal they needed wasn&rsquo;t in the raw columns. Trees could use the engineered hour, weekday and distance features; boosting squeezed out the rest.</p></figure>
 
   <section>
     <div class="two-col">
@@ -236,7 +264,7 @@ html.reveal-js .reveal.in{opacity:1;transform:none}
   <section>
     <p class="kicker reveal">STACK</p>
     <div class="chipgrid reveal">
-      <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">scikit-learn</span><span class="chip">Feature Engineering</span><span class="chip">Matplotlib</span>
+      <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">LightGBM</span><span class="chip">scikit-learn</span><span class="chip">Feature Engineering</span><span class="chip">Matplotlib</span>
     </div>
   </section>
 </main>
