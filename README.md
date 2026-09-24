@@ -140,6 +140,10 @@ Backlog).
 
 ## Backlog
 
+- **Broken link: the cardiovascular live app.** `https://cardiovascular-risk-predictor.onrender.com/`
+  returns 404 (it did on v1 too). Redeploy the Render service or remove `live:` from
+  `src/content/projects/cardiovascular.mdx`, then drop its exclusion from `lychee.toml`.
+
 - **LCP target (2.0 s).** With v1's type kept byte-for-byte, LCP waits on the variable Newsreader
   files (roman ~87 KB, italic ~98 KB after subsetting). Case studies measure ~2.1 s, home ~2.9 s;
   the CI budgets hold those values. Reaching 2.0 s needs a typography decision, e.g.

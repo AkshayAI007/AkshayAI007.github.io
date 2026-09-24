@@ -17,6 +17,12 @@ exclude = [
   '^https://akshayai007\.github\.io',
   # Medium serves bots a Cloudflare challenge (403) for every profile URL
   '^https://medium\.com/',
+  # Unsplash answers automated requests to its home page with 401
+  '^https://unsplash\.com/$',
+  # KNOWN BROKEN (404 since at least 2026-09-24, also in v1): the cardiovascular
+  # "Open the live app" link. Redeploy the Render app or remove `live:` from
+  # src/content/projects/cardiovascular.mdx, then delete this line.
+  '^https://cardiovascular-risk-predictor\.onrender\.com/',
   '^mailto:',
   # lychee can't check fragments on directory-index links (/#systems → index.html);
   # these two anchors are asserted by tests/routes.spec.ts and behaviour.spec.ts
