@@ -1,0 +1,65 @@
+---
+/** A case study: hero + proof, story (MDX body), architecture, decisions, outcome. */
+import type { CollectionEntry } from 'astro:content';
+import { getEntry, render } from 'astro:content';
+import ArchitectureFlow from '@/components/case/ArchitectureFlow.astro';
+import DecisionList from '@/components/case/DecisionList.astro';
+import Ledger from '@/components/case/Ledger.astro';
+import ProofMetric from '@/components/case/ProofMetric.astro';
+import Story from '@/components/case/Story.astro';
+import { caseHref } from '@/lib/content';
+import { breadcrumbJsonLd, buildSeo, personJsonLd } from '@/lib/seo';
+import Page from './Page.astro';
+
+interface Props {
+  entry: CollectionEntry<'cases'>;
+}
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await render(entry);
+const next = await getEntry(data.next.case);
+if (!next) throw new Error(`${entry.id}: next case "${data.next.case.id}" does not exist`);
+
+const site = Astro.site!;
+const path = caseHref(entry);
+const seo = buildSeo(
+  { title: `${data.title} | Akshay Bawaliwale`, description: data.description, path, ogImage: `/og/case-${entry.id}.png`, ogType: 'article' },
+  site,
+);
+const jsonLd = [
+  {
+    '@type': 'TechArticle',
+    headline: data.heading,
+    description: data.description,
+    url: seo.canonical,
+    image: seo.ogImageUrl,
+    author: { '@id': new URL('/#person', site).href },
+    about: data.architecture.stops.map((s) => s.label),
+  },
+  personJsonLd(site),
+  breadcrumbJsonLd(site, [
+    { name: 'Home', path: '/' },
+    { name: 'Selected systems', path: '/#systems' },
+    { name: data.title, path },
+  ]),
+];
+---
+
+<Page seo={seo} current="case" pageId={entry.id} jsonLd={jsonLd}>
+  <main id="top" class="detail-page">
+    <section class="case-hero section-shell reveal">
+      <p class="section-kicker">{data.kicker}</p>
+      <h1>{data.heading}</h1>
+      <p>{data.lede}</p>
+      <ProofMetric proof={data.proof} />
+      <dl class="case-spec reveal">{data.spec.map((s) => <div><dt>{s.label}</dt><dd>{s.value}</dd></div>)}</dl>
+    </section>
+    <section class="case-story section-shell">
+      <Content components={{ Story }} />
+    </section>
+    <ArchitectureFlow id={entry.id} title={data.architecture.title} stops={data.architecture.stops} />
+    <DecisionList title={data.decisions.title} items={data.decisions.items} />
+    <Ledger {...data.outcome} />
+    <section class="next-case reveal"><p>EXPLORE ANOTHER SYSTEM</p><a href={caseHref(next)}>{data.next.label} &rarr;</a></section>
+  </main>
+</Page>

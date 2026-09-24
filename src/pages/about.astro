@@ -1,0 +1,57 @@
+---
+import Page from '@/layouts/Page.astro';
+import { breadcrumbJsonLd, buildSeo, personJsonLd } from '@/lib/seo';
+import portrait from '@/assets/images/about-portrait.webp';
+import Photo from '@/components/Photo.astro';
+const seo = buildSeo(
+  {
+    title: 'About | Akshay Bawaliwale',
+    description:
+      'From earth-system research and computer vision to production generative AI: the path, the principles and the current work of Akshay Bawaliwale.',
+    path: '/about',
+    ogImage: '/og/about.png',
+  },
+  Astro.site!,
+);
+const site = Astro.site!;
+const jsonLd = [
+  { '@type': 'ProfilePage', url: seo.canonical, name: seo.title, mainEntity: { '@id': new URL('/#person', site).href } },
+  personJsonLd(site),
+  breadcrumbJsonLd(site, [{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }]),
+];
+---
+
+<Page seo={seo} current="about" pageId="about" jsonLd={jsonLd}>
+  <main id="top" class="index-page about-page">
+    <section class="index-hero about-hero-section section-shell reveal">
+      <div class="about-hero-banner">
+        <Photo src={portrait} alt="Akshay Bawaliwale" sizes="(max-width:760px) 100vw, min(46vw, 42rem)" eager />
+        <div class="about-hero-copy">
+          <p class="section-kicker">ABOUT / MACHINE LEARNING TO PRODUCTION AI</p>
+          <h1>Machine learning got me here. <em>Generative AI is where I build now.</em></h1>
+          <p>Earth-system research trained me on messy, high-dimensional data. Computer-vision work trained me to ship models that survive outside a notebook. Production GenAI trained me that the model is the easy part &mdash; the system around it is what earns trust.</p>
+        </div>
+      </div>
+    </section>
+    <section class="beliefs section-shell reveal">
+      <p class="section-kicker">What I believe</p>
+      <blockquote>&ldquo;The future of AI will not be decided by the most impressive model. It will be decided by who can design the most reliable system around it.&rdquo;</blockquote>
+    </section>
+    <section class="timeline section-shell">
+      <article class="reveal"><span>2012&mdash;2016</span><h2>B.E. &middot; MECHANICAL ENGINEERING</h2><p>SSGI, Bhilai. First-principles problem-solving, before the problems were machine-learning ones.</p></article>
+      <article class="reveal"><span>2019&mdash;2021</span><h2>M.TECH &middot; IIT KHARAGPUR</h2><p><b class="tl-proof">GATE qualified &times;8 · AIR 1, IIST&ndash;ISRO entrance</b>Earth System Science and Technology; complex data, spatial systems and research discipline.</p></article>
+      <article class="reveal"><span>2022</span><h2>CENTRE OF EXCELLENCE IN AI</h2><p><b class="tl-proof">72% LULC prediction accuracy</b>CNN research for satellite image processing and upscaling.</p></article>
+      <article class="reveal"><span>2023&mdash;2024</span><h2>ALMABETTER &middot; DATA &amp; ML</h2><p><b class="tl-proof">Top 0.1% of the AlmaX cohort</b>Shipped a deployed cardiovascular-risk app: nine classifiers, a leakage-safe pipeline, calibrated probabilities.</p></article>
+      <article class="reveal"><span>2024&mdash;NOW</span><h2>BUZZBOARD &middot; GENAI</h2><p><b class="tl-proof">20+ production LLM systems · Senior since Jan 2026</b>Agentic systems, enterprise voice AI, retrieval at 3M-SMB scale, evaluation and production delivery.</p></article>
+      <article class="reveal"><span>NEXT</span><h2>AI &amp; ML ARCHITECTURE</h2><p>Designing intelligence as an accountable system&mdash;not a magical API call.</p></article>
+    </section>
+    <section class="about-split section-shell">
+      <div class="reveal"><p class="section-kicker">CURRENTLY</p><h2>Senior Generative AI &amp; LLM Specialist</h2><p>Architecting agentic AI and RAG systems in production, while staying hands-on with the <span class="ml-accent">applied ML &mdash; XGBoost, clustering, predictive modelling</span> behind every model choice.</p></div>
+      <div class="reveal"><p class="section-kicker">RECOGNITION</p><h2>Sparkle Award<br/>Promoted to Senior, 2026</h2><p>Mentoring 3 engineers on agentic system design.</p></div>
+    </section>
+    <section class="next-case reveal">
+      <p>CURRENTLY OPEN TO SENIOR GENAI, ML ENGINEERING &amp; AI ARCHITECTURE ROLES.</p>
+      <a href="/reach">LET'S TALK &rarr;</a>
+    </section>
+  </main>
+</Page>

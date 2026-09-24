@@ -1,0 +1,46 @@
+/* Exposes tokens.css to Tailwind utilities (bg-ground, text-ink-2, font-serif,
+   border-line, ease-spring…). `inline` makes utilities reference the token
+   variables directly, so they follow the light/dark toggle for free;
+   `reference` stops Tailwind re-declaring them. tokens.css stays the single
+   source of truth — nothing here holds a value. */
+@theme inline reference {
+  --color-*: initial;
+  --color-ground: var(--ground);
+  --color-ground-2: var(--ground-2);
+  --color-ground-3: var(--ground-3);
+  --color-panel: var(--panel);
+  --color-panel-ink: var(--panel-ink);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-ink: var(--accent-ink);
+  --color-flag: var(--flag);
+
+  --font-*: initial;
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --text-display: var(--fs-display);
+  --text-h1: var(--fs-h1);
+  --text-h2: var(--fs-h2);
+  --text-h3: var(--fs-h3);
+  --text-lead: var(--fs-lead);
+  --text-body: var(--fs-body);
+  --text-small: var(--fs-small);
+  --text-meta: var(--fs-meta);
+  --text-micro: var(--fs-micro);
+  --tracking-micro: var(--ls-micro);
+
+  --ease-out: var(--ease-out);
+  --ease-in: var(--ease-in);
+  --ease-spring: var(--ease-spring);
+
+  --shadow-e2: var(--e2);
+  --shadow-e3: var(--e3);
+}

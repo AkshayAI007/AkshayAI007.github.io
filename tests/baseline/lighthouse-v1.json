@@ -1,0 +1,335 @@
+{
+  "recordedAt": "2026-09-24T09:07:53.952Z",
+  "pages": [
+    {
+      "url": "https://akshayai007.github.io/#/case/voice-ai",
+      "label": "case-voice-ai",
+      "formFactor": "desktop",
+      "runs": [
+        {
+          "performance": 93,
+          "accessibility": 100,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 1135,
+          "lcpMs": 1422,
+          "tbtMs": 0,
+          "cls": 0,
+          "totalKb": 923,
+          "scriptKb": 168
+        },
+        {
+          "performance": 92,
+          "accessibility": 100,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 1135,
+          "lcpMs": 1504,
+          "tbtMs": 0,
+          "cls": 0,
+          "totalKb": 923,
+          "scriptKb": 168
+        },
+        {
+          "performance": 92,
+          "accessibility": 100,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 1150,
+          "lcpMs": 1486,
+          "tbtMs": 0,
+          "cls": 0.03,
+          "totalKb": 923,
+          "scriptKb": 168
+        }
+      ],
+      "median": {
+        "performance": 92,
+        "accessibility": 100,
+        "bestPractices": 96,
+        "seo": 100,
+        "fcpMs": 1135,
+        "lcpMs": 1486,
+        "tbtMs": 0,
+        "cls": 0,
+        "totalKb": 923,
+        "scriptKb": 168
+      }
+    },
+    {
+      "url": "https://akshayai007.github.io/#/case/voice-ai",
+      "label": "case-voice-ai",
+      "formFactor": "mobile",
+      "runs": [
+        {
+          "performance": 71,
+          "accessibility": 100,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 3125,
+          "lcpMs": 6534,
+          "tbtMs": 0,
+          "cls": 0,
+          "totalKb": 780,
+          "scriptKb": 168
+        },
+        {
+          "performance": 72,
+          "accessibility": 100,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 2985,
+          "lcpMs": 6508,
+          "tbtMs": 0,
+          "cls": 0,
+          "totalKb": 780,
+          "scriptKb": 168
+        },
+        {
+          "performance": 72,
+          "accessibility": 100,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 2982,
+          "lcpMs": 6480,
+          "tbtMs": 0,
+          "cls": 0,
+          "totalKb": 780,
+          "scriptKb": 168
+        }
+      ],
+      "median": {
+        "performance": 72,
+        "accessibility": 100,
+        "bestPractices": 96,
+        "seo": 100,
+        "fcpMs": 2985,
+        "lcpMs": 6508,
+        "tbtMs": 0,
+        "cls": 0,
+        "totalKb": 780,
+        "scriptKb": 168
+      }
+    },
+    {
+      "url": "https://akshayai007.github.io/",
+      "label": "home",
+      "formFactor": "desktop",
+      "runs": [
+        {
+          "performance": 56,
+          "accessibility": 100,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 1223,
+          "lcpMs": 1597,
+          "tbtMs": 1620,
+          "cls": 0,
+          "totalKb": 923,
+          "scriptKb": 168
+        },
+        {
+          "performance": 57,
+          "accessibility": 100,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 1168,
+          "lcpMs": 1504,
+          "tbtMs": 1606,
+          "cls": 0,
+          "totalKb": 923,
+          "scriptKb": 168
+        },
+        {
+          "performance": 57,
+          "accessibility": 100,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 1141,
+          "lcpMs": 1487,
+          "tbtMs": 1729,
+          "cls": 0,
+          "totalKb": 923,
+          "scriptKb": 168
+        }
+      ],
+      "median": {
+        "performance": 57,
+        "accessibility": 100,
+        "bestPractices": 96,
+        "seo": 100,
+        "fcpMs": 1168,
+        "lcpMs": 1504,
+        "tbtMs": 1620,
+        "cls": 0,
+        "totalKb": 923,
+        "scriptKb": 168
+      }
+    },
+    {
+      "url": "https://akshayai007.github.io/",
+      "label": "home",
+      "formFactor": "mobile",
+      "runs": [
+        {
+          "performance": 36,
+          "accessibility": 95,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 5018,
+          "lcpMs": 5869,
+          "tbtMs": 4856,
+          "cls": 0,
+          "totalKb": 781,
+          "scriptKb": 168
+        },
+        {
+          "performance": 35,
+          "accessibility": 95,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 5063,
+          "lcpMs": 6679,
+          "tbtMs": 3417,
+          "cls": 0,
+          "totalKb": 780,
+          "scriptKb": 168
+        },
+        {
+          "performance": 35,
+          "accessibility": 95,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 4988,
+          "lcpMs": 6549,
+          "tbtMs": 3978,
+          "cls": 0,
+          "totalKb": 780,
+          "scriptKb": 168
+        }
+      ],
+      "median": {
+        "performance": 35,
+        "accessibility": 95,
+        "bestPractices": 96,
+        "seo": 100,
+        "fcpMs": 5018,
+        "lcpMs": 6549,
+        "tbtMs": 3978,
+        "cls": 0,
+        "totalKb": 780,
+        "scriptKb": 168
+      }
+    },
+    {
+      "url": "https://akshayai007.github.io/projects/cardiovascular.html",
+      "label": "project-cardiovascular",
+      "formFactor": "desktop",
+      "runs": [
+        {
+          "performance": 98,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 756,
+          "lcpMs": 1052,
+          "tbtMs": 0,
+          "cls": 0,
+          "totalKb": 277,
+          "scriptKb": 0
+        },
+        {
+          "performance": 98,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 781,
+          "lcpMs": 941,
+          "tbtMs": 0,
+          "cls": 0,
+          "totalKb": 277,
+          "scriptKb": 0
+        },
+        {
+          "performance": 99,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 735,
+          "lcpMs": 895,
+          "tbtMs": 0,
+          "cls": 0,
+          "totalKb": 277,
+          "scriptKb": 0
+        }
+      ],
+      "median": {
+        "performance": 98,
+        "accessibility": 96,
+        "bestPractices": 96,
+        "seo": 100,
+        "fcpMs": 756,
+        "lcpMs": 941,
+        "tbtMs": 0,
+        "cls": 0,
+        "totalKb": 277,
+        "scriptKb": 0
+      }
+    },
+    {
+      "url": "https://akshayai007.github.io/projects/cardiovascular.html",
+      "label": "project-cardiovascular",
+      "formFactor": "mobile",
+      "runs": [
+        {
+          "performance": 90,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 1636,
+          "lcpMs": 3600,
+          "tbtMs": 0,
+          "cls": 0.001,
+          "totalKb": 241,
+          "scriptKb": 0
+        },
+        {
+          "performance": 91,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 1581,
+          "lcpMs": 3405,
+          "tbtMs": 0,
+          "cls": 0.008,
+          "totalKb": 241,
+          "scriptKb": 0
+        },
+        {
+          "performance": 91,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 100,
+          "fcpMs": 1583,
+          "lcpMs": 3399,
+          "tbtMs": 0,
+          "cls": 0.001,
+          "totalKb": 241,
+          "scriptKb": 0
+        }
+      ],
+      "median": {
+        "performance": 91,
+        "accessibility": 96,
+        "bestPractices": 96,
+        "seo": 100,
+        "fcpMs": 1583,
+        "lcpMs": 3405,
+        "tbtMs": 0,
+        "cls": 0.001,
+        "totalKb": 241,
+        "scriptKb": 0
+      }
+    }
+  ]
+}

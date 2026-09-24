@@ -1,0 +1,147 @@
+---
+/**
+ * Project deep-dive. One layout and one stylesheet for all four pages (v1
+ * copied the same 14 KB of CSS into each). Its own header, type pairing and
+ * reveal behaviour, as in v1; shares tokens and the theme key with the site.
+ */
+import '@/styles/project.css';
+import newsreaderLatin from '@fontsource-variable/newsreader/files/newsreader-latin-standard-normal.woff2?url';
+import instrumentLatin from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
+import plexMonoLatin from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2?url';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import Photo from '@/components/Photo.astro';
+import Bench from '@/components/project/Bench.astro';
+import Column from '@/components/project/Column.astro';
+import ThemeToggle from '@/components/ThemeToggle.astro';
+import { projectHref } from '@/lib/content';
+import { PROJECT_ICONS, strokeIcon } from '@/lib/icons';
+import { breadcrumbJsonLd, buildSeo, personJsonLd } from '@/lib/seo';
+import { SITE } from '@/lib/site';
+import Base from './Base.astro';
+
+interface Props {
+  entry: CollectionEntry<'projects'>;
+}
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await render(entry);
+
+const site = Astro.site!;
+const path = projectHref(entry);
+const seo = buildSeo(
+  { title: `${data.title} | ${SITE.name}`, description: data.description, path, ogImage: `/og/project-${entry.id}.png`, ogType: 'article' },
+  site,
+);
+const jsonLd = [
+  {
+    '@type': 'SoftwareSourceCode',
+    name: data.title,
+    description: data.description,
+    url: seo.canonical,
+    image: seo.ogImageUrl,
+    codeRepository: data.repo,
+    programmingLanguage: 'Python',
+    keywords: data.stack.join(', '),
+    author: { '@id': new URL('/#person', site).href },
+  },
+  personJsonLd(site),
+  breadcrumbJsonLd(site, [
+    { name: 'Home', path: '/' },
+    { name: 'Projects', path: '/#projects' },
+    { name: data.title, path },
+  ]),
+];
+const icon = strokeIcon(PROJECT_ICONS[data.icon]);
+---
+
+<Base seo={seo} jsonLd={jsonLd} preloadFonts={[instrumentLatin, newsreaderLatin, plexMonoLatin]}>
+  <a class="skip-link" href="#top">Skip to main content</a>
+  <header>
+    <a class="brand" href="#top"><span set:html={icon} /> {data.title}</a>
+    <ThemeToggle variant="project" />
+    <a class="back" href="/">← BACK TO PORTFOLIO</a>
+  </header>
+
+  <main id="top" class="shell">
+    <section class="hero">
+      <div class="eyebrow reveal">
+        {data.chips.map((c) => <span class:list={['chip', { accent: c.accent }]}>{c.label}</span>)}
+      </div>
+      <h1 class="reveal">{data.heading} <em>{data.headingEm}</em></h1>
+      <p class="lede reveal">{data.lede}</p>
+      <div class="hero-actions reveal">
+        <a class="btn btn-primary" href={data.repo} target="_blank" rel="noreferrer">VIEW CODE ON GITHUB ↗</a>
+        {data.live ? <a class="btn btn-ghost" href={data.live.url} target="_blank" rel="noreferrer">{data.live.label}</a> : <a class="btn btn-ghost" href="/">← BACK TO PORTFOLIO</a>}
+      </div>
+    </section>
+
+    <figure class="cover reveal"><Photo src={data.cover.image} alt={data.cover.alt} sizes="100vw" /><figcaption>{data.cover.caption}</figcaption></figure>
+    <div class="stats reveal">
+      {data.stats.map((s) => <div><strong>{s.value}</strong><span>{s.label}</span></div>)}
+    </div>
+    <Bench bench={data.bench} />
+
+    <section>
+      <div class="two-col">
+        <Content components={{ Column }} />
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker reveal">UNDER THE HOOD</p>
+      <h2 class="reveal">{data.flowTitle}</h2>
+      <div class="flow reveal" tabindex="0" role="group" aria-label={`${data.flowTitle} Pipeline stages.`}>{data.flow.map((s, i) => <>{i > 0 && <div class="flow-line"><b></b></div>}<div class:list={['flow-seg', { hl: s.hot }]}><div><span>{String(i + 1).padStart(2, '0')}</span><strong>{s.label}</strong></div></div></>)}</div>
+    </section>
+
+    <section>
+      <p class="kicker reveal">STACK</p>
+      <div class="chipgrid reveal">
+        {data.stack.map((t) => <span class="chip">{t}</span>)}
+      </div>
+    </section>
+  </main>
+
+  <div class="result">
+    <div class="shell reveal">
+      <p class="kicker">THE USP</p>
+      <blockquote>{data.usp}</blockquote>
+    </div>
+  </div>
+
+  <div class="shell cta reveal">
+    <p class="kicker" style="text-align:center">EXPLORE THE CODE</p>
+    <h2>{data.cta}</h2>
+    <a class="btn btn-primary" href={data.repo} target="_blank" rel="noreferrer">VIEW CODE ON GITHUB ↗</a>
+  </div>
+
+  <footer>
+    <span>AKSHAY BAWALIWALE</span>
+    <span class="credit">Photography via <a href="https://unsplash.com" target="_blank" rel="noreferrer">Unsplash</a></span>
+    <a href={SITE.github} target="_blank" rel="noreferrer">GITHUB ↗</a>
+  </footer>
+
+  <!-- Reveals, as v1 shipped them: content stays visible unless this runs.
+       Inline and last in <body> so it applies before first paint. -->
+  <script is:inline>
+    document.documentElement.classList.add('reveal-js');
+    var els = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: .12, rootMargin: '-30px' });
+    els.forEach(function (el) {
+      var sibs = Array.from(el.parentElement.children).filter(function (n) { return n.classList.contains('reveal'); });
+      el.style.setProperty('--i', Math.min(sibs.indexOf(el), 6));
+      io.observe(el);
+    });
+    /* Safety net: anything already at or above the fold reveals immediately, so a
+       deep link or restored scroll can never leave content stuck at opacity 0. */
+    addEventListener('scroll', function () {
+      document.querySelectorAll('.reveal:not(.in)').forEach(function (el) {
+        if (el.getBoundingClientRect().top < innerHeight + 80) el.classList.add('in');
+      });
+    }, { passive: true });
+    requestAnimationFrame(function () { document.querySelectorAll('.reveal').forEach(function (el) { if (el.getBoundingClientRect().top < innerHeight + 120) el.classList.add('in'); }); });
+    setTimeout(function () { document.querySelectorAll('.reveal:not(.in)').forEach(function (el) { el.classList.add('in'); }); }, 2000);
+  </script>
+</Base>

@@ -1,0 +1,91 @@
+/* Design tokens — "Field notebook". Dark is the committed default; light is
+   an explicit, persisted toggle (data-theme on <html>). Ported verbatim from v1
+   index.html; the single source of colour, type, rhythm and motion tokens for
+   every page (project deep-dives import this too). */
+
+/* ── 0 · TOKENS ─────────────────────────────────────────────────────── */
+:root{
+  /* ground — warm near-black, brown bias */
+  --ground:#141310;
+  --ground-2:#1b1813;
+  --ground-3:#242019;
+  --panel:#201c15;          /* the "spec-sheet" inverted sections, dark mode */
+  --panel-ink:#efe9db;
+
+  /* content */
+  --ink:#ece6d7;
+  --ink-2:#b6ad9b;
+  --ink-3:#928979;
+  --line:rgba(236,230,215,.14);
+  --line-2:rgba(236,230,215,.28);
+
+  /* one electric accent + one rare warm signal */
+  --accent:#7f9dff;
+  --accent-2:#a9beff;
+  --accent-deep:#5f7de0;
+  --accent-ink:#0b1020;
+  --flag:#e8724a;
+
+  /* legacy aliases so inline styles / leftover rules keep resolving */
+  --signal:var(--accent); --signal-deep:var(--accent-deep);
+  --azure:var(--accent); --azure-lit:var(--accent-2); --azure-pale:var(--accent-2); --azure-deep:var(--accent-deep);
+  --gold:var(--accent-2); --gold-soft:var(--accent-2);
+  --cyan:var(--accent-2); --lilac:var(--accent-2); --acid:var(--accent-2); --rose:var(--accent);
+  --amber:var(--flag); --violet:var(--accent-2); --mint:var(--accent-2);
+  --ice:var(--ink); --text:var(--ink); --text-2:var(--ink-2); --text-3:var(--ink-3); --text-4:var(--ink-3);
+  --muted:var(--ink-2); --slate:var(--ink-2); --slate-lit:var(--ink-2);
+  --surface:var(--ground-2); --surface-2:var(--ground-2); --surface-3:var(--ground-3);
+
+  /* type */
+  --font-serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --font-sans:'Geist',system-ui,sans-serif;
+  --font-mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,monospace;
+
+  --fs-display:clamp(3.4rem,1.1rem + 9vw,7.5rem);
+  --fs-h1:clamp(2.55rem,1.4rem + 5vw,4.6rem);
+  --fs-h2:clamp(1.9rem,1.35rem + 2.6vw,3rem);
+  --fs-h3:clamp(1.4rem,1.15rem + 1.1vw,1.9rem);
+  --fs-lead:clamp(1.2rem,1.05rem + .7vw,1.45rem);
+  --fs-body:clamp(1.0625rem,1rem + .28vw,1.125rem);
+  --fs-small:1rem;
+  --fs-meta:.8125rem;
+  --fs-micro:.75rem;
+  --ls-micro:.16em;
+
+  /* rhythm */
+  --gutter:clamp(22px,6vw,88px);
+  --measure:66ch;
+  --bay:clamp(76px,11vw,140px);
+  --canvas:1240px;
+
+  --dur-1:130ms; --dur-2:230ms; --dur-3:420ms; --dur-4:600ms;
+  --ease-out:cubic-bezier(.2,.7,.2,1);
+  --ease-in:cubic-bezier(.7,0,.84,0);
+  --ease-spring:cubic-bezier(.34,1.4,.64,1);
+
+  --e2:0 18px 44px -24px rgba(0,0,0,.7);
+  --e3:0 40px 90px -40px rgba(0,0,0,.78);
+}
+
+:root[data-theme="light"]{
+  --ground:#f4efe4;
+  --ground-2:#ece4d4;
+  --ground-3:#e2d9c6;
+  --panel:#e7ded0;
+  --panel-ink:#1b1712;
+
+  --ink:#1b1712;
+  --ink-2:#544a3d;
+  --ink-3:#685e4f;          /* v1 #6f6454: 4.34:1 on --panel; now ≥4.5:1 on every light ground */
+  --line:rgba(27,23,18,.16);
+  --line-2:rgba(27,23,18,.32);
+
+  --accent:#1c3fd6;
+  --accent-2:#1b4dff;
+  --accent-deep:#16309f;
+  --accent-ink:#f4efe4;
+  --flag:#aa3609;           /* v1 #bd3c0a: 4.13:1 on --panel; now ≥4.6:1 on every light ground */
+
+  --e2:0 18px 44px -26px rgba(60,45,25,.3);
+  --e3:0 40px 90px -44px rgba(60,45,25,.32);
+}

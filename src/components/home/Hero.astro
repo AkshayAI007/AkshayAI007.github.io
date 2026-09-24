@@ -1,0 +1,35 @@
+---
+/** Home hero: graded ambient photo, WebGL aurora ribbons, dotted parallax layer. */
+import heroAmbient from '@/assets/images/photos/hero-ambient.jpg';
+import Photo from '@/components/Photo.astro';
+---
+
+<section class="hero section-shell" id="heroSection">
+  <div class="hero-ambient" aria-hidden="true"><Photo src={heroAmbient} alt="" sizes="(max-width: 1050px) 60vw, 100vw" quality={35} eager /></div>
+  <div class="hero-aurora" id="heroAurora" aria-hidden="true"></div>
+  <div class="hero-parallax-layer" id="heroParallax" aria-hidden="true"></div>
+  <div class="hero-copy" id="heroCopy">
+    <p class="eyebrow"><span></span> SENIOR GENERATIVE AI &amp; LLM ENGINEER · AGENTIC SYSTEMS · VOICE AI · RAG</p>
+    <h1>I architect AI systems that <em>survive reality.</em></h1>
+    <p class="hero-subcopy">I design, ship and evaluate production AI &mdash; multi-agent orchestration, RAG, voice AI and LLM evaluation &mdash; from the client call that scopes it to the system that runs it.</p>
+    <ul class="hero-proof" aria-label="Headline results">
+      <li><b>2 days &rarr; 3 min</b><span>Service queue</span></li>
+      <li><b>3M+</b><span>SMBs served · &lt;3s TTFT</span></li>
+      <li><b>20+</b><span>Production LLM systems</span></li>
+    </ul>
+    <div class="hero-actions">
+      <a href="#systems" class="button button-primary" data-scroll="#systems">EXPLORE THE SYSTEMS ↘</a>
+      <a href="/reach" class="button button-secondary">GET IN TOUCH →</a>
+    </div>
+  </div>
+
+  <div class="hero-index">AKSHAY BAWALIWALE <span>©26</span></div>
+</section>
+
+<script>
+  import { mountAurora } from '@/lib/aurora';
+
+  const host = document.getElementById('heroAurora');
+  const hero = document.getElementById('heroSection');
+  if (host && hero) mountAurora(host, hero);
+</script>

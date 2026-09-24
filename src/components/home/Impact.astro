@@ -1,0 +1,17 @@
+---
+/** Business outcome + the four-instrument impact deck (React island). */
+import ImpactDeck from '@/islands/ImpactDeck';
+---
+
+<section class="impact reveal" id="impact" aria-labelledby="impactTitle">
+  <header class="impact-head">
+    <p class="proof-kicker">Business outcome</p>
+    <h2 class="impact-title" id="impactTitle">Won a major <em>enterprise contract.</em></h2>
+    <div class="impact-aside">
+      <p>With the Voice AI proof of concept I scoped, demoed &mdash; then shipped. Four systems, measured in production:</p>
+      <a href="/case/voice-ai" class="proof-link">READ THE CASE STUDY <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+    </div>
+  </header>
+
+  <ImpactDeck client:visible={{ rootMargin: '300px' }} />
+</section>

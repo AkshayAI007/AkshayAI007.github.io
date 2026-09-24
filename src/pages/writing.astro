@@ -1,0 +1,56 @@
+---
+import Page from '@/layouts/Page.astro';
+import { getWriting } from '@/lib/content';
+import { breadcrumbJsonLd, buildSeo, personJsonLd } from '@/lib/seo';
+
+const posts = await getWriting();
+const seo = buildSeo(
+  {
+    title: 'Writing | Akshay Bawaliwale',
+    description:
+      'Notes from the machine room: the decisions, failure modes and mental models behind production AI — RAG, agents, model training and hosting.',
+    path: '/writing',
+    ogImage: '/og/writing.png',
+  },
+  Astro.site!,
+);
+const site = Astro.site!;
+const jsonLd = [
+  {
+    '@type': 'CollectionPage',
+    url: seo.canonical,
+    name: seo.title,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: posts.map(({ data }, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: { '@type': 'Article', headline: data.title, url: data.url, datePublished: data.published.toISOString().slice(0, 10), author: { '@id': new URL('/#person', site).href } },
+      })),
+    },
+  },
+  personJsonLd(site),
+  breadcrumbJsonLd(site, [{ name: 'Home', path: '/' }, { name: 'Writing', path: '/writing' }]),
+];
+---
+
+<Page seo={seo} current="writing" pageId="writing" jsonLd={jsonLd}>
+  <main id="top" class="index-page">
+    <section class="index-hero section-shell reveal">
+      <p class="section-kicker">WRITING / NOTES FROM THE MACHINE ROOM</p>
+      <h1>Making complex AI <em>harder to misunderstand.</em></h1>
+      <p>I write about the decisions, failure modes and mental models behind production intelligence&mdash;with just enough sarcasm to keep everyone awake.</p>
+    </section>
+    <section class="writing-index section-shell">
+      {
+        posts.map(({ data }, i) => (
+          <a class="reveal" href={data.url} target="_blank" rel="noreferrer"><span>{String(i + 1).padStart(2, '0')}</span><div><small>{data.category} &middot; {data.minutes} MIN</small><h2>{data.title}</h2><p>{data.excerpt}</p></div><span>&#8599;</span></a>
+        ))
+      }
+    </section>
+    <section class="next-case reveal">
+      <p>WRITTEN BETWEEN SHIPPING THINGS.</p>
+      <a href="/reach">START A CONVERSATION &rarr;</a>
+    </section>
+  </main>
+</Page>

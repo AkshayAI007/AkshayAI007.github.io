@@ -1,0 +1,55 @@
+---
+import { NAV } from '@/lib/site';
+---
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Site navigation" inert>
+  <div class="mobile-menu-meta"><span>AKSHAY BAWALIWALE</span><span>SENIOR GENAI &amp; LLM ENGINEER</span></div>
+  <button id="mobileMenuClose" aria-label="Close navigation"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+  <nav aria-label="Mobile navigation">
+    {NAV.map((item, i) => <div><span>{String(i + 1).padStart(2, '0')}</span><a href={item.href}>{item.label}</a></div>)}
+  </nav>
+  <a class="mobile-contact" href="/reach">AVAILABLE FOR THE RIGHT PROBLEM →</a>
+</div>
+
+<script>
+  import { trapFocus } from '@/lib/focus';
+
+  // Closed, the menu is `inert`, so its links leave the tab order entirely.
+  // Open, it traps focus, closes on Escape and hands focus back to the button.
+  const menu = document.getElementById('mobileMenu')!;
+  const button = document.getElementById('menuButton')!;
+
+  function open() {
+    menu.removeAttribute('inert');
+    menu.classList.add('open');
+    button.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    menu.querySelector<HTMLElement>('a[href], button')?.focus();
+  }
+
+  function close({ restoreFocus = true } = {}) {
+    const wasOpen = menu.classList.contains('open');
+    menu.classList.remove('open');
+    menu.setAttribute('inert', '');
+    button.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    if (wasOpen && restoreFocus) button.focus();
+  }
+
+  button.addEventListener('click', open);
+  document.getElementById('mobileMenuClose')!.addEventListener('click', () => close());
+  // Leaving for another page: close without stealing focus, so a page restored
+  // from the back/forward cache comes back with the menu shut.
+  menu.addEventListener('click', (e) => {
+    if ((e.target as Element).closest('a[href]')) close({ restoreFocus: false });
+  });
+  window.addEventListener('menu:close', () => close());
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) close({ restoreFocus: false });
+  });
+  window.addEventListener('keydown', (e) => {
+    if (!menu.classList.contains('open')) return;
+    if (e.key === 'Tab') trapFocus(menu, e);
+    if (e.key === 'Escape') close();
+  });
+</script>

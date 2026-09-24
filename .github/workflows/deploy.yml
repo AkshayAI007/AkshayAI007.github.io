@@ -1,0 +1,66 @@
+# Deploys to GitHub Pages (repo Settings → Pages → Source: "GitHub Actions").
+# - Automatically, for every main commit whose CI run succeeded.
+# - Manually (Actions → Deploy → Run workflow) for any ref — e.g. `v1-static`
+#   to roll back to the hand-written v1 site in one run.
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch, tag or commit to deploy (v1-static rolls back to the static site)
+        required: true
+        default: main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.event.workflow_run.head_sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build
+        run: |
+          if [ -f package.json ]; then
+            corepack enable
+            pnpm install --frozen-lockfile
+            pnpm build
+            echo "SITE_DIR=dist" >> "$GITHUB_ENV"
+          else
+            # pre-Astro static site (v1-static): publish the tree as-is
+            mkdir -p _site && cp -r index.html projects Akshay_Bawaliwale_Resume.pdf _site/
+            touch _site/.nojekyll
+            echo "SITE_DIR=_site" >> "$GITHUB_ENV"
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.SITE_DIR }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

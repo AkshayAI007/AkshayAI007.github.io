@@ -1,0 +1,12 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Project from '@/layouts/Project.astro';
+import { getProjects } from '@/lib/content';
+
+export const getStaticPaths = (async () =>
+  (await getProjects()).map((entry) => ({ params: { slug: entry.id }, props: { entry } }))) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+---
+
+<Project entry={entry} />

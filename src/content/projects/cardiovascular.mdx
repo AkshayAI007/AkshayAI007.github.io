@@ -1,0 +1,101 @@
+---
+title: Cardiovascular Risk Prediction
+description: Nine classifiers, a leakage-safe pipeline and Platt calibration on the Framingham Heart Study. Logistic regression won at 0.714 ROC-AUC and ships as a live app.
+order: 1
+icon: heart-pulse
+chips:
+- label: SUPERVISED ML
+  accent: true
+- label: HEALTHCARE
+- label: A/01
+heading: Estimating a patient's ten-year cardiovascular risk,
+headingEm: before it becomes an emergency.
+lede: Nine classifiers on the Framingham Heart Study, behind a leakage-safe pipeline with SMOTE, Platt calibration and a recall-weighted threshold. Plain logistic regression won — and it ships as a live risk-scoring app.
+repo: https://github.com/AkshayAI007/Cardiovascular-disease-risk-prediction-using-Machine-learning
+live:
+  label: OPEN THE LIVE APP ↗
+  url: https://cardiovascular-risk-predictor.onrender.com
+cover:
+  image: ../../assets/images/photos/dna-helix.jpg
+  alt: Rendering of a DNA double helix
+  caption: FRAMINGHAM HEART STUDY · 9 CLASSIFIERS · PLATT-CALIBRATED
+stats:
+- value: '0.714'
+  label: ROC-AUC · held-out test
+- value: 75 / 102
+  label: At-risk patients caught
+- value: '9'
+  label: Classifiers compared
+- value: LIVE
+  label: FastAPI app on Render
+bench:
+  title: The obvious model came sixth.
+  meta: ROC-AUC on the held-out test set · 678 patients
+  note: Same data, same split, same tuning budget. A calibrated linear model beat every ensemble — a result you only trust when the test set was never touched during training.
+  bars:
+    min: 0.5
+    max: 0.75
+    axis:
+    - 0.50 · CHANCE
+    - '0.55'
+    - '0.60'
+    - '0.65'
+    - '0.70'
+    - '0.75'
+    rows:
+    - label: Logistic Regression
+      value: '0.714'
+      mark: win
+    - label: Stacking
+      value: '0.713'
+    - label: Naive Bayes
+      value: '0.705'
+    - label: AdaBoost
+      value: '0.666'
+    - label: Random Forest
+      value: '0.647'
+    - label: XGBoost
+      value: '0.605'
+      mark: flag
+      note: The default pick — sixth of nine
+    - label: KNN
+      value: '0.582'
+    - label: Gradient Boosting
+      value: '0.557'
+    - label: SVC
+      value: '0.556'
+flowTitle: From raw records to a risk score.
+flow:
+- label: FRAMINGHAM DATA
+- label: LEAKAGE-SAFE SPLIT
+- label: SMOTE (TRAIN ONLY)
+- label: 9 MODELS · GRIDSEARCH
+  hot: true
+- label: PLATT + F2 THRESHOLD
+- label: LIVE APP
+stack:
+- Python
+- Pandas
+- scikit-learn
+- Logistic Regression
+- XGBoost
+- FastAPI
+- Render
+- imbalanced-learn (SMOTE)
+- Matplotlib / Seaborn
+usp: XGBoost came sixth. A calibrated logistic regression caught 75 of 102 at-risk patients on data it had never seen — and every score it returns means what it says.
+cta: Read the notebooks, the feature engineering and the model comparison.
+orbit:
+  title: Cardiovascular Risk Prediction
+  tag: SUPERVISED ML · HEALTHCARE
+  desc: Nine classifiers behind a leakage-safe pipeline with Platt calibration — logistic regression won, and it ships as a live app.
+  metric: 0.714 ROC-AUC
+  tint: '#8e3345'
+---
+
+<Column kicker="THE PROBLEM" title="Risk hides in noisy, imbalanced data.">
+Cardiovascular disease is one of the leading causes of death worldwide, yet the clinical signals that predict it — blood pressure, cholesterol, smoking history, BMI, age — are noisy, correlated, and skewed: the vast majority of patients in any dataset never go on to develop disease. A model optimised for raw accuracy will happily predict "healthy" for everyone and still score well, while missing the patients who actually need attention.
+</Column>
+<Column kicker="THE APPROACH" title="Build the pipeline so the score can be trusted.">
+A stratified 60/20/20 split keeps the test set untouched until the end. Feature engineering adds pulse pressure and drops collinear inputs; SMOTE oversamples the training fold only. Nine classifiers are tuned with GridSearchCV on AUC, the winner is Platt-calibrated so a “30% risk” means roughly 30%, and the decision threshold is tuned on validation by F2 — recall weighted twice over precision, with a precision floor.
+</Column>

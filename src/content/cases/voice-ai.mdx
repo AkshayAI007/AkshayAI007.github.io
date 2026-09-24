@@ -1,0 +1,103 @@
+---
+title: 'Voice AI: a two-day queue to three minutes'
+description: A three-agent voice AI workflow on LiveKit, Twilio SIP and Salesforce that cut a two-day service queue to three minutes and won an enterprise contract.
+order: 1
+kicker: CASE STUDY 01 / VOICE AI · MULTI-AGENT · ENTERPRISE
+heading: From a two-day service queue to three minutes.
+lede: A three-agent voice workflow that verifies the caller, understands the request, enforces compliance and files the Salesforce ticket before the call ends. I scoped the use case and demoed the proof of concept that won the contract.
+proof:
+  label: Service-queue latency
+  value:
+    from: 2 days
+    to: 3 min
+    seq: 2 days|1 day|12 h|3 h|40 min|3 min
+    spoken: from 2 days to 3 minutes
+  viz:
+    kind: collapse
+    after: 1.5%
+  foot: −99.9% queue latency
+  support:
+  - label: Fulfilment time
+    value: 87.5% faster
+  - label: Specialised agents
+    value: '3'
+  - label: Commercial
+    value: Major enterprise contract won
+spec:
+- label: Role
+  value: Use-case scoping, POC demo, architecture
+- label: Stack
+  value: LiveKit · Twilio SIP · Salesforce
+- label: Guardrails
+  value: Real-time, aligned to HIPAA & PCI DSS
+- label: Client
+  value: Enterprise, under NDA
+architecture:
+  title: Three agents. Five checkpoints.
+  stops:
+  - label: CALLER
+    detail: Inbound call over Twilio SIP, streamed through LiveKit for real-time turn-taking and interruption handling.
+  - label: VERIFICATION
+    detail: URL lookup and OTP validation. No account context enters the conversation until identity is proven.
+  - label: CARE AGENT
+    detail: Understands the service request and gathers what fulfilment needs, in natural conversation.
+    hot: true
+  - label: COMPLIANCE
+    detail: Real-time guardrails aligned to HIPAA and PCI DSS check what is said, captured and stored.
+  - label: SALESFORCE
+    detail: Validated intent becomes a structured ticket through a controlled tool call — no re-keying.
+decisions:
+  title: Verification comes before the conversation does.
+  items:
+  - title: Split verification, care and compliance into three agents.
+    insteadOf: One voice agent carrying every policy in a single prompt.
+    because: Compliance rules stop competing with conversation flow for the same context, and each agent can be tested on its own.
+    tradeoff: More handoffs to engineer — each one a latency and state-transfer risk.
+  - title: Prove identity before any account context is exposed.
+    insteadOf: Verifying lazily, once the caller asks for something sensitive.
+    because: PII never enters the model’s context for an unverified caller, which is what HIPAA and PCI DSS alignment demands.
+    tradeoff: A few seconds of friction at the start of every call.
+  - title: Run the whole exchange in real time on LiveKit and Twilio SIP.
+    insteadOf: Capturing the request and calling back once it was processed.
+    because: Resolving the request on the first call is what removes the queue entirely.
+    tradeoff: A strict latency budget that constrains every model and tool choice.
+  - title: File tickets through a controlled, structured tool call.
+    insteadOf: A free-text call summary for a human to re-key.
+    because: The ticket is actionable the moment the call ends, and every field is validated.
+    tradeoff: Schemas must be kept in sync with Salesforce, with a fallback when intent is ambiguous.
+outcome:
+  lede: The queue stopped being a queue — and the proof of concept became a signed contract.
+  caption: Voice AI outcomes, before and after
+  columns:
+  - Metric
+  - Before
+  - After
+  - Change
+  rows:
+  - - Service-queue latency
+    - 2 days
+    - 3 minutes
+    - −99.9%
+  - - Fulfilment time
+    - Manual, multi-team
+    - Autonomous, with escalation
+    - 87.5% faster
+  - - Availability
+    - Queue-bound
+    - 24/7
+    - Always on
+  - - Commercial
+    - Proof of concept
+    - Major enterprise contract
+    - Won
+next:
+  case: agent
+  label: 'NEXT: AN AGENT FOR 3M+ SMBS'
+---
+
+<Story kicker="THE CONTEXT" title="Two days, for a phone call.">
+Inbound service requests entered a manual queue. Customers waited up to two days before work began, while identity checks, information capture and ticket creation crossed several systems and teams.
+</Story>
+<Story kicker="THE CONSTRAINT" title="Real-time doesn’t forgive mistakes.">
+The system had to hold a live conversation, hand off between agents without losing state, keep PII out of reach until identity was proven, and stay observable enough for enterprise production support.
+</Story>

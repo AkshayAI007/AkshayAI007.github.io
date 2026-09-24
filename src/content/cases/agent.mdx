@@ -1,0 +1,105 @@
+---
+title: An autonomous agent for 3M+ SMBs
+description: A ReAct agent with guardrails, long-term memory and hybrid retrieval that answers for 3M+ US SMBs in under three seconds at over 95% accuracy.
+order: 2
+kicker: CASE STUDY 02 / AGENTIC AI · RETRIEVAL AT SCALE
+heading: An autonomous agent answering for 3M+ SMBs in under three seconds.
+lede: A ReAct agent that filters queries through guardrails, remembers the conversation and chooses among 10 tools across 10 data sources — with hybrid retrieval and re-ranking lifting output accuracy above 95%.
+proof:
+  label: Time to first token
+  value:
+    to: <3s
+  viz:
+    kind: ruler
+    fill: 54%
+    mark: 60%
+    ticks:
+    - 0s
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - 5s
+  foot: Budget held across 3M+ US SMB records
+  support:
+  - label: Businesses covered
+    value: 3M+ US SMBs
+  - label: Output accuracy
+    value: '>95%'
+  - label: Tools · data sources
+    value: 10 · 10
+spec:
+- label: Role
+  value: Engineered end to end
+- label: Pattern
+  value: Autonomous ReAct agent
+- label: Retrieval
+  value: Hybrid search + re-ranking
+- label: Memory
+  value: Long-term, follow-up aware
+architecture:
+  title: The agent decides. The guardrails decide first.
+  stops:
+  - label: QUERY
+    detail: A natural-language question about one business or many.
+  - label: GUARDRAIL
+    detail: Query filtering rejects out-of-scope requests before any tool call or token budget is spent.
+  - label: MEMORY
+    detail: Long-term memory decides whether this is a standalone question or a follow-up that needs earlier context.
+  - label: REACT · 10 TOOLS
+    detail: The agent reasons, picks among 10 tools over 10 data sources, observes the result and repeats until it can answer.
+    hot: true
+  - label: HYBRID + RERANK
+    detail: Dense and keyword search combined, then re-ranked — the step that lifted output accuracy above 95%.
+  - label: ANSWER
+    detail: A grounded response, first token in under three seconds.
+decisions:
+  title: Scope is decided before the model is.
+  items:
+  - title: Filter queries with guardrails before the agent loop.
+    insteadOf: Asking the system prompt to refuse off-scope requests.
+    because: Rejecting early is cheaper than reasoning, and keeps the tool budget for questions worth answering.
+    tradeoff: Filters need tuning so valid questions aren’t turned away.
+  - title: Classify standalone vs follow-up before retrieval.
+    insteadOf: Appending the full conversation history to every call.
+    because: Follow-ups resolve against memory; new questions don’t drag stale context along, which keeps prompts short and TTFT low.
+    tradeoff: A misclassified question retrieves with the wrong context.
+  - title: Combine hybrid search with re-ranking.
+    insteadOf: Dense vector search on its own.
+    because: Business names, categories and locations need exact matches that embeddings blur. This is what took accuracy above 95%.
+    tradeoff: An extra ranking pass inside a three-second budget.
+  - title: Give the agent ten narrow tools, one per source.
+    insteadOf: One broad tool that queries everything at once.
+    because: Each tool has a clear contract the ReAct loop can choose between and that can be tested on its own.
+    tradeoff: More routing decisions per question.
+outcome:
+  lede: 'Scale and speed held together: 3M+ businesses, answered in under three seconds, above 95% accuracy.'
+  caption: ReAct agent results
+  columns:
+  - Dimension
+  - Result
+  - What made it possible
+  rows:
+  - - Coverage
+    - 3M+ US SMBs
+    - 10 tools over 10 data sources
+  - - Latency
+    - <3s to first token
+    - Guardrails and memory routing keep prompts short
+  - - Accuracy
+    - '>95% output accuracy'
+    - Hybrid search + re-ranking
+  - - Continuity
+    - Follow-ups answered in context
+    - Long-term memory
+next:
+  case: onboarding
+  label: 'NEXT: FOUR-AGENT ONBOARDING'
+---
+
+<Story kicker="THE CONTEXT" title="Ten sources, one question.">
+A useful answer about a business meant pulling from up to ten data sources across 3M+ SMB records — too slow to do by hand, too broad for a single prompt.
+</Story>
+<Story kicker="THE CONSTRAINT" title="Fast, grounded, in context.">
+The agent had to reach a first token in under three seconds, tell a new question from a follow-up, stay inside its scope, and match business names, categories and locations exactly.
+</Story>

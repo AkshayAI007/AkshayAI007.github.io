@@ -1,0 +1,64 @@
+---
+title: Netflix AI Recommender
+description: Eleven recommender models benchmarked on 8,807 titles. The shipped hybrid kept 99.96% genre precision, added 43% diversity and serves in 6.91 ms.
+order: 2
+icon: film
+chips:
+- label: RECOMMENDER SYSTEMS
+  accent: true
+- label: NLP
+- label: A/02
+heading: Eleven models benchmarked across 8,807 titles,
+headingEm: then tuned for what people actually watch.
+lede: A content-based Netflix recommender built from titles, descriptions, genres and cast. Eleven candidate models were benchmarked across the full 8,807-title catalogue, then combined into a hybrid re-ranker (TF-IDF + NMF + LDA over K-Means segments) that reached 99.96% Precision@10 and served recommendations in 6.91 ms — with cold-start coverage and explainable results built in.
+repo: https://github.com/AkshayAI007/Netflix_Movies_and_TVshows_Clustering
+cover:
+  image: ../../assets/images/photos/cinema.jpg
+  alt: Empty cinema auditorium seen from the screen
+  caption: HYBRID RE-RANKER · TF-IDF + NMF + LDA · 8,807 TITLES
+stats:
+- value: +43%
+  label: Diversity vs previous hybrid
+- value: 99.96%
+  label: Genre Precision@10
+- value: 6.91 ms
+  label: Per recommendation
+- value: '11'
+  label: Models benchmarked
+bench:
+  title: Precision was easy. Precision with variety was the job.
+  meta: 11 models · 500-title holdout · relevance = shares a genre
+  note: Precision@10 here counts a recommendation as relevant when it shares at least one genre with the query title — a generous proxy, which is exactly why a perfect score was a warning sign rather than a win.
+  figure: netflix-scatter
+flowTitle: From catalogue text to a ranked shortlist.
+flow:
+- label: CATALOGUE DATA
+- label: TF-IDF + NMF + LDA
+- label: K-MEANS SEGMENTS
+- label: HYBRID RE-RANK
+  hot: true
+- label: TOP-10 + WHY
+stack:
+- Python
+- Pandas
+- scikit-learn
+- TF-IDF / NMF / LDA
+- K-Means
+- NLTK
+- Flask
+usp: The highest-accuracy model was the wrong one — it recommended the same genres back. The shipped model trades a sliver of precision for 43% more diverse recommendations, and every title is recommendable the moment it's added.
+cta: Read the notebooks, the model benchmark and the re-ranking logic.
+orbit:
+  title: Netflix AI Recommender
+  tag: RECOMMENDER SYSTEMS · NLP
+  desc: Eleven models on 8,807 titles. The shipped hybrid held 99.96% genre precision and returned 43% more diverse picks.
+  metric: +43% DIVERSITY
+  tint: '#5a3c9a'
+---
+
+<Column kicker="THE PROBLEM" title="A single accuracy score hid a genre echo chamber.">
+Collaborative filtering needs watch history the catalogue doesn't have on day one. And optimising for raw accuracy produced a model that just kept recommending the same few genres back — technically precise, practically useless. The catalogue of 8,807 titles also needed recommendations fast enough to serve inline.
+</Column>
+<Column kicker="THE APPROACH" title="Benchmark eleven, then hybridise the best.">
+Each title's description, genres and cast become a document — vectorised with TF-IDF, reduced with NMF and LDA, and segmented with K-Means. Eleven candidate models were benchmarked across the full catalogue on Precision@10 and content diversity; the winning hybrid re-ranker was tuned to trade a sliver of precision for 43% more diverse recommendations, with cold-start fallback for brand-new titles and per-recommendation explanations.
+</Column>

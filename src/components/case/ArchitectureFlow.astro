@@ -1,0 +1,40 @@
+---
+/**
+ * The system as a row of stages. Hover or tab through them: the readout
+ * below says what each stage owns. The hot stage is the one the page is about.
+ */
+interface Props {
+  id: string;
+  title: string;
+  stops: { label: string; detail: string; hot: boolean }[];
+}
+const { id, title, stops } = Astro.props;
+const readout = `readout-${id}`;
+const pad = (i: number) => String(i + 1).padStart(2, '0');
+const hotIndex = Math.max(0, stops.findIndex((s) => s.hot));
+const hot = stops[hotIndex]!;
+---
+
+<section class="case-architecture section-shell reveal">
+  <p class="section-kicker">THE ARCHITECTURE</p><h2>{title}</h2>
+  <div class="case-flow">{stops.map((s, i) => <div class="case-flow-segment"><div class:list={['flow-stop', { 'is-hot': s.hot }]} tabindex="0" aria-describedby={readout} data-detail={s.detail}><span>{pad(i)}</span><strong>{s.label}</strong></div>{i < stops.length - 1 && <i><b></b></i>}</div>)}</div>
+  <p class="flow-readout" id={readout} aria-live="polite"><b>{pad(hotIndex)} · {hot.label}</b><span>{hot.detail}</span></p>
+  <p class="flow-hint">Hover or tab through the stages</p>
+</section>
+
+<script>
+  for (const section of document.querySelectorAll<HTMLElement>('.case-architecture')) {
+    const stops = [...section.querySelectorAll<HTMLElement>('.flow-stop')];
+    const out = section.querySelector('.flow-readout');
+    if (!out) continue;
+    const show = (stop: HTMLElement) => {
+      stops.forEach((s) => s.classList.toggle('is-hot', s === stop));
+      out.querySelector('b')!.textContent = `${stop.querySelector('span')!.textContent} · ${stop.querySelector('strong')!.textContent}`;
+      out.querySelector('span')!.textContent = stop.dataset.detail ?? '';
+    };
+    for (const s of stops) {
+      s.addEventListener('mouseenter', () => show(s));
+      s.addEventListener('focus', () => show(s));
+    }
+  }
+</script>

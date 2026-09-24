@@ -1,0 +1,158 @@
+---
+import Page from '@/layouts/Page.astro';
+import { breadcrumbJsonLd, buildSeo, personJsonLd } from '@/lib/seo';
+import { SITE } from '@/lib/site';
+
+const seo = buildSeo(
+  {
+    title: 'Resume | Akshay Bawaliwale',
+    description:
+      'The one-page version: 20+ production LLM systems, the measured outcomes, the skills by layer and the experience behind them. Download the PDF.',
+    path: '/resume',
+    ogImage: '/og/resume.png',
+  },
+  Astro.site!,
+);
+const site = Astro.site!;
+const jsonLd = [
+  {
+    '@type': 'ProfilePage',
+    url: seo.canonical,
+    name: seo.title,
+    mainEntity: { '@id': new URL('/#person', site).href },
+    associatedMedia: { '@type': 'MediaObject', contentUrl: new URL(SITE.resumePdf, site).href, encodingFormat: 'application/pdf' },
+  },
+  personJsonLd(site),
+  breadcrumbJsonLd(site, [{ name: 'Home', path: '/' }, { name: 'Resume', path: '/resume' }]),
+];
+---
+
+<Page seo={seo} current="resume" pageId="resume" jsonLd={jsonLd}>
+  <main id="top" class="index-page resume-page">
+    <section class="index-hero section-shell reveal">
+      <p class="section-kicker">RESUME / THE ONE-PAGE VERSION</p>
+      <h1>Everything above, <em>compressed to one page.</em></h1>
+      <p>Senior Generative AI &amp; LLM engineer &mdash; agentic systems, RAG, voice AI and LLM evaluation. 2.5 years and 20+ production LLM systems, condensed into one downloadable PDF.</p>
+      <div class="hero-actions">
+        <button class="button button-primary resume-download" id="downloadResumeBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>
+          <span id="downloadResumeLabel">DOWNLOAD RESUME (PDF)</span>
+        </button>
+        <a class="button button-secondary" href="/reach">GET IN TOUCH →</a>
+      </div>
+      <p class="resume-note" id="downloadResumeNote"></p>
+    </section>
+
+    <section class="section-shell reveal" aria-label="Resume highlights">
+      <dl class="spec-table">
+        <div><dt>Production LLM systems</dt><dd>20+</dd></div>
+        <div><dt>Service-queue latency</dt><dd>2 days &rarr; 3 min</dd></div>
+        <div><dt>Scale served</dt><dd>3M+ US SMBs · &lt;3s TTFT</dd></div>
+        <div><dt>Output accuracy</dt><dd>&gt;95%</dd></div>
+        <div><dt>Ad delivery</dt><dd>Days &rarr; &lt;10 min · 2,000+ accounts</dd></div>
+        <div><dt>Commercial</dt><dd>Voice AI POC won a major enterprise contract</dd></div>
+      </dl>
+    </section>
+
+    <section class="resume-skills section-shell reveal">
+      <div class="resume-skill-group">
+        <h2>AGENTIC AI &amp; ORCHESTRATION</h2>
+        <div class="resume-chip-row"><span class="resume-chip">LangGraph</span><span class="resume-chip">LangChain</span><span class="resume-chip">CrewAI</span><span class="resume-chip">Claude SDK</span><span class="resume-chip">Multi-Agent Systems</span><span class="resume-chip">ReAct Agents</span><span class="resume-chip">Tool Calling</span><span class="resume-chip">Structured Outputs</span><span class="resume-chip">Pydantic</span><span class="resume-chip">MCP</span></div>
+      </div>
+      <div class="resume-skill-group">
+        <h2>VOICE AI</h2>
+        <div class="resume-chip-row"><span class="resume-chip">LiveKit</span><span class="resume-chip">Twilio SIP</span><span class="resume-chip">Salesforce Integration</span><span class="resume-chip">Production Voice Agents</span></div>
+      </div>
+      <div class="resume-skill-group">
+        <h2>RAG &amp; VECTOR DATABASES</h2>
+        <div class="resume-chip-row"><span class="resume-chip">LlamaIndex</span><span class="resume-chip">Pinecone</span><span class="resume-chip">FAISS</span><span class="resume-chip">ChromaDB</span><span class="resume-chip">Hybrid Search</span><span class="resume-chip">Re-ranking</span><span class="resume-chip">Embeddings</span></div>
+      </div>
+      <div class="resume-skill-group">
+        <h2>LLMOPS &amp; EVALUATION</h2>
+        <div class="resume-chip-row"><span class="resume-chip">LangSmith</span><span class="resume-chip">MLflow</span><span class="resume-chip">LLM-as-Judge</span><span class="resume-chip">Model Benchmarking</span><span class="resume-chip">Prompt Optimization</span><span class="resume-chip">FastAPI</span><span class="resume-chip">CI/CD</span><span class="resume-chip">Git</span></div>
+      </div>
+      <div class="resume-skill-group">
+        <h2>CLOUD &amp; PRODUCT</h2>
+        <div class="resume-chip-row"><span class="resume-chip">AWS</span><span class="resume-chip">Google Vertex AI</span><span class="resume-chip">Docker</span><span class="resume-chip">Requirements Gathering</span><span class="resume-chip">Feature Ownership</span><span class="resume-chip">Stakeholder Communication</span></div>
+      </div>
+      <div class="resume-skill-group">
+        <h2>APPLIED ML</h2>
+        <div class="resume-chip-row"><span class="resume-chip">Python</span><span class="resume-chip">SQL</span><span class="resume-chip">Logistic Regression</span><span class="resume-chip">XGBoost</span><span class="resume-chip">LightGBM</span><span class="resume-chip">SMOTE</span><span class="resume-chip">NMF / LDA</span><span class="resume-chip">CNN</span><span class="resume-chip">Real-ESRGAN</span><span class="resume-chip">PyTorch</span><span class="resume-chip">scikit-learn</span><span class="resume-chip">RLHF / PEFT</span></div>
+      </div>
+    </section>
+
+    <section class="timeline section-shell reveal">
+      <article class="reveal"><span>04/2024 &mdash; PRESENT</span><h2>SENIOR GENAI &amp; LLM SPECIALIST &middot; BUZZBOARD</h2><p><b class="tl-proof">Promoted to Senior, Jan 2026 · 3 engineers mentored</b>Own feature delivery for the Zylo product line and run client feedback calls with VPs, PMs and product owners. Scoped and demoed a three-agent voice AI POC (LiveKit, Twilio SIP, Salesforce) that won a major enterprise contract, cutting request-queue latency from 2 days to 3 minutes (&minus;99.9%) and fulfilment time by 87.5%. Engineered an autonomous ReAct agent serving 3M+ US SMBs at &lt;3s time-to-first-token with &gt;95% output accuracy; orchestrated a four-agent onboarding system producing 60 fields per profile, scored on a 10-parameter LLM-as-Judge rubric; cut ad delivery from days to &lt;10 minutes for 2,000+ SMB accounts.</p></article>
+      <article class="reveal"><span>11/2023 &mdash; 03/2024</span><h2>DATA ANALYST TRAINEE &middot; ALMABETTER</h2><p><b class="tl-proof">Top 0.1% of the AlmaX cohort</b>Built and deployed a full-stack cardiovascular-risk app (FastAPI, Render): nine classifiers, a leakage-safe pipeline with SMOTE and Platt calibration, 0.714 ROC-AUC.</p></article>
+      <article class="reveal"><span>07/2022 &mdash; 10/2022</span><h2>RESEARCH STAFF &middot; CENTRE OF EXCELLENCE IN AI, IIT KHARAGPUR</h2><p><b class="tl-proof">72% LULC prediction accuracy</b>Researched a CNN architecture for satellite image processing and upscaling, with augmentation and preprocessing.</p></article>
+    </section>
+
+    <section class="reach-links section-shell reveal">
+      <a class="reach-row" href="/projects/netflix">
+        <span class="reach-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18M17 3v18M3 7.5h4M3 12h18M3 16.5h4M17 7.5h4M17 16.5h4"/></svg></span>
+        <div class="reach-text"><span class="reach-label">FEATURED PROJECT</span><span class="reach-value">Netflix AI Recommender — 11 models benchmarked, +43% diversity at 99.96% genre precision</span></div>
+        <span class="reach-arrow">&#8599;</span>
+      </a>
+      <a class="reach-row" href="/projects/image-enhancer">
+        <span class="reach-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M5 3v4M3 5h4M19 17v4M17 19h4"/></svg></span>
+        <div class="reach-text"><span class="reach-label">FEATURED PROJECT</span><span class="reach-value">AI Image Enhancer — Real-ESRGAN super-resolution API, production-hardened</span></div>
+        <span class="reach-arrow">&#8599;</span>
+      </a>
+    </section>
+
+    <section class="about-split section-shell reveal">
+      <div class="reveal"><p class="section-kicker">EDUCATION</p><h2>M.Tech, Earth System Science &amp; Technology</h2><p>IIT Kharagpur &middot; 2019–2021</p><p>B.E., Mechanical Engineering &middot; SSGI, Bhilai &middot; 2012–2016</p></div>
+      <div class="reveal"><p class="section-kicker">RESEARCH</p><h2>Computer Vision, Centre of Excellence in AI</h2><p>IIT Kharagpur &middot; CNN for satellite image processing and upscaling &middot; 72% LULC prediction accuracy</p></div>
+    </section>
+
+    <section class="credentials section-shell reveal">
+      <div class="credential-main"><p class="section-kicker">CERTIFICATIONS &amp; WRITING</p><h2>Kept current, on purpose.</h2><p>Reinforcement Fine-Tuning LLMs with GRPO (DeepLearning.AI) &middot; Machine Learning Specialization (Stanford &amp; DeepLearning.AI) &middot; ongoing technical writing on generative AI and agentic engineering.</p></div>
+      <div class="credential-links">
+        <a href="https://medium.com/@akshay.bawali09" target="_blank" rel="noreferrer">&#9998; READ ON MEDIUM →</a>
+        <a href="/about">{'{ }'} FULL PROFILE →</a>
+      </div>
+    </section>
+
+    <section class="next-case reveal">
+      <p>OPEN TO SENIOR GENAI, ML ENGINEERING &amp; AI ARCHITECTURE ROLES.</p>
+      <a href="/reach">START A CONVERSATION &rarr;</a>
+    </section>
+  </main>
+</Page>
+
+<script>
+  import { SITE } from '@/lib/site';
+
+  // Fetch the PDF and hand the browser a blob with an explicit file name:
+  // that forces a save across Chrome/Firefox/Edge/Safari instead of opening
+  // the built-in viewer. If fetch fails, fall back to a plain download link.
+  const btn = document.getElementById('downloadResumeBtn') as HTMLButtonElement;
+  const note = document.getElementById('downloadResumeNote')!;
+  const FILE = 'Akshay_Bawaliwale_Resume.pdf';
+
+  const clickLink = (href: string, extra: Partial<HTMLAnchorElement> = {}) => {
+    const a = Object.assign(document.createElement('a'), { href, download: FILE, ...extra });
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  };
+
+  btn.addEventListener('click', async () => {
+    btn.disabled = true;
+    note.textContent = 'Preparing file…';
+    try {
+      const res = await fetch(SITE.resumePdf, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const url = URL.createObjectURL(await res.blob());
+      clickLink(url);
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      note.textContent = 'Saved to your device.';
+    } catch {
+      clickLink(SITE.resumePdf, { target: '_blank', rel: 'noopener' });
+      note.textContent = "If the download didn't start, use your browser's save option on the opened PDF.";
+    } finally {
+      btn.disabled = false;
+      setTimeout(() => { note.textContent = ''; }, 7000);
+    }
+  });
+</script>

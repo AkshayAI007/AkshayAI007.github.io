@@ -1,0 +1,24 @@
+---
+import { NAV, type NavRoute } from '@/lib/site';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  /** Destination marked aria-current in the primary nav. */
+  current: NavRoute;
+  /** v1 toggled `hidden` on the Ask button off the home page (CSS keeps it shown). */
+  askHidden?: boolean;
+}
+const { current, askHidden = false } = Astro.props;
+---
+
+<header class="site-header">
+  <a class="brand-mark" href="/" aria-label="AB, Akshay Bawaliwale: home"><span>AB</span><i></i></a>
+  <nav class="desktop-nav" id="mainNav" aria-label="Primary navigation">
+    {NAV.map((item) => <a href={item.href} data-route={item.route} aria-current={item.route === current ? 'page' : undefined}>{item.label}</a>)}
+  </nav>
+  <div class="nav-actions">
+    <button class="ask-nav" id="askNavBtn" data-ask-open hidden={askHidden}><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"></path></svg> ASK AKSHAY</button>
+    <ThemeToggle />
+    <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open navigation"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg></button>
+  </div>
+</header>

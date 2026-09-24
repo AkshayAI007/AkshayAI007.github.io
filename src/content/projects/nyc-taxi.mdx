@@ -1,0 +1,90 @@
+---
+title: NYC Taxi Trip Time Prediction
+description: Eight regressors compared on NYC taxi trips. Engineered geo and time features plus LightGBM lifted R² from a 0.55 linear baseline to 0.74, with a 2.84-minute MAE.
+order: 4
+icon: route
+chips:
+- label: REGRESSION
+  accent: true
+- label: TRANSPORTATION
+- label: A/04
+heading: Estimating how long a taxi ride will actually take,
+headingEm: before the meter starts.
+lede: A regression pipeline that predicts NYC taxi trip duration from pickup and drop-off details. Eight models compared; engineered geo and time features plus LightGBM lifted R² from a 0.55 linear baseline to 0.74.
+repo: https://github.com/AkshayAI007/NYC-TAXI-TRIP-TIME-PREDICTION
+cover:
+  image: ../../assets/images/photos/yellow-cabs.jpg
+  alt: Yellow cabs on a Manhattan avenue seen down the street
+  caption: PICKUP / DROP-OFF GEOMETRY · TEMPORAL FEATURES · REGRESSION
+stats:
+- value: '0.74'
+  label: R² · LightGBM
+- value: 2.84 min
+  label: Mean absolute error
+- value: 87%
+  label: Accuracy (1 − MAPE)
+- value: '8'
+  label: Regressors compared
+bench:
+  title: Every linear model hit the same ceiling.
+  meta: R² on the hold-out set
+  note: Four linear models landed on identical scores — the signal they needed wasn’t in the raw columns. Trees could use the engineered hour, weekday and distance features; boosting squeezed out the rest.
+  bars:
+    min: 0.4
+    max: 0.8
+    axis:
+    - '0.40'
+    - '0.50'
+    - '0.60'
+    - '0.70'
+    - '0.80'
+    rows:
+    - label: LightGBM
+      value: '0.74'
+      mark: win
+    - label: XGBoost
+      value: '0.73'
+    - label: Random Forest
+      value: '0.73'
+    - label: Decision Tree
+      value: '0.69'
+    - label: Linear
+      value: '0.55'
+      mark: flag
+      note: Baseline — distance alone is not enough
+    - label: Ridge
+      value: '0.55'
+    - label: Lasso
+      value: '0.55'
+    - label: Elastic Net
+      value: '0.55'
+flowTitle: From raw trip logs to a duration estimate.
+flow:
+- label: TRIP LOGS
+- label: FEATURE ENG.
+  hot: true
+- label: REGRESSION
+- label: DURATION ESTIMATE
+stack:
+- Python
+- Pandas
+- LightGBM
+- scikit-learn
+- Feature Engineering
+- Matplotlib
+usp: The city's geography and rhythm are the real predictors here — the model just has to be given features that can see them.
+cta: Read the feature engineering and the model comparison.
+orbit:
+  title: NYC Taxi Trip Time
+  tag: REGRESSION · MOBILITY
+  desc: Eight regressors compared. Geo and time features plus LightGBM lifted R² from a 0.55 linear baseline to 0.74.
+  metric: R² 0.74
+  tint: '#a2621c'
+---
+
+<Column kicker="THE PROBLEM" title="Trip duration depends on more than distance.">
+Two trips that cover the same straight-line distance can take very different amounts of time depending on the hour of day, the day of the week, and where in the city they start and end. A model that only sees raw coordinates and a timestamp has no way to capture that — the signal has to be engineered in.
+</Column>
+<Column kicker="THE APPROACH" title="Make the features carry the city's structure.">
+The pipeline derives haversine distance, pickup hour and day-of-week, and location-based groupings from the raw pickup/drop-off coordinates and timestamps, then compares regression models on top of that engineered feature set — treating feature design, not model selection, as the main lever on accuracy.
+</Column>

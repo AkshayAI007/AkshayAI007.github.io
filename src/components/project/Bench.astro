@@ -1,0 +1,24 @@
+---
+/** The benchmark figure on a project page: ranked bars from data, or a bespoke SVG. */
+import type { CollectionEntry } from 'astro:content';
+import NetflixScatter from './NetflixScatter.astro';
+import TilingDiagram from './TilingDiagram.astro';
+
+type Bench = CollectionEntry<'projects'>['data']['bench'];
+interface Props {
+  bench: Bench;
+}
+const { bench } = Astro.props;
+const bars = bench.bars;
+const width = (v: string) => (bars ? (((parseFloat(v) - bars.min) / (bars.max - bars.min)) * 100).toFixed(1) : '0');
+const FIGURES = { 'netflix-scatter': NetflixScatter, tiling: TilingDiagram };
+const Figure = bench.figure ? FIGURES[bench.figure] : null;
+---
+
+<figure class="bench reveal"><figcaption><b>{bench.title}</b><span>{bench.meta}</span></figcaption>{
+  bars && (
+    <>
+      <ol>{bars.rows.map((r, d) => <li class={r.mark}><span>{r.label}</span><i><b style={`--w:${width(r.value)}%;--d:${d}`}></b></i><strong>{r.value}</strong>{r.note && <em>{r.note}</em>}</li>)}</ol><div class="axis" aria-hidden="true">{bars.axis.map((a) => <span>{a}</span>)}</div>
+    </>
+  )
+}{Figure && <Figure />}{bench.note && <p class="note">{bench.note}</p>}</figure>

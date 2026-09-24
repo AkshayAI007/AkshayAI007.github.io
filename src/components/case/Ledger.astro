@@ -1,0 +1,14 @@
+---
+/** The outcome as a ledger; on narrow screens each row stacks with its column labels. */
+interface Props {
+  lede: string;
+  caption: string;
+  columns: string[];
+  rows: string[][];
+}
+const { lede, caption, columns, rows } = Astro.props;
+---
+
+<section class="case-ledger section-shell reveal"><p class="section-kicker">THE OUTCOME</p><p class="ledger-lede">{lede}</p>
+  <table class="ledger"><caption class="visually-hidden">{caption}</caption><thead><tr>{columns.map((c) => <th scope="col">{c}</th>)}</tr></thead><tbody>{rows.map(([head, ...cells]) => <tr><th scope="row">{head}</th>{cells.map((c, i) => <td data-label={columns[i + 1]}>{c}</td>)}</tr>)}</tbody></table>
+</section>

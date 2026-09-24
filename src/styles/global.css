@@ -1,0 +1,19 @@
+/* Main-site stylesheet entry (Page, CaseStudy layouts).
+   Order matters: fonts → tokens → Tailwind → the v1 component layers. */
+@import './fonts.css';
+@import './tokens.css';
+
+/* Tailwind v4 without Preflight: v1 ships its own base layer (01-base-chrome),
+   and Preflight's resets (img display:block, heading margins…) would move pixels. */
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+@import './theme.css';
+
+/* The v1 stylesheet, split at its section markers but otherwise verbatim. */
+@import './site/01-base-chrome.css';
+@import './site/02-home.css';
+@import './site/03-pages.css';
+@import './site/04-shot-motion.css';
+@import './site/05-proof.css';
+@import './site/06-transitions.css';
