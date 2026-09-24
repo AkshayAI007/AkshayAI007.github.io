@@ -45,6 +45,8 @@ export default function ImpactDeck() {
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const panels = useRef<(HTMLDivElement | null)[]>([]);
   const pending = useRef<{ index: number; focus: boolean } | null>(null);
+  /** Bumped on every selection; a running animation loop stops when it goes stale. */
+  const generation = useRef(0);
 
   const later = (fn: () => void, ms: number) => timers.current.push(window.setTimeout(fn, ms));
   const clear = () => {
@@ -69,9 +71,9 @@ export default function ImpactDeck() {
       p.querySelectorAll<HTMLElement>('.vr-pipe li').forEach((li, i) => li.style.setProperty('--s', String(i)));
       const el = p.querySelector<HTMLElement>('[data-to]')!;
       if (reduce.current) return;
-      const end = Number(el.dataset.to), t0 = performance.now() + 700, dur = 1500;
+      const end = Number(el.dataset.to), t0 = performance.now() + 700, dur = 1500, run = generation.current;
       const tick = (now: number) => {
-        if (!p.classList.contains('is-active')) return;
+        if (run !== generation.current) return;
         const k = Math.min(1, Math.max(0, (now - t0) / dur)), e = 1 - Math.pow(1 - k, 3);
         el.textContent = `${el.dataset.prefix}${Math.round(end * e)}${el.dataset.suffix}`;
         if (k < 1) requestAnimationFrame(tick);
@@ -93,11 +95,11 @@ export default function ImpactDeck() {
         ruler.style.setProperty('--t', '52%');
         return;
       }
-      const FIRST = 2600, t0 = performance.now();
+      const FIRST = 2600, t0 = performance.now(), run = generation.current;
       clock.textContent = '0.0s';
       ruler.style.setProperty('--t', '0%');
       const tick = (now: number) => {
-        if (!p.classList.contains('is-active')) return;
+        if (run !== generation.current) return;
         const ms = Math.min(FIRST, now - t0);
         clock.textContent = `${(ms / 1000).toFixed(1)}s`;
         ruler.style.setProperty('--t', `${(ms / 5000) * 100}%`);
@@ -123,6 +125,7 @@ export default function ImpactDeck() {
     const job = pending.current;
     if (!job) return;
     pending.current = null;
+    generation.current++;
     panels.current.forEach((p) => p?.classList.remove('is-active', 'is-played'));
     const p = panels.current[job.index]!;
     void p.offsetWidth; // restart CSS transitions

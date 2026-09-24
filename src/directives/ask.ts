@@ -6,38 +6,47 @@ import type { ClientDirective } from 'astro';
  * server-rendered and closed, so nothing is visible until then, and the React
  * runtime stays off the critical path of every page.
  *
- * A click that arrives before hydration finishes is recorded on
- * `window.__askQueued`; the island opens for it as soon as it mounts.
+ * Until the island announces it is listening (the `ask:ready` event, fired
+ * once its own click handler is attached), clicks on a trigger are recorded
+ * on `window.__askQueued` and replayed by the island when it mounts. A failed
+ * chunk load re-arms the directive, so the next intent retries.
  */
 const askDirective: ClientDirective = (load) => {
   const INTENT = ['pointerover', 'focusin', 'touchstart', 'pointerdown'] as const;
-  let started = false;
-  let hydrated = false;
+  let loading = false;
 
   const trigger = (e: Event) => (e.target instanceof Element ? e.target.closest('[data-ask-open]') : null);
 
+  const arm = () => INTENT.forEach((t) => document.addEventListener(t, onIntent, { capture: true, passive: true }));
+  const disarm = () => INTENT.forEach((t) => document.removeEventListener(t, onIntent, true));
+
   const start = async () => {
-    if (started) return;
-    started = true;
-    INTENT.forEach((t) => document.removeEventListener(t, onIntent, true));
-    const hydrate = await load();
-    await hydrate();
-    hydrated = true;
-    document.removeEventListener('click', onClick, true);
+    if (loading) return;
+    loading = true;
+    disarm();
+    try {
+      const hydrate = await load();
+      await hydrate();
+    } catch (err) {
+      loading = false;
+      arm();
+      console.warn('Ask Akshay failed to load; it will retry on the next interaction.', err);
+    }
   };
 
-  const onIntent = (e: Event) => {
+  function onIntent(e: Event) {
     if (trigger(e)) void start();
-  };
+  }
 
-  const onClick = (e: Event) => {
+  function onClick(e: Event) {
     const t = trigger(e);
-    if (!t || hydrated) return;
-    (window as Window & { __askQueued?: Element }).__askQueued = t;
+    if (!t) return;
+    window.__askQueued = t;
     void start();
-  };
+  }
 
-  INTENT.forEach((t) => document.addEventListener(t, onIntent, { capture: true, passive: true }));
+  window.addEventListener('ask:ready', () => document.removeEventListener('click', onClick, true), { once: true });
+  arm();
   document.addEventListener('click', onClick, true);
 };
 

@@ -42,6 +42,8 @@ export default function AskAkshay() {
       show(window.__askQueued);
       delete window.__askQueued;
     }
+    // Tell client:ask this handler is live, so it stops queueing clicks.
+    window.dispatchEvent(new Event('ask:ready'));
     return () => document.removeEventListener('click', onClick);
   }, [show]);
 
