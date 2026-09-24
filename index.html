@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -805,16 +803,182 @@ a.reach-row:hover .reach-value{color:var(--accent)}
 @media(max-width:1050px){.proof-board{grid-template-columns:1fr}.proof-lead{border-right:0;border-bottom:1px solid var(--line)}}
 @media(max-width:620px){.proof-grid{grid-template-columns:1fr}.proof-cell{border-right:0!important;border-bottom:1px solid var(--line)!important}.proof-grid>.proof-cell:last-child{border-bottom:0!important}}
 
-/* stack ticker */
-.stack-ticker{display:flex;align-items:center;gap:1.6rem;padding:1.1rem 0 1.1rem var(--gutter);border-bottom:1px solid var(--line);overflow:hidden}
-.stack-ticker>p{flex:none;font:500 var(--fs-micro)/1 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--flag)}
-.ticker-window{display:flex;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.ticker-track{display:flex;flex:none;gap:0;margin:0;padding:0;list-style:none;animation:ticker 48s linear infinite}
-.ticker-track li{padding:0 1.2rem;font:500 var(--fs-meta)/1 var(--font-mono);letter-spacing:.08em;color:var(--ink-2);white-space:nowrap;border-right:1px solid var(--line)}
-.stack-ticker:hover .ticker-track{animation-play-state:paused}
-@keyframes ticker{to{transform:translateX(-100%)}}
-@media(max-width:620px){.stack-ticker{flex-direction:column;align-items:flex-start;gap:.8rem;padding-right:0}}
-@media(prefers-reduced-motion:reduce){.ticker-track{animation:none!important;flex-wrap:wrap;row-gap:.6rem}.ticker-track[aria-hidden]{display:none}.ticker-window{mask-image:none;-webkit-mask-image:none}}
+/* ── impact deck: one outcome, four instruments, one on stage at a time ── */
+.impact{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.impact-head{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);grid-template-areas:"k k" "t a";align-items:end;gap:1.1rem clamp(2rem,5vw,5rem);
+  padding:clamp(2.4rem,5vw,4rem) var(--gutter) clamp(2rem,4vw,3rem);border-bottom:1px solid var(--line)}
+.impact-head .proof-kicker{grid-area:k;margin:0}
+.impact-title{grid-area:t;margin:0;font-family:var(--font-serif);font-weight:300;font-size:clamp(2.4rem,1.2rem + 4.2vw,4.8rem);line-height:.98;letter-spacing:-.025em;color:var(--ink)}
+.impact-title em{font-style:italic;color:var(--accent-2)}
+.impact-aside{grid-area:a;display:flex;flex-direction:column;gap:1.1rem;padding-bottom:.4rem}
+.impact-aside p{margin:0;max-width:38ch;color:var(--ink-2);font-size:var(--fs-small);line-height:1.6}
+
+.impact-deck{--dwell:7s;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr)}
+.impact-tabs{display:flex;flex-direction:column;border-right:1px solid var(--line)}
+.impact-tab{position:relative;display:grid;grid-template-columns:2.6rem 1fr;grid-template-areas:"i l" "i v";gap:.45rem .2rem;align-content:center;
+  flex:1;min-height:7rem;padding:1.3rem clamp(1rem,2.4vw,2.2rem) 1.3rem var(--gutter);text-align:left;color:var(--ink-3);
+  background:none;border:0;border-bottom:1px solid var(--line);cursor:pointer;font:inherit;
+  transition:background var(--dur-3) var(--ease-out),color var(--dur-3) var(--ease-out)}
+.impact-tab:last-child{border-bottom:0}
+.it-idx{grid-area:i;font:500 var(--fs-micro)/1.6 var(--font-mono);letter-spacing:.12em}
+.it-label{grid-area:l;font:500 var(--fs-micro)/1.4 var(--font-mono);letter-spacing:.14em;text-transform:uppercase}
+.it-value{grid-area:v;font-family:var(--font-serif);font-weight:300;font-size:clamp(1.45rem,1rem + 1.1vw,2rem);line-height:1.05;letter-spacing:-.01em;color:var(--ink-2);transition:color var(--dur-3) var(--ease-out),transform var(--dur-3) var(--ease-out);transform-origin:left}
+.impact-tab:hover{background:color-mix(in srgb,var(--ink) 3%,transparent)}
+.impact-tab:hover .it-value{color:var(--ink)}
+.impact-tab[aria-selected="true"]{color:var(--ink-2);background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.impact-tab[aria-selected="true"] .it-idx{color:var(--flag)}
+.impact-tab[aria-selected="true"] .it-value{color:var(--ink);transform:translateX(4px)}
+.impact-tab:focus-visible{outline:1px solid var(--accent);outline-offset:-1px}
+/* left rule + dwell progress on the active row */
+.impact-tab::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--line)}
+.it-progress{position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);transform:scaleY(0);transform-origin:top}
+.impact-tab[aria-selected="true"] .it-progress{transform:scaleY(1)}
+.impact-deck.is-auto .impact-tab[aria-selected="true"] .it-progress{animation:it-dwell var(--dwell) linear forwards}
+.impact-deck.is-paused .it-progress{animation-play-state:paused!important}
+@keyframes it-dwell{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+
+.impact-stage{position:relative;display:grid;min-height:28rem;overflow:hidden}
+.impact-stage::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;
+  -webkit-mask-image:radial-gradient(120% 90% at 85% 10%,#000,transparent 70%);mask-image:radial-gradient(120% 90% at 85% 10%,#000,transparent 70%)}
+.impact-panel{grid-area:1/1;position:relative;display:flex;flex-direction:column;gap:1.4rem;padding:clamp(1.8rem,3.6vw,3.2rem) var(--gutter) clamp(1.8rem,3.6vw,3.2rem) clamp(1.6rem,4vw,3.6rem)}
+.impact-panel[hidden]{display:flex;visibility:hidden}
+.impact-panel>*{opacity:0;transform:translateY(14px);transition:opacity .5s var(--ease-out),transform .6s var(--ease-out)}
+.impact-panel.is-active>*{opacity:1;transform:none}
+.impact-panel.is-active>:nth-child(2){transition-delay:.06s}
+.impact-panel.is-active>:nth-child(3){transition-delay:.12s}
+.impact-panel.is-active>:nth-child(4){transition-delay:.2s}
+.ip-kicker{margin:0;font:500 var(--fs-micro)/1.4 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.ip-value{display:flex;align-items:baseline;flex-wrap:wrap;gap:.2ch .5ch;margin:0;font-variant-numeric:tabular-nums lining-nums}
+.ip-value strong{font-family:var(--font-serif);font-weight:300;font-size:clamp(3.4rem,2rem + 5vw,6.2rem);line-height:.9;letter-spacing:-.035em;color:var(--ink)}
+.ip-value s{font-family:var(--font-serif);font-weight:300;font-size:clamp(1.6rem,1.2rem + 1.4vw,2.5rem);color:var(--ink-3);text-decoration-thickness:1px;text-decoration-color:var(--flag)}
+.ip-arrow{color:var(--accent);font-size:1.4rem}
+.ip-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:auto 0 0;padding:0;list-style:none}
+.ip-chips li{padding:.5rem .8rem;border:1px solid var(--line);font:500 var(--fs-micro)/1 var(--font-mono);letter-spacing:.08em;color:var(--ink-3)}
+.ip-chips b{font-weight:500;color:var(--ink)}
+
+/* 01 · 48 hour-bars that collapse into a three-minute sliver */
+.viz-hours{max-width:620px}
+.vh-bars{position:relative;display:grid;grid-template-columns:repeat(48,1fr);gap:3px;align-items:end;height:84px}
+.vh-bars i{height:100%;background:var(--ink-3);opacity:.45;transform-origin:bottom;transition:transform .5s var(--ease-out),opacity .5s var(--ease-out),background .5s;transition-delay:calc((47 - var(--h)) * 22ms + .5s)}
+.is-played .vh-bars i{opacity:1;background:transparent;box-shadow:inset 0 0 0 1px var(--line)}
+.vh-now{position:absolute;left:0;bottom:0;width:calc((100% - 141px) / 48);height:5%;min-height:3px;background:var(--accent);box-shadow:0 0 14px 2px var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease-spring) 1.9s}
+.is-played .vh-now{transform:none}
+.vh-now span{position:absolute;left:0;bottom:calc(100% + 26px);padding-left:8px;border-left:1px solid var(--accent);white-space:nowrap;font:500 10px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);opacity:0;transition:opacity .4s 2.2s}
+.vh-now span::after{content:"";position:absolute;left:-1px;top:100%;height:26px;border-left:1px solid var(--accent)}
+.is-played .vh-now span{opacity:1}
+.vh-axis{display:flex;justify-content:space-between;margin-top:.7rem}
+.vh-axis em{font:500 10px/1 var(--font-mono);font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+
+/* 02 · agent console that streams its first token inside the budget */
+.viz-stream{max-width:620px;border:1px solid var(--line);background:color-mix(in srgb,var(--ground) 70%,transparent)}
+.vs-bar{display:flex;justify-content:space-between;padding:.6rem .9rem;border-bottom:1px solid var(--line);font:500 11px/1 var(--font-mono);letter-spacing:.08em;color:var(--ink-3)}
+.vs-clock{color:var(--accent);font-variant-numeric:tabular-nums}
+.vs-q{margin:0;padding:.9rem .9rem .3rem;font:400 var(--fs-meta)/1.5 var(--font-mono);color:var(--ink)}
+.vs-tools{display:flex;flex-wrap:wrap;gap:.35rem;margin:0;padding:.3rem .9rem}
+.vs-tools span{padding:.25rem .5rem;border:1px solid var(--line);font:500 10px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);transition:color .25s,border-color .25s,background .25s}
+.vs-tools span.on{color:var(--accent-ink);background:var(--accent);border-color:var(--accent)}
+.vs-out{min-height:3.2em;margin:0;padding:.5rem .9rem .9rem;font:400 var(--fs-meta)/1.6 var(--font-sans);color:var(--ink-2)}
+.vs-caret{display:inline-block;width:.5em;height:1em;margin-left:2px;vertical-align:-.12em;background:var(--accent);animation:vs-blink 1s steps(1) infinite}
+@keyframes vs-blink{50%{opacity:0}}
+.vs-ruler{padding:.2rem .9rem .9rem}
+.vs-ruler>i{position:relative;display:block;height:4px;background:var(--line)}
+.vs-ruler b{position:absolute;inset:0 auto 0 0;width:var(--t,0%);background:var(--accent)}
+.vs-ruler u{position:absolute;left:60%;top:-6px;bottom:-6px;width:1px;background:var(--flag);text-decoration:none}
+.vs-ruler u span{position:absolute;left:6px;top:-12px;white-space:nowrap;font:500 9px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--flag)}
+.vs-ruler>span{display:flex;justify-content:space-between;margin-top:.5rem}
+.vs-ruler em{font:500 10px/1 var(--font-mono);font-style:normal;color:var(--ink-3)}
+
+/* 03 · retrieval pipeline + 100 answers, graded */
+.viz-rag{display:grid;grid-template-columns:auto 1fr;gap:.9rem 2rem;align-items:start;max-width:640px}
+.vr-pipe{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:0;margin:0;padding:0;list-style:none;counter-reset:vr}
+.vr-pipe li{position:relative;padding:.45rem .8rem;border:1px solid var(--line);margin-right:1.4rem;font:500 10px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);transition:color .3s,border-color .3s}
+.vr-pipe li:not(:last-child)::after{content:"";position:absolute;left:100%;top:50%;width:1.4rem;height:1px;background:var(--line-2)}
+.is-played .vr-pipe li{color:var(--ink);border-color:var(--accent);transition-delay:calc(var(--s) * 180ms + .2s)}
+.vr-grid{display:grid;grid-template-columns:repeat(10,14px);gap:4px}
+.vr-grid i{width:14px;height:14px;background:var(--line);transform:scale(.5);transition:transform .35s var(--ease-spring),background .35s;transition-delay:calc(var(--d) * 45ms + .9s)}
+.is-played .vr-grid i{background:var(--accent);transform:none}
+.is-played .vr-grid i.miss{background:transparent;box-shadow:inset 0 0 0 1px var(--flag)}
+.vr-legend{display:flex;flex-direction:column;gap:.6rem;margin:0;align-self:end}
+.vr-legend span{display:flex;align-items:center;gap:.6rem;font:500 10px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.vr-legend i{width:10px;height:10px;background:var(--accent)}
+.vr-legend i.miss{background:none;box-shadow:inset 0 0 0 1px var(--flag)}
+
+/* 04 · four hand-offs pulled together by one agent */
+.viz-ads{display:grid;gap:1.4rem;max-width:640px;padding-top:.4rem}
+.va-row{display:grid;grid-template-columns:4.2rem 1fr;gap:.55rem 1rem;align-items:center}
+.va-row em{font:500 10px/1 var(--font-mono);font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.va-row small{grid-column:2;font:500 10px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.va-after small{color:var(--accent)}
+.va-track{display:flex;align-items:center;min-width:0}
+.va-track span{flex:none;padding:.4rem .6rem;border:1px solid var(--line-2);font:500 10px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transition:color .3s,border-color .3s,background .3s}
+.va-gap{flex:1 1 0;min-width:10px;height:0;border-top:1px dashed var(--line-2)}
+.va-after .va-gap{border-top:1px solid var(--line-2);transition:flex-grow 1s var(--ease-out) .35s,border-color .4s 1.2s}
+.is-played .va-after .va-gap{flex-grow:0;border-color:var(--accent)}
+.is-played .va-after span{color:var(--accent-ink);background:var(--accent);border-color:var(--accent);transition-delay:calc(var(--k) * 150ms + 1.25s)}
+
+@media(max-width:900px){
+  .impact-head{grid-template-columns:1fr;grid-template-areas:"k" "t" "a"}
+  .impact-deck{grid-template-columns:1fr}
+  .impact-tabs{display:grid;grid-template-columns:1fr 1fr;border-right:0;border-bottom:1px solid var(--line)}
+  .impact-tab{min-height:0;padding:1rem 1rem 1rem 1.2rem;grid-template-columns:1fr;grid-template-areas:"i" "l" "v";border-bottom:1px solid var(--line)}
+  .impact-tab:nth-child(odd){border-right:1px solid var(--line)}
+  .impact-tab:nth-last-child(-n+2){border-bottom:0}
+  .it-label{font-size:10px;letter-spacing:.1em}
+  .it-value{font-size:1.3rem}
+  .impact-tab::before,.it-progress{left:0;right:0;top:auto;bottom:0;width:auto;height:2px}
+  .it-progress{transform:scaleX(0);transform-origin:left}
+  .impact-tab[aria-selected="true"] .it-progress{transform:scaleX(1)}
+  .impact-deck.is-auto .impact-tab[aria-selected="true"] .it-progress{animation-name:it-dwell-x}
+  .impact-tab[aria-selected="true"] .it-value{transform:none}
+  .impact-stage{min-height:0}
+  .impact-panel[hidden]{display:none}
+  .impact-tab::before{background:transparent}
+  .impact-panel{padding:1.8rem var(--gutter) 2.2rem}
+}
+@keyframes it-dwell-x{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media(max-width:560px){
+  .viz-rag{grid-template-columns:1fr}
+  .vr-grid{grid-template-columns:repeat(10,1fr);max-width:260px}.vr-grid i{width:auto;aspect-ratio:1;height:auto}
+  .vr-legend{flex-direction:row;gap:1.2rem}
+  .vh-bars{gap:2px;height:64px}
+  .va-row{grid-template-columns:3.4rem 1fr}
+  .va-track span{padding:.35rem .4rem;font-size:9px;letter-spacing:.06em}
+}
+@media(prefers-reduced-motion:reduce){.vs-caret{animation:none}}
+
+/* ── stack marquee: two counter-running rows, grouped by layer ── */
+.stack-marquee{display:grid;grid-template-columns:minmax(12rem,.5fr) minmax(0,2fr);align-items:center;border-bottom:1px solid var(--line)}
+.sm-head{display:flex;flex-direction:column;gap:.8rem;padding:1.8rem 1.6rem 1.8rem var(--gutter);border-right:1px solid var(--line);align-self:stretch;justify-content:center}
+.sm-head .proof-kicker{margin:0}
+.sm-count{margin:0;max-width:18ch;font:400 var(--fs-meta)/1.5 var(--font-sans);color:var(--ink-3)}
+.sm-count b{font-family:var(--font-serif);font-weight:300;font-size:1.9rem;line-height:1;color:var(--ink);margin-right:.2ch;vertical-align:-.12em}
+.sm-rows{display:grid;gap:.9rem;min-width:0;padding:1.4rem 0;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.sm-row{display:flex;width:max-content}
+.sm-track{display:flex;flex:none;margin:0;padding:0;list-style:none;animation:sm-scroll 58s linear infinite}
+.sm-row--rev .sm-track{animation-duration:66s;animation-direction:reverse}
+.stack-marquee:hover .sm-track{animation-play-state:paused}
+@keyframes sm-scroll{to{transform:translateX(-100%)}}
+.sm-group{display:flex;align-items:center;gap:.5rem;padding-right:2.6rem}
+.sm-group em{display:inline-flex;align-items:center;gap:.7ch;margin-right:.5rem;font:500 10px/1 var(--font-mono);font-style:normal;letter-spacing:.16em;text-transform:uppercase;color:var(--flag);white-space:nowrap}
+.sm-group em::before{content:"";width:14px;height:1px;background:currentColor}
+.sm-chip{padding:.5rem 1rem .55rem;border:1px solid var(--line);border-radius:999px;font:300 1.15rem/1 var(--font-serif);letter-spacing:-.005em;color:var(--ink);white-space:nowrap;
+  transition:opacity var(--dur-2) var(--ease-out),border-color var(--dur-2),color var(--dur-2),background var(--dur-2),transform var(--dur-2) var(--ease-out)}
+.sm-rows:hover .sm-chip{opacity:.4}
+.sm-rows .sm-chip:hover{opacity:1;color:var(--accent-2);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);transform:translateY(-2px)}
+@media(max-width:900px){
+  .stack-marquee{grid-template-columns:1fr}
+  .sm-head{gap:.6rem;padding:1.6rem var(--gutter) 0;border-right:0}
+  .sm-count{max-width:none}
+  .sm-chip{font-size:1rem;padding:.45rem .85rem .5rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .sm-rows{mask-image:none;-webkit-mask-image:none;padding:1.4rem var(--gutter)}
+  .sm-row{width:auto}
+  .sm-track{animation:none!important;flex-wrap:wrap;row-gap:.7rem}
+  .sm-track[aria-hidden]{display:none}
+}
 
 /* system cards: topology thumbnails instead of stock photography */
 .topo{height:100%;aspect-ratio:4/5;margin:0;display:grid;place-items:center;background:var(--ground-2);border:1px solid var(--line);transition:border-color var(--dur-3)}
@@ -1017,26 +1181,80 @@ a.reach-row:hover .reach-value{color:var(--accent)}
     <div class="hero-index">AKSHAY BAWALIWALE <span>©26</span></div>
   </section>
 
-  <section class="proof-board reveal" aria-label="Measured outcomes">
-    <div class="proof-lead">
+  <section class="impact reveal" id="impact" aria-labelledby="impactTitle">
+    <header class="impact-head">
       <p class="proof-kicker">Business outcome</p>
-      <p class="proof-lead-title">Won a major enterprise contract.</p>
-      <p class="proof-lead-note">On the Voice AI proof of concept I scoped and demoed &mdash; then built into the system below.</p>
-      <a href="#/case/voice-ai" class="proof-link">READ THE CASE STUDY <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <h2 class="impact-title" id="impactTitle">Won a major <em>enterprise contract.</em></h2>
+      <div class="impact-aside">
+        <p>With the Voice AI proof of concept I scoped, demoed &mdash; then shipped. Four systems, measured in production:</p>
+        <a href="#/case/voice-ai" class="proof-link">READ THE CASE STUDY <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </header>
+
+    <div class="impact-deck" id="impactDeck">
+      <div class="impact-tabs" role="tablist" aria-label="Measured outcomes">
+        <button type="button" class="impact-tab" role="tab" id="impTab0" aria-controls="impPanel0" aria-selected="true" tabindex="0"><span class="it-idx">01</span><span class="it-label">Service queue · Voice AI</span><span class="it-value">2 days &rarr; 3 min</span><i class="it-progress" aria-hidden="true"></i></button>
+        <button type="button" class="impact-tab" role="tab" id="impTab1" aria-controls="impPanel1" aria-selected="false" tabindex="-1"><span class="it-idx">02</span><span class="it-label">Time to first token · ReAct agent</span><span class="it-value">&lt;3s</span><i class="it-progress" aria-hidden="true"></i></button>
+        <button type="button" class="impact-tab" role="tab" id="impTab2" aria-controls="impPanel2" aria-selected="false" tabindex="-1"><span class="it-idx">03</span><span class="it-label">Output accuracy · hybrid RAG</span><span class="it-value">&gt;95%</span><i class="it-progress" aria-hidden="true"></i></button>
+        <button type="button" class="impact-tab" role="tab" id="impTab3" aria-controls="impPanel3" aria-selected="false" tabindex="-1"><span class="it-idx">04</span><span class="it-label">Ad delivery · Google &amp; Meta agent</span><span class="it-value">days &rarr; &lt;10 min</span><i class="it-progress" aria-hidden="true"></i></button>
+      </div>
+
+      <div class="impact-stage">
+        <div class="impact-panel is-active" role="tabpanel" id="impPanel0" aria-labelledby="impTab0" data-kind="queue">
+          <p class="ip-kicker">Service-queue latency &middot; multi-agent voice care</p>
+          <p class="ip-value"><s>2 days</s><span class="ip-arrow" aria-hidden="true">&rarr;</span><strong data-steps="2 days|1 day|12 h|3 h|40 min|3 min">3 min</strong></p>
+          <div class="viz-hours" aria-hidden="true">
+            <div class="vh-bars"><i style="--h:0"></i><i style="--h:1"></i><i style="--h:2"></i><i style="--h:3"></i><i style="--h:4"></i><i style="--h:5"></i><i style="--h:6"></i><i style="--h:7"></i><i style="--h:8"></i><i style="--h:9"></i><i style="--h:10"></i><i style="--h:11"></i><i style="--h:12"></i><i style="--h:13"></i><i style="--h:14"></i><i style="--h:15"></i><i style="--h:16"></i><i style="--h:17"></i><i style="--h:18"></i><i style="--h:19"></i><i style="--h:20"></i><i style="--h:21"></i><i style="--h:22"></i><i style="--h:23"></i><i style="--h:24"></i><i style="--h:25"></i><i style="--h:26"></i><i style="--h:27"></i><i style="--h:28"></i><i style="--h:29"></i><i style="--h:30"></i><i style="--h:31"></i><i style="--h:32"></i><i style="--h:33"></i><i style="--h:34"></i><i style="--h:35"></i><i style="--h:36"></i><i style="--h:37"></i><i style="--h:38"></i><i style="--h:39"></i><i style="--h:40"></i><i style="--h:41"></i><i style="--h:42"></i><i style="--h:43"></i><i style="--h:44"></i><i style="--h:45"></i><i style="--h:46"></i><i style="--h:47"></i><b class="vh-now"><span>now &middot; 3 min</span></b></div>
+            <div class="vh-axis"><em>0 h</em><em>each outline = one hour of the old queue</em><em>48 h</em></div>
+          </div>
+          <ul class="ip-chips"><li><b>&minus;99.9%</b> queue latency</li><li><b>87.5%</b> faster fulfilment</li></ul>
+        </div>
+
+        <div class="impact-panel" role="tabpanel" id="impPanel1" aria-labelledby="impTab1" data-kind="stream" hidden>
+          <p class="ip-kicker">Time to first token &middot; ReAct agent</p>
+          <p class="ip-value"><strong>&lt;3s</strong></p>
+          <div class="viz-stream" aria-hidden="true">
+            <div class="vs-bar"><span>agent.run()</span><span class="vs-clock">0.0s</span></div>
+            <p class="vs-q">&rsaquo; Why did this dental clinic&rsquo;s inbound calls drop this month?</p>
+            <p class="vs-tools"><span>crm</span><span>ads</span><span>reviews</span><span>listings</span><span>web</span></p>
+            <p class="vs-out"><span class="vs-text"></span><i class="vs-caret"></i></p>
+            <div class="vs-ruler"><i><b></b><u><span>3s budget</span></u></i><span><em>0s</em><em>1</em><em>2</em><em>3</em><em>4</em><em>5s</em></span></div>
+          </div>
+          <ul class="ip-chips"><li><b>3M+</b> US SMBs</li><li><b>10</b> tools</li><li><b>10</b> data sources</li></ul>
+        </div>
+
+        <div class="impact-panel" role="tabpanel" id="impPanel2" aria-labelledby="impTab2" data-kind="grid" hidden>
+          <p class="ip-kicker">Output accuracy &middot; hybrid retrieval</p>
+          <p class="ip-value"><strong data-to="95" data-prefix="&gt;" data-suffix="%">&gt;95%</strong></p>
+          <div class="viz-rag" aria-hidden="true">
+            <ol class="vr-pipe"><li>Query</li><li>Keyword + vector</li><li>Re-rank</li><li>Grounded answer</li></ol>
+            <div class="vr-grid"><i style="--d:0"></i><i style="--d:1"></i><i style="--d:2"></i><i style="--d:3"></i><i style="--d:4"></i><i style="--d:5"></i><i style="--d:6"></i><i style="--d:7"></i><i style="--d:8"></i><i style="--d:9"></i><i style="--d:1"></i><i style="--d:2"></i><i style="--d:3"></i><i style="--d:4"></i><i style="--d:5"></i><i style="--d:6"></i><i style="--d:7"></i><i style="--d:8"></i><i style="--d:9"></i><i style="--d:10"></i><i style="--d:2"></i><i style="--d:3"></i><i style="--d:4"></i><i class="miss" style="--d:5"></i><i style="--d:6"></i><i style="--d:7"></i><i style="--d:8"></i><i style="--d:9"></i><i style="--d:10"></i><i style="--d:11"></i><i style="--d:3"></i><i style="--d:4"></i><i style="--d:5"></i><i style="--d:6"></i><i style="--d:7"></i><i style="--d:8"></i><i style="--d:9"></i><i style="--d:10"></i><i style="--d:11"></i><i style="--d:12"></i><i style="--d:4"></i><i style="--d:5"></i><i style="--d:6"></i><i style="--d:7"></i><i style="--d:8"></i><i style="--d:9"></i><i style="--d:10"></i><i class="miss" style="--d:11"></i><i style="--d:12"></i><i style="--d:13"></i><i style="--d:5"></i><i style="--d:6"></i><i style="--d:7"></i><i style="--d:8"></i><i style="--d:9"></i><i style="--d:10"></i><i style="--d:11"></i><i style="--d:12"></i><i style="--d:13"></i><i style="--d:14"></i><i style="--d:6"></i><i style="--d:7"></i><i style="--d:8"></i><i style="--d:9"></i><i style="--d:10"></i><i style="--d:11"></i><i style="--d:12"></i><i style="--d:13"></i><i style="--d:14"></i><i style="--d:15"></i><i style="--d:7"></i><i class="miss" style="--d:8"></i><i style="--d:9"></i><i style="--d:10"></i><i style="--d:11"></i><i style="--d:12"></i><i style="--d:13"></i><i style="--d:14"></i><i style="--d:15"></i><i style="--d:16"></i><i style="--d:8"></i><i style="--d:9"></i><i style="--d:10"></i><i style="--d:11"></i><i style="--d:12"></i><i style="--d:13"></i><i style="--d:14"></i><i style="--d:15"></i><i class="miss" style="--d:16"></i><i style="--d:17"></i><i style="--d:9"></i><i style="--d:10"></i><i style="--d:11"></i><i style="--d:12"></i><i style="--d:13"></i><i style="--d:14"></i><i style="--d:15"></i><i style="--d:16"></i><i style="--d:17"></i><i style="--d:18"></i></div>
+            <p class="vr-legend"><span><i></i>correct</span><span><i class="miss"></i>miss</span></p>
+          </div>
+          <ul class="ip-chips"><li><b>Hybrid</b> search</li><li><b>Re-ranked</b> over SMB records</li></ul>
+        </div>
+
+        <div class="impact-panel" role="tabpanel" id="impPanel3" aria-labelledby="impTab3" data-kind="ads" hidden>
+          <p class="ip-kicker">Ad delivery &middot; Google &amp; Meta ads agent</p>
+          <p class="ip-value"><s>days</s><span class="ip-arrow" aria-hidden="true">&rarr;</span><strong data-steps="days|1 day|6 h|1 h|&lt;10 min">&lt;10 min</strong></p>
+          <div class="viz-ads" aria-hidden="true">
+            <div class="va-row va-before"><em>Before</em><div class="va-track"><span style="--k:0">Brief</span><i class="va-gap"></i><span style="--k:1">Creative</span><i class="va-gap"></i><span style="--k:2">Audience</span><i class="va-gap"></i><span style="--k:3">Launch</span></div><small>days of manual hand-offs</small></div>
+            <div class="va-row va-after"><em>Agent</em><div class="va-track"><span style="--k:0">Brief</span><i class="va-gap"></i><span style="--k:1">Creative</span><i class="va-gap"></i><span style="--k:2">Audience</span><i class="va-gap"></i><span style="--k:3">Launch</span></div><small>one run &middot; &lt;10 min</small></div>
+          </div>
+          <ul class="ip-chips"><li><b>2,000+</b> SMB ad accounts</li><li><b>Google</b> + <b>Meta</b></li></ul>
+        </div>
+      </div>
     </div>
-    <dl class="proof-grid">
-      <div class="proof-cell"><dt>Service-queue latency · Voice AI</dt><dd class="proof-value"><span class="pv-from">2 days</span><span class="pv-arrow" aria-hidden="true">&rarr;</span><strong aria-hidden="true" data-seq="2 days|1 day|12 h|3 h|40 min|3 min">3 min</strong><span class="visually-hidden">from 2 days to 3 minutes</span></dd><dd class="viz-collapse" aria-hidden="true" style="--after:1.5%"><span class="vc-row"><em>BEFORE</em><i><b></b></i></span><span class="vc-row vc-after"><em>AFTER</em><i><b></b></i></span></dd><dd class="proof-foot">&minus;99.9% queue latency · 87.5% faster fulfilment</dd></div>
-      <div class="proof-cell"><dt>Time to first token · ReAct agent</dt><dd class="proof-value"><strong>&lt;3s</strong></dd><dd class="viz-ruler" aria-hidden="true" style="--fill:54%;--mark:60%"><i><b></b><u></u></i><span><em>0s</em><em>1</em><em>2</em><em>3</em><em>4</em><em>5s</em></span></dd><dd class="proof-foot">Across 3M+ US SMBs · 10 tools · 10 data sources</dd></div>
-      <div class="proof-cell"><dt>Output accuracy · hybrid retrieval</dt><dd class="proof-value"><strong aria-hidden="true" data-count="95" data-prefix="&gt;" data-suffix="%">&gt;95%</strong><span class="visually-hidden">more than 95 percent</span></dd><dd class="viz-dots" aria-hidden="true"><i style="--d:0"></i><i style="--d:1"></i><i style="--d:2"></i><i style="--d:3"></i><i style="--d:4"></i><i style="--d:5"></i><i style="--d:6"></i><i style="--d:7"></i><i style="--d:8"></i><i style="--d:9"></i><i style="--d:10"></i><i style="--d:11"></i><i style="--d:12"></i><i style="--d:13"></i><i style="--d:14"></i><i style="--d:15"></i><i style="--d:16"></i><i style="--d:17"></i><i style="--d:18"></i><i class="miss" style="--d:19"></i></dd><dd class="proof-foot">Hybrid search + re-ranking over SMB records</dd></div>
-      <div class="proof-cell"><dt>Ad delivery · Google &amp; Meta ads agent</dt><dd class="proof-value"><span class="pv-from">days</span><span class="pv-arrow" aria-hidden="true">&rarr;</span><strong aria-hidden="true" data-seq="days|1 day|6 h|1 h|&lt;10 min">&lt;10 min</strong><span class="visually-hidden">from days to under 10 minutes</span></dd><dd class="viz-collapse" aria-hidden="true" style="--after:1%"><span class="vc-row"><em>BEFORE</em><i><b></b></i></span><span class="vc-row vc-after"><em>AFTER</em><i><b></b></i></span></dd><dd class="proof-foot">Across 2,000+ SMB ad accounts</dd></div>
-    </dl>
   </section>
 
-  <section class="stack-ticker" aria-label="Production stack">
-    <p>In production with</p>
-    <div class="ticker-window">
-      <ul class="ticker-track"><li>LangGraph</li><li>CrewAI</li><li>Claude SDK</li><li>Pydantic</li><li>MCP</li><li>LiveKit</li><li>Twilio SIP</li><li>Salesforce</li><li>LlamaIndex</li><li>Pinecone</li><li>FAISS</li><li>LangSmith</li><li>MLflow</li><li>FastAPI</li><li>AWS</li><li>Vertex AI</li><li>Docker</li></ul>
-      <ul class="ticker-track" aria-hidden="true"><li>LangGraph</li><li>CrewAI</li><li>Claude SDK</li><li>Pydantic</li><li>MCP</li><li>LiveKit</li><li>Twilio SIP</li><li>Salesforce</li><li>LlamaIndex</li><li>Pinecone</li><li>FAISS</li><li>LangSmith</li><li>MLflow</li><li>FastAPI</li><li>AWS</li><li>Vertex AI</li><li>Docker</li></ul>
+  <section class="stack-marquee" aria-labelledby="stackTitle">
+    <div class="sm-head">
+      <p class="proof-kicker" id="stackTitle">In production with</p>
+      <p class="sm-count"><b>17</b> tools across five layers of the stack</p>
+    </div>
+    <div class="sm-rows">
+      <div class="sm-row"><ul class="sm-track"><li class="sm-group"><em>Orchestration</em><span class="sm-chip">LangGraph</span><span class="sm-chip">CrewAI</span><span class="sm-chip">Claude SDK</span><span class="sm-chip">MCP</span><span class="sm-chip">Pydantic</span></li><li class="sm-group"><em>Voice &amp; CRM</em><span class="sm-chip">LiveKit</span><span class="sm-chip">Twilio SIP</span><span class="sm-chip">Salesforce</span></li></ul><ul class="sm-track" aria-hidden="true"><li class="sm-group"><em>Orchestration</em><span class="sm-chip">LangGraph</span><span class="sm-chip">CrewAI</span><span class="sm-chip">Claude SDK</span><span class="sm-chip">MCP</span><span class="sm-chip">Pydantic</span></li><li class="sm-group"><em>Voice &amp; CRM</em><span class="sm-chip">LiveKit</span><span class="sm-chip">Twilio SIP</span><span class="sm-chip">Salesforce</span></li></ul><ul class="sm-track" aria-hidden="true"><li class="sm-group"><em>Orchestration</em><span class="sm-chip">LangGraph</span><span class="sm-chip">CrewAI</span><span class="sm-chip">Claude SDK</span><span class="sm-chip">MCP</span><span class="sm-chip">Pydantic</span></li><li class="sm-group"><em>Voice &amp; CRM</em><span class="sm-chip">LiveKit</span><span class="sm-chip">Twilio SIP</span><span class="sm-chip">Salesforce</span></li></ul></div>
+      <div class="sm-row sm-row--rev"><ul class="sm-track"><li class="sm-group"><em>Retrieval</em><span class="sm-chip">LlamaIndex</span><span class="sm-chip">Pinecone</span><span class="sm-chip">FAISS</span></li><li class="sm-group"><em>Evaluation</em><span class="sm-chip">LangSmith</span><span class="sm-chip">MLflow</span></li><li class="sm-group"><em>Serving &amp; cloud</em><span class="sm-chip">FastAPI</span><span class="sm-chip">AWS</span><span class="sm-chip">Vertex AI</span><span class="sm-chip">Docker</span></li></ul><ul class="sm-track" aria-hidden="true"><li class="sm-group"><em>Retrieval</em><span class="sm-chip">LlamaIndex</span><span class="sm-chip">Pinecone</span><span class="sm-chip">FAISS</span></li><li class="sm-group"><em>Evaluation</em><span class="sm-chip">LangSmith</span><span class="sm-chip">MLflow</span></li><li class="sm-group"><em>Serving &amp; cloud</em><span class="sm-chip">FastAPI</span><span class="sm-chip">AWS</span><span class="sm-chip">Vertex AI</span><span class="sm-chip">Docker</span></li></ul><ul class="sm-track" aria-hidden="true"><li class="sm-group"><em>Retrieval</em><span class="sm-chip">LlamaIndex</span><span class="sm-chip">Pinecone</span><span class="sm-chip">FAISS</span></li><li class="sm-group"><em>Evaluation</em><span class="sm-chip">LangSmith</span><span class="sm-chip">MLflow</span></li><li class="sm-group"><em>Serving &amp; cloud</em><span class="sm-chip">FastAPI</span><span class="sm-chip">AWS</span><span class="sm-chip">Vertex AI</span><span class="sm-chip">Docker</span></li></ul></div>
     </div>
   </section>
 
@@ -1873,6 +2091,115 @@ document.getElementById('runEvalBtn').addEventListener('click', () => {
     };
     stops.forEach(s => { s.addEventListener('mouseenter', () => show(s)); s.addEventListener('focus', () => show(s)); });
   });
+})();
+
+/* ===== Impact deck: one instrument on stage, auto-advancing while in view ===== */
+(function impactDeck(){
+  const deck = document.getElementById('impactDeck');
+  if (!deck) return;
+  const tabs = [...deck.querySelectorAll('[role="tab"]')];
+  const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let current = 0, timers = [], inView = false, hovering = false, manual = false;
+
+  const later = (fn, ms) => timers.push(setTimeout(fn, ms));
+  const clear = () => { timers.forEach(clearTimeout); timers = []; };
+
+  const players = {
+    queue(p){ steps(p.querySelector('[data-steps]'), 420, 230); },
+    ads(p){
+      steps(p.querySelector('[data-steps]'), 420, 260);
+    },
+    grid(p){
+      p.querySelectorAll('.vr-pipe li').forEach((li, i) => li.style.setProperty('--s', i));
+      const el = p.querySelector('[data-to]');
+      const end = +el.dataset.to, t0 = performance.now() + 700, dur = 1500;
+      if (reduce) return;
+      const tick = (now) => {
+        if (!p.classList.contains('is-active')) return;
+        const k = Math.min(1, Math.max(0, (now - t0) / dur)), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = el.dataset.prefix + Math.round(end * e) + el.dataset.suffix;
+        if (k < 1) requestAnimationFrame(tick);
+      };
+      el.textContent = el.dataset.prefix + '0' + el.dataset.suffix;
+      requestAnimationFrame(tick);
+    },
+    stream(p){
+      const clock = p.querySelector('.vs-clock'), ruler = p.querySelector('.vs-ruler b');
+      const tools = [...p.querySelectorAll('.vs-tools span')], out = p.querySelector('.vs-text');
+      const answer = 'Paid search held steady. Organic calls fell after the Google listing lost its opening hours — restore the listing first, then re-check call tracking in 7 days.';
+      tools.forEach(t => t.classList.remove('on')); out.textContent = '';
+      if (reduce) { tools.forEach(t => t.classList.add('on')); out.textContent = answer; clock.textContent = 'first token < 3s'; ruler.style.setProperty('--t', '52%'); return; }
+      const FIRST = 2600, t0 = performance.now();
+      clock.textContent = '0.0s'; ruler.style.setProperty('--t', '0%');
+      const tick = (now) => {
+        if (!p.classList.contains('is-active')) return;
+        const ms = Math.min(FIRST, now - t0);
+        clock.textContent = (ms / 1000).toFixed(1) + 's';
+        ruler.style.setProperty('--t', (ms / 5000 * 100) + '%');
+        if (ms < FIRST) requestAnimationFrame(tick);
+        else clock.textContent = 'first token · < 3s';
+      };
+      requestAnimationFrame(tick);
+      tools.forEach((t, i) => later(() => t.classList.add('on'), 350 + i * 420));
+      const words = answer.split(' ');
+      words.forEach((w, i) => later(() => { out.textContent += (i ? ' ' : '') + w; }, FIRST + i * 70));
+    }
+  };
+  function steps(el, start, gap){
+    if (!el || reduce) return;
+    const final = el.dataset.final || (el.dataset.final = el.innerHTML);
+    const seq = el.dataset.steps.split('|');
+    el.innerHTML = seq[0];
+    seq.forEach((s, i) => later(() => { el.innerHTML = s; }, start + i * gap));
+    later(() => { el.innerHTML = final; }, start + seq.length * gap);
+  }
+
+  function select(i, focus){
+    clear();
+    current = (i + tabs.length) % tabs.length;
+    tabs.forEach((t, k) => {
+      const on = k === current;
+      t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1;
+      panels[k].classList.remove('is-active', 'is-played');
+      panels[k].hidden = !on;
+    });
+    const p = panels[current];
+    void p.offsetWidth;                         // restart CSS transitions
+    p.classList.add('is-active');
+    requestAnimationFrame(() => requestAnimationFrame(() => p.classList.add('is-played')));
+    (players[p.dataset.kind] || (() => {}))(p);
+    // restart the dwell bar
+    const bar = tabs[current].querySelector('.it-progress');
+    bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = '';
+    if (focus) tabs[current].focus();
+  }
+
+  const syncPause = () => deck.classList.toggle('is-paused', !inView || hovering);
+  const auto = !reduce;
+  deck.classList.toggle('is-auto', auto);
+
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => { manual = true; deck.classList.remove('is-auto'); select(i); });
+    t.addEventListener('keydown', (e) => {
+      const k = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+      if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); manual = true; deck.classList.remove('is-auto'); select(e.key === 'Home' ? 0 : tabs.length - 1, true); }
+      if (!k) return;
+      e.preventDefault(); manual = true; deck.classList.remove('is-auto'); select(current + k, true);
+    });
+    t.querySelector('.it-progress').addEventListener('animationend', () => { if (auto && !manual) select(current + 1); });
+  });
+  deck.addEventListener('mouseenter', () => { hovering = true; syncPause(); });
+  deck.addEventListener('mouseleave', () => { hovering = false; syncPause(); });
+  deck.addEventListener('focusin', () => { hovering = true; syncPause(); });
+  deck.addEventListener('focusout', () => { hovering = false; syncPause(); });
+
+  let started = false;
+  new IntersectionObserver(([en]) => {
+    inView = en.isIntersecting; syncPause();
+    if (inView && !started) { started = true; select(0); }
+  }, { threshold: 0.35 }).observe(deck);
+  syncPause();
 })();
 
 /* ===== Portfolio chat (real canned Q&A, matches production PortfolioChat) ===== */
