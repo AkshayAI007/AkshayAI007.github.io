@@ -1,0 +1,22 @@
+---
+/** The case study's headline number, its instrument, and three supporting figures. */
+import type { CollectionEntry } from 'astro:content';
+
+type Proof = CollectionEntry<'cases'>['data']['proof'];
+interface Props {
+  proof: Proof;
+}
+const { proof } = Astro.props;
+const { value, viz } = proof;
+const hidden = value.spoken ? 'true' : undefined;
+---
+
+<div class="case-proof reveal"><dl class="case-proof-lead"><div class="proof-cell proof-cell--xl"><dt>{proof.label}</dt><dd class="proof-value">{value.from && <><span class="pv-from">{value.from}</span><span class="pv-arrow" aria-hidden="true">&rarr;</span></>}<strong aria-hidden={hidden} data-seq={value.seq} data-count={value.count} data-prefix={value.count !== undefined ? '' : undefined} data-suffix={value.count !== undefined ? '' : undefined}>{value.to}</strong>{value.spoken && <span class="visually-hidden">{value.spoken}</span>}</dd>{
+  viz.kind === 'collapse' ? (
+    <dd class="viz-collapse" aria-hidden="true" style={`--after:${viz.after}`}><span class="vc-row"><em>BEFORE</em><i><b></b></i></span><span class="vc-row vc-after"><em>AFTER</em><i><b></b></i></span></dd>
+  ) : viz.kind === 'ruler' ? (
+    <dd class="viz-ruler" aria-hidden="true" style={`--fill:${viz.fill};--mark:${viz.mark}`}><i><b></b><u></u></i><span>{viz.ticks.map((t) => <em>{t}</em>)}</span></dd>
+  ) : (
+    <dd class="viz-fields" aria-hidden="true">{Array.from({ length: viz.total }, (_, d) => <i class={viz.repaired.includes(d) ? 'fix' : undefined} style={`--d:${d}`}></i>)}</dd>
+  )
+}<dd class="proof-foot">{proof.foot}</dd></div></dl><dl class="case-proof-support">{proof.support.map((s) => <div><dt>{s.label}</dt><dd>{s.value}</dd></div>)}</dl></div>

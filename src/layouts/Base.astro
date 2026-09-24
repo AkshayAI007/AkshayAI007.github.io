@@ -1,0 +1,64 @@
+---
+/**
+ * Document shell shared by every page: <head> metadata (SEO, Open Graph,
+ * JSON-LD), font preloads and the pre-paint theme restore. Styles are
+ * imported by the layout that wraps this one, so the main site and the
+ * project deep-dives each ship only their own stylesheet.
+ */
+import type { Seo } from '@/lib/seo';
+import { SITE } from '@/lib/site';
+
+interface Props {
+  seo: Seo;
+  /** schema.org nodes, emitted as one @graph. */
+  jsonLd?: object[];
+  /** woff2 URLs to preload (the faces visible above the fold). */
+  preloadFonts?: string[];
+}
+
+const { seo, jsonLd = [], preloadFonts = [] } = Astro.props;
+const ldJson =
+  jsonLd.length > 0
+    ? JSON.stringify({ '@context': 'https://schema.org', '@graph': jsonLd }).replace(/</g, '\\u003c')
+    : null;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{seo.title}</title>
+    <meta name="description" content={seo.description} />
+    <meta name="author" content={SITE.name} />
+    <meta name="theme-color" content={SITE.themeColor} />
+    <link rel="canonical" href={seo.canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`Writing — ${SITE.name}`} href="/rss.xml" />
+    <meta property="og:type" content={seo.ogType} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.socialDescription} />
+    <meta property="og:url" content={seo.canonical} />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:image" content={seo.ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={seo.ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seo.title} />
+    <meta name="twitter:description" content={seo.socialDescription} />
+    <meta name="twitter:image" content={seo.ogImageUrl} />
+    {ldJson && <script type="application/ld+json" set:html={ldJson} />}
+    {preloadFonts.map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
+    <!-- restore the persisted theme before first paint (key shared with v1) -->
+    <script is:inline>
+      try{var t=localStorage.getItem('ab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,33 @@
+---
+import Page from '@/layouts/Page.astro';
+import { buildSeo } from '@/lib/seo';
+
+const seo = buildSeo(
+  {
+    title: 'Page not found | Akshay Bawaliwale',
+    description: 'This page does not exist. The case studies, projects and writing are one click away.',
+    path: '/404',
+    ogImage: '/og/home.png',
+  },
+  Astro.site!,
+);
+---
+
+<Page seo={seo} current="none" pageId="not-found">
+  <meta name="robots" content="noindex" slot="head" />
+  <main id="top" class="index-page">
+    <section class="index-hero section-shell reveal">
+      <p class="section-kicker">404 / NOT FOUND</p>
+      <h1>This page took a different route. <em>The work didn't.</em></h1>
+      <p>The link may be old or mistyped. Everything that was here is still one click away.</p>
+      <div class="hero-actions">
+        <a href="/#systems" class="button button-primary">SEE THE SYSTEMS ↘</a>
+        <a href="/" class="button button-secondary">BACK TO HOME →</a>
+      </div>
+    </section>
+    <section class="next-case reveal">
+      <p>LOOKING FOR SOMETHING SPECIFIC?</p>
+      <a href="/reach">ASK DIRECTLY &rarr;</a>
+    </section>
+  </main>
+</Page>

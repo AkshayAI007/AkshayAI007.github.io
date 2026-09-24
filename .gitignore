@@ -2,3 +2,14 @@
 Thumbs.db
 *.bak
 *.bak-*
+
+# dependencies / build output
+node_modules/
+dist/
+.astro/
+
+# test output
+test-results/
+playwright-report/
+.lighthouseci/
+tests/.cache/

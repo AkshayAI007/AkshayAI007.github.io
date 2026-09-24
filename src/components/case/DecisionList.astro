@@ -1,0 +1,14 @@
+---
+/** Key decisions: each call, the alternative it beat, and what it cost. */
+interface Props {
+  title: string;
+  items: { title: string; insteadOf: string; because: string; tradeoff: string }[];
+}
+const { title, items } = Astro.props;
+---
+
+<section class="case-decisions case-decisions--cards section-shell">
+  <div class="reveal"><p class="section-kicker">KEY DECISIONS</p><h2>{title}</h2><p class="decision-lede">Each call, the alternative it beat, and what it cost.</p></div>
+  <ol class="decision-list">{items.map((d, i) => <li class="decision reveal"><span class="d-num">{String(i + 1).padStart(2, '0')}</span><h3>{d.title}</h3>
+        <dl><div><dt>Instead of</dt><dd>{d.insteadOf}</dd></div><div><dt>Because</dt><dd>{d.because}</dd></div><div><dt>Trade-off</dt><dd>{d.tradeoff}</dd></div></dl></li>)}</ol>
+</section>

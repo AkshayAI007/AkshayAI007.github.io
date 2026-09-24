@@ -1,0 +1,84 @@
+---
+import Page from '@/layouts/Page.astro';
+import { breadcrumbJsonLd, buildSeo, personJsonLd } from '@/lib/seo';
+import { SITE } from '@/lib/site';
+
+const seo = buildSeo(
+  {
+    title: 'Reach Out | Akshay Bawaliwale',
+    description:
+      'Email, LinkedIn, GitHub or Medium: the fastest ways to reach Akshay Bawaliwale about senior GenAI, ML engineering and AI architecture work.',
+    path: '/reach',
+    ogImage: '/og/reach.png',
+  },
+  Astro.site!,
+);
+const site = Astro.site!;
+const jsonLd = [
+  { '@type': 'ContactPage', url: seo.canonical, name: seo.title, mainEntity: { '@id': new URL('/#person', site).href } },
+  { ...personJsonLd(site), email: `mailto:${SITE.email}` },
+  breadcrumbJsonLd(site, [{ name: 'Home', path: '/' }, { name: 'Reach out', path: '/reach' }]),
+];
+---
+
+<Page seo={seo} current="reach" pageId="reach" jsonLd={jsonLd}>
+  <main id="top" class="index-page reach-page">
+    <section class="index-hero section-shell reveal">
+      <p class="section-kicker">REACH OUT / START HERE</p>
+      <h1>Have an AI problem that refuses to behave? <em>Let's talk.</em></h1>
+      <p>The fastest way to reach me is directly &mdash; pick whichever channel you're already in.</p>
+    </section>
+    <section class="reach-links section-shell reveal">
+      <div class="reach-row">
+        <span class="reach-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m2 7 8.9 5.9a2 2 0 0 0 2.2 0L22 7"/></svg></span>
+        <div class="reach-text"><span class="reach-label">EMAIL</span><a class="reach-value" href="mailto:akshay.aispecialist@gmail.com">akshay.aispecialist@gmail.com</a></div>
+        <button class="reach-copy" id="copyEmailBtn" data-copy="akshay.aispecialist@gmail.com">COPY</button>
+      </div>
+      <a class="reach-row" href="https://in.linkedin.com/in/akshaybawaliwale" target="_blank" rel="noreferrer">
+        <span class="reach-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v1.5A5 5 0 0 1 16 8z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></span>
+        <div class="reach-text"><span class="reach-label">LINKEDIN</span><span class="reach-value">in.linkedin.com/in/akshaybawaliwale</span></div>
+        <span class="reach-arrow">&#8599;</span>
+      </a>
+      <a class="reach-row" href="https://github.com/AkshayAI007" target="_blank" rel="noreferrer">
+        <span class="reach-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg></span>
+        <div class="reach-text"><span class="reach-label">GITHUB</span><span class="reach-value">github.com/AkshayAI007</span></div>
+        <span class="reach-arrow">&#8599;</span>
+      </a>
+      <a class="reach-row" href="https://medium.com/@akshay.bawali09" target="_blank" rel="noreferrer">
+        <span class="reach-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
+        <div class="reach-text"><span class="reach-label">MEDIUM</span><span class="reach-value">medium.com/@akshay.bawali09</span></div>
+        <span class="reach-arrow">&#8599;</span>
+      </a>
+    </section>
+    <section class="next-case reveal">
+      <p>AVAILABLE FOR SENIOR GENAI, ML ENGINEERING &amp; AI ARCHITECTURE ROLES.</p>
+      <a href="mailto:akshay.aispecialist@gmail.com">EMAIL DIRECTLY &rarr;</a>
+    </section>
+  </main>
+</Page>
+
+<script>
+  // Copy the address, with a textarea fallback where the Clipboard API is unavailable.
+  const btn = document.getElementById('copyEmailBtn')!;
+  btn.addEventListener('click', async () => {
+    const value = btn.dataset.copy!;
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = value;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    btn.textContent = 'COPIED';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'COPY';
+      btn.classList.remove('copied');
+    }, 1800);
+  });
+</script>

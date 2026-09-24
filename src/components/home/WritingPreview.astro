@@ -1,0 +1,21 @@
+---
+/** The two featured posts from the writing collection, as photo cards. */
+import Photo from '@/components/Photo.astro';
+import { getWriting } from '@/lib/content';
+
+const featured = (await getWriting()).filter((w) => w.data.feature);
+---
+
+<section class="writing-preview section-shell">
+  <div class="section-heading reveal">
+    <div><p class="section-kicker">Writing</p><h2>Making complex AI harder to misunderstand.</h2></div>
+    <a href="/writing">VIEW ALL WRITING →</a>
+  </div>
+  <div class="article-grid">
+    {
+      featured.map(({ data }) => (
+        <a class="shot-host reveal" href={data.url} target="_blank" rel="noreferrer"><figure class="shot shot-frame" aria-hidden="true"><Photo src={data.feature!.image} alt={data.feature!.alt} sizes="(max-width:760px) 96vw, 48vw" /></figure><div><span>{data.category}</span><small>{data.minutes} MIN</small></div><h3>{data.feature!.title}</h3><span>↘</span></a>
+      ))
+    }
+  </div>
+</section>

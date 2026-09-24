@@ -1,0 +1,62 @@
+---
+title: AI Image Enhancer
+description: 'A Real-ESRGAN super-resolution API built for production: 4× upscaling, 256 px tiled inference, FP16, thread-safe loading and automatic GPU-to-CPU fallback.'
+order: 3
+icon: sparkles
+chips:
+- label: COMPUTER VISION
+  accent: true
+- label: DEEP LEARNING
+- label: A/03
+heading: 4× super-resolution built to
+headingEm: keep working when the ideal path isn't available.
+lede: A production image super-resolution API on Real-ESRGAN and RRDBNet — 4× upscaling that holds fine detail, with tile-based inference for large images, FP16 acceleration, thread-safe model loading and automatic GPU-to-CPU fallback so a request still returns something useful when the ideal environment isn't there.
+repo: https://github.com/AkshayAI007/AI_enhancer_model
+cover:
+  image: ../../assets/images/photos/camera-lenses.jpg
+  alt: Camera body and prime lenses arranged on a dark surface
+  caption: REAL-ESRGAN + RRDBNET · 4× · TILED · GPU-TO-CPU FALLBACK
+stats:
+- value: 4×
+  label: Upscale factor
+- value: 256 px
+  label: Inference tiles
+- value: 1,024 px
+  label: Input edge cap
+- value: GPU → CPU
+  label: Automatic fallback
+bench:
+  title: Memory has a ceiling. Tiling keeps every request under it.
+  meta: 256 px tiles · 10 px padding · longest edge capped at 1,024 px
+  figure: tiling
+flowTitle: From a low-quality input to a served result.
+flow:
+- label: INPUT IMAGE
+- label: TILE + FP16
+- label: REAL-ESRGAN / RRDBNET
+  hot: true
+- label: GPU → CPU FALLBACK
+- label: 4× OUTPUT
+stack:
+- PyTorch
+- Real-ESRGAN
+- RRDBNet
+- FastAPI
+- OpenCV / Pillow
+- Python
+usp: Tiling, FP16, thread-safe loading and a GPU-to-CPU fallback — the plumbing most upscaling demos skip, and the reason this one answers every request.
+cta: Read the model wrapper, the tiling and the fallback logic.
+orbit:
+  title: AI Image Enhancer
+  tag: COMPUTER VISION
+  desc: Real-ESRGAN + RRDBNet super-resolution API — 4× upscaling, tiled inference, automatic GPU/CPU fallback.
+  metric: 4× · RRDBNET
+  tint: '#1f6f6a'
+---
+
+<Column kicker="THE PROBLEM" title="Super-resolution demos rarely survive contact with production.">
+Real-ESRGAN produces impressive results in a notebook, but a real service has to handle images larger than GPU memory, environments without a GPU at all, and concurrent requests hitting one model instance — none of which a bare model call solves on its own.
+</Column>
+<Column kicker="THE APPROACH" title="Treat reliability as a first-class feature.">
+A Real-ESRGAN + RRDBNet model wrapped for production: tile-based inference so arbitrarily large images fit in memory, FP16 to keep latency down, thread-safe model loading for concurrency, and automatic GPU-to-CPU fallback so a request that can't take the fast path still returns a result instead of an error.
+</Column>

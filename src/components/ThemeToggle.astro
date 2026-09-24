@@ -1,0 +1,44 @@
+---
+/**
+ * Dark/light toggle. Dark is the default; the choice persists under the same
+ * `ab-theme` key v1 used, and Base.astro restores it before first paint.
+ * The script is inline and runs as soon as the button is parsed, so the
+ * label never flashes "Dark" for a light-theme visitor.
+ */
+interface Props {
+  /** `site` for the main header, `project` for the deep-dive header. */
+  variant?: 'site' | 'project';
+}
+const { variant = 'site' } = Astro.props;
+// The accessible name starts with the visible text ("Theme Dark"), as WCAG
+// 2.5.3 asks; the script keeps it in step with the current theme.
+const label = 'Theme Dark, switch between dark and light theme';
+---
+
+{
+  variant === 'site' ? (
+    <button class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label={label}><span class="tg-dot" aria-hidden="true"></span>Theme <b id="themeState">Dark</b></button>
+  ) : (
+    <button class="hd-theme" id="hdTheme" aria-pressed="false" aria-label={label}>Theme <b id="hdThemeState">Dark</b></button>
+  )
+}
+<script is:inline>
+  (function (btn) {
+    var root = document.documentElement, lbl = btn.querySelector('b');
+    function cur() { return root.getAttribute('data-theme') || 'dark'; }
+    function paint() {
+      var c = cur();
+      var name = c === 'light' ? 'Light' : 'Dark';
+      lbl.textContent = name;
+      btn.setAttribute('aria-label', 'Theme ' + name + ', switch between dark and light theme');
+      btn.setAttribute('aria-pressed', c === 'light' ? 'true' : 'false');
+    }
+    paint();
+    btn.addEventListener('click', function () {
+      var n = cur() === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', n);
+      try { localStorage.setItem('ab-theme', n); } catch (e) {}
+      paint();
+    });
+  })(document.currentScript.previousElementSibling);
+</script>

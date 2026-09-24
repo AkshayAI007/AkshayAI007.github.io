@@ -1,0 +1,22 @@
+---
+/** "In production with": the stack, grouped by layer, on a scroll-velocity marquee. */
+import StackMarquee, { type StackGroup } from '@/islands/StackMarquee';
+
+const STACK: StackGroup[] = [
+  { layer: 'Orchestration', tools: ['LangGraph', 'CrewAI', 'Claude SDK', 'MCP', 'Pydantic'] },
+  { layer: 'Retrieval', tools: ['LlamaIndex', 'Pinecone', 'FAISS'] },
+  { layer: 'Voice & CRM', tools: ['LiveKit', 'Twilio SIP', 'Salesforce'] },
+  { layer: 'Evaluation', tools: ['LangSmith', 'MLflow'] },
+  { layer: 'Serving & cloud', tools: ['FastAPI', 'AWS', 'Vertex AI', 'Docker'] },
+];
+const toolCount = STACK.reduce((n, g) => n + g.tools.length, 0);
+const layerWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+---
+
+<section class="stack-marquee" aria-labelledby="stackTitle">
+  <div class="sm-head">
+    <p class="proof-kicker" id="stackTitle">In production with</p>
+    <p class="sm-count"><b>{toolCount}</b> tools across {layerWords[STACK.length]} layers of the stack</p>
+  </div>
+  <StackMarquee client:visible={{ rootMargin: '300px' }} groups={STACK} velocity={0.5} direction={1} />
+</section>

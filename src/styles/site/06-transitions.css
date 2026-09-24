@@ -1,0 +1,21 @@
+/* Page changes. v1 swapped hash-routed pages under a ground-coloured veil
+   (.route-veil): it rose from the bottom edge, covered the screen at 45%,
+   then drew off toward the top to reveal the incoming page. With real URLs
+   the same move is a cross-document view transition — no router, no JS.
+   The overlay's background is the veil; clipping the two snapshots exposes it
+   exactly where the old scaleY veil stood. Browsers without cross-document
+   view transitions simply navigate. */
+@view-transition{navigation:auto}
+
+@media(prefers-reduced-motion:no-preference){
+  ::view-transition{background:var(--ground)}
+  ::view-transition-old(root){animation:vt-veil-rise var(--dur-4) var(--ease-out) both;mix-blend-mode:normal}
+  ::view-transition-new(root){animation:vt-veil-lift var(--dur-4) var(--ease-out) both;mix-blend-mode:normal}
+}
+@media(prefers-reduced-motion:reduce){
+  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}
+}
+
+/* same keyframe split as v1's route-wipe: cover by 45%, uncover by 100% */
+@keyframes vt-veil-rise{0%{clip-path:inset(0 0 0 0)}45%,100%{clip-path:inset(0 0 100% 0)}}
+@keyframes vt-veil-lift{0%,45%{clip-path:inset(100% 0 0 0)}100%{clip-path:inset(0 0 0 0)}}

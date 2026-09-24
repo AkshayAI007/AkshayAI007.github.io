@@ -1,0 +1,19 @@
+---
+/** Open-source projects on the 3D orbit (React island), fed by the projects collection. */
+import ProjectOrbit from '@/islands/ProjectOrbit';
+import { getOrbitCards } from '@/lib/content';
+import { SITE } from '@/lib/site';
+
+const cards = await getOrbitCards();
+---
+
+<section id="projects" class="public-work section-shell">
+  <div class="section-heading reveal">
+    <div><p class="section-kicker">Open source</p><h2>Applied ML, in public.</h2></div>
+    <p>Independent builds across healthcare, media, vision and mobility — curated for depth, not repo count.</p>
+  </div>
+  <ProjectOrbit client:visible={{ rootMargin: '300px' }} cards={cards} />
+  <div class="glimpse-cta reveal">
+    <a class="button button-secondary" href={SITE.github} target="_blank" rel="noreferrer">EXPLORE ALL ON GITHUB ↗</a>
+  </div>
+</section>

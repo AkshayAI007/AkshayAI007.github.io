@@ -1,0 +1,45 @@
+---
+/**
+ * Main-site layout: the fixed header, mobile menu and "Ask Akshay" panel
+ * around one page. Every page's content sits in `.page`, whose route-in
+ * animation v1 played on each route change — now it plays on each load.
+ */
+import '@/styles/global.css';
+import newsreaderLatin from '@fontsource-variable/newsreader/files/newsreader-latin-standard-normal.woff2?url';
+import geistLatin from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url';
+import geistMonoLatin from '@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2?url';
+import AskAkshay from '@/islands/AskAkshay';
+import Header from '@/components/Header.astro';
+import MobileMenu from '@/components/MobileMenu.astro';
+import type { Seo } from '@/lib/seo';
+import type { NavRoute } from '@/lib/site';
+import Base from './Base.astro';
+
+interface Props {
+  seo: Seo;
+  current: NavRoute;
+  jsonLd?: object[];
+  /** Page wrapper id — v1 keyed each `.page` by data-page. */
+  pageId: string;
+}
+const { seo, current, jsonLd, pageId } = Astro.props;
+---
+
+<Base seo={seo} jsonLd={jsonLd} preloadFonts={[newsreaderLatin, geistLatin, geistMonoLatin]}>
+  <slot name="head" slot="head" />
+  <a class="skip-link" href="#top">Skip to main content</a>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+  <Header current={current} askHidden={pageId !== 'home'} />
+  <MobileMenu />
+  <AskAkshay client:ask />
+
+  <div class="page" data-page={pageId}>
+    <slot />
+  </div>
+</Base>
+
+<script>
+  import '@/lib/motion';
+  import '@/lib/anchors';
+</script>

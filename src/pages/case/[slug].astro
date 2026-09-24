@@ -1,0 +1,12 @@
+---
+import type { GetStaticPaths } from 'astro';
+import CaseStudy from '@/layouts/CaseStudy.astro';
+import { getCases } from '@/lib/content';
+
+export const getStaticPaths = (async () =>
+  (await getCases()).map((entry) => ({ params: { slug: entry.id }, props: { entry } }))) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+---
+
+<CaseStudy entry={entry} />

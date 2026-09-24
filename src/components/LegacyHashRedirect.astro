@@ -1,0 +1,33 @@
+---
+/**
+ * v1 was one document with hash routes (/#/about, /#/case/voice-ai…). The
+ * browser never sends the fragment to the server, so this runs first thing in
+ * the home page's <head> and maps every old link to its real URL. Anchors on
+ * the home page itself are rewritten in place (no reload); everything else is
+ * a location.replace, so the old URL never lands in history.
+ * Mirrors v1's ROUTES table, including its aliases and the fallback to home.
+ */
+---
+
+<script is:inline>
+  (function () {
+    var h = location.hash;
+    if (h.indexOf('#/') !== 0) return;
+    var map = {
+      '': '/', home: '/',
+      systems: '/#systems', projects: '/#projects', lab: '/#projects',
+      about: '/about', writing: '/writing', reach: '/reach', resume: '/resume',
+      'case/voice-ai': '/case/voice-ai',
+      'case/agent': '/case/agent', 'case/b2b': '/case/agent',
+      'case/onboarding': '/case/onboarding', 'case/eval': '/case/onboarding'
+    };
+    var key = h.slice(2).replace(/\/$/, '');
+    var to = Object.prototype.hasOwnProperty.call(map, key) ? map[key] : '/';
+    if (to === '/' || to.charAt(1) === '#') {
+      history.replaceState(null, '', to);
+      if (to !== '/') window.__legacyAnchor = to.slice(1);
+    } else {
+      location.replace(to);
+    }
+  })();
+</script>

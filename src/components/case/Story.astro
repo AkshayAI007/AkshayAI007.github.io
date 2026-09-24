@@ -1,0 +1,10 @@
+---
+/** A titled block of prose in a case study (used from MDX: <Story kicker title>…</Story>). */
+interface Props {
+  kicker: string;
+  title: string;
+}
+const { kicker, title } = Astro.props;
+---
+
+<div class="reveal"><p class="section-kicker">{kicker}</p><h2>{title}</h2><slot /></div>

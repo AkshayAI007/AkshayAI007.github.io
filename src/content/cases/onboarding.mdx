@@ -1,0 +1,105 @@
+---
+title: Four-agent business onboarding
+description: Four LangGraph agents build a validated 60-field business profile in parallel, repair what fails, and are scored on a 10-parameter LLM-as-Judge rubric.
+order: 3
+kicker: CASE STUDY 03 / MULTI-AGENT · STRUCTURED OUTPUT · LLM EVALUATION
+heading: Four agents, one validated business profile.
+lede: A LangGraph system where business-information, visual and voice agents work in parallel and a validator agent repairs whatever fails — producing 60 business-specific fields per profile, scored on a 10-parameter LLM-as-Judge rubric and monitored in MLflow.
+proof:
+  label: Fields per business profile
+  value:
+    to: '60'
+    count: 60
+    spoken: '60'
+  viz:
+    kind: fields
+    total: 60
+    repaired:
+    - 7
+    - 19
+    - 33
+    - 46
+    - 52
+  foot: Outlined fields failed validation and were repaired in the loop
+  support:
+  - label: Agents
+    value: '4'
+  - label: Evaluation
+    value: 10-parameter LLM-as-Judge
+  - label: Execution
+    value: Async, self-correcting
+spec:
+- label: Role
+  value: Orchestration & architecture
+- label: Stack
+  value: LangGraph · Claude SDKs
+- label: Output
+  value: Pydantic-typed, 60 fields
+- label: Monitoring
+  value: MLflow
+architecture:
+  title: Generate in parallel. Validate. Repair only what failed.
+  stops:
+  - label: BUSINESS INPUT
+    detail: Source information about the business being onboarded.
+  - label: INFO · VISUAL · VOICE
+    detail: Three agents run asynchronously, each returning Pydantic-typed structured output.
+  - label: VALIDATOR
+    detail: The validator agent checks every field against its schema and rules.
+    hot: true
+  - label: REPAIR LOOP
+    detail: Failed fields go back to the agent that owns them — a self-correcting loop, not a full regeneration.
+  - label: 60-FIELD PROFILE
+    detail: A complete, validated business profile.
+  - label: LLM-AS-JUDGE
+    detail: Scored on a custom 10-parameter rubric and tracked in MLflow, run over run.
+decisions:
+  title: Structure first, so quality can be measured.
+  items:
+  - title: Type every agent’s output with Pydantic.
+    insteadOf: Free-form text, parsed afterwards.
+    because: Sixty fields need types the validator can check and downstream systems can trust.
+    tradeoff: A schema change ripples through every agent that produces it.
+  - title: Run the three generator agents in parallel.
+    insteadOf: A sequential chain, one agent after another.
+    because: The agents are independent, so wall-clock time is bound by the slowest one, not the sum.
+    tradeoff: Conflicts between agents surface at the validator and must be resolved there.
+  - title: Repair failed fields in a self-correcting loop.
+    insteadOf: Failing the whole profile, or regenerating it end to end.
+    because: Only the broken fields are redone, which saves tokens and time.
+    tradeoff: The loop needs a cap so a stubborn field can’t run up cost.
+  - title: Score profiles with a 10-parameter LLM-as-Judge rubric in MLflow.
+    insteadOf: Spot-checking outputs by hand.
+    because: A prompt or model change shows up as a score change before it shows up in production.
+    tradeoff: The judge needs its own calibration against human review.
+outcome:
+  lede: Profiles arrive complete, typed and scored — with regressions visible run over run.
+  caption: Onboarding system results
+  columns:
+  - Dimension
+  - Result
+  - Mechanism
+  rows:
+  - - Output
+    - 60 business-specific fields per profile
+    - Pydantic structured outputs
+  - - Throughput
+    - Agents run concurrently
+    - Asynchronous LangGraph execution
+  - - Reliability
+    - Failed fields self-correct
+    - Validator + repair loop
+  - - Quality
+    - Every profile scored
+    - 10-parameter LLM-as-Judge, monitored in MLflow
+next:
+  case: voice-ai
+  label: 'NEXT: VOICE AI'
+---
+
+<Story kicker="THE CONTEXT" title="A profile is more than a form.">
+Onboarding a business means describing who it is, how it looks and how it sounds. Assembled by hand it is slow; generated in one prompt it is inconsistent and hard to check.
+</Story>
+<Story kicker="THE CONSTRAINT" title="Sixty fields, and each one has to hold up.">
+Every field needed a type, a validation rule and a way to be fixed without regenerating the whole profile — plus a score that engineers and stakeholders could both read.
+</Story>

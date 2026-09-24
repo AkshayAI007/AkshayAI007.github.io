@@ -1,0 +1,10 @@
+---
+/** A titled column of prose on a project page (used from MDX: <Column kicker title>…</Column>). */
+interface Props {
+  kicker: string;
+  title: string;
+}
+const { kicker, title } = Astro.props;
+---
+
+<div class="reveal"><p class="kicker">{kicker}</p><h2>{title}</h2><slot /></div>
