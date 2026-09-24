@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -956,13 +957,10 @@ a.reach-row:hover .reach-value{color:var(--accent)}
 .sm-head .proof-kicker{margin:0}
 .sm-count{margin:0;max-width:18ch;font:400 var(--fs-meta)/1.5 var(--font-sans);color:var(--ink-3)}
 .sm-count b{font-family:var(--font-serif);font-weight:300;font-size:1.9rem;line-height:1;color:var(--ink);margin-right:.2ch;vertical-align:-.12em}
-.sm-rows{display:grid;gap:.9rem;min-width:0;padding:1.4rem 0;overflow:hidden;
+.sm-rows{display:grid;gap:.9rem;min-width:0;padding:1.6rem 0;overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
-.sm-row{display:flex;width:max-content}
-.sm-track{display:flex;flex:none;margin:0;padding:0;list-style:none;animation:sm-scroll 58s linear infinite}
-.sm-row--rev .sm-track{animation-duration:66s;animation-direction:reverse}
-.stack-marquee:hover .sm-track{animation-play-state:paused}
-@keyframes sm-scroll{to{transform:translateX(-100%)}}
+.sm-row{display:flex;width:max-content;will-change:transform;transform:translate3d(0,0,0)}
+.sm-track{display:flex;flex:none;margin:0;padding:0;list-style:none}
 .sm-group{display:flex;align-items:center;gap:.5rem;padding-right:2.6rem}
 .sm-group em{display:inline-flex;align-items:center;gap:.7ch;margin-right:.5rem;font:500 10px/1 var(--font-mono);font-style:normal;letter-spacing:.16em;text-transform:uppercase;color:var(--flag);white-space:nowrap}
 .sm-group em::before{content:"";width:14px;height:1px;background:currentColor}
@@ -978,8 +976,9 @@ a.reach-row:hover .reach-value{color:var(--accent)}
 }
 @media(prefers-reduced-motion:reduce){
   .sm-rows{mask-image:none;-webkit-mask-image:none;padding:1.4rem var(--gutter)}
-  .sm-row{width:auto}
-  .sm-track{animation:none!important;flex-wrap:wrap;row-gap:.7rem}
+  .sm-row{width:auto;transform:none!important}
+  .sm-track{flex:1 1 auto;flex-wrap:wrap;row-gap:.7rem}
+  .sm-group{flex-wrap:wrap;row-gap:.5rem;padding-right:1.6rem}
   .sm-track[aria-hidden]{display:none}
 }
 
@@ -1256,8 +1255,7 @@ a.reach-row:hover .reach-value{color:var(--accent)}
       <p class="sm-count"><b>17</b> tools across five layers of the stack</p>
     </div>
     <div class="sm-rows">
-      <div class="sm-row"><ul class="sm-track"><li class="sm-group"><em>Orchestration</em><span class="sm-chip">LangGraph</span><span class="sm-chip">CrewAI</span><span class="sm-chip">Claude SDK</span><span class="sm-chip">MCP</span><span class="sm-chip">Pydantic</span></li><li class="sm-group"><em>Voice &amp; CRM</em><span class="sm-chip">LiveKit</span><span class="sm-chip">Twilio SIP</span><span class="sm-chip">Salesforce</span></li></ul><ul class="sm-track" aria-hidden="true"><li class="sm-group"><em>Orchestration</em><span class="sm-chip">LangGraph</span><span class="sm-chip">CrewAI</span><span class="sm-chip">Claude SDK</span><span class="sm-chip">MCP</span><span class="sm-chip">Pydantic</span></li><li class="sm-group"><em>Voice &amp; CRM</em><span class="sm-chip">LiveKit</span><span class="sm-chip">Twilio SIP</span><span class="sm-chip">Salesforce</span></li></ul><ul class="sm-track" aria-hidden="true"><li class="sm-group"><em>Orchestration</em><span class="sm-chip">LangGraph</span><span class="sm-chip">CrewAI</span><span class="sm-chip">Claude SDK</span><span class="sm-chip">MCP</span><span class="sm-chip">Pydantic</span></li><li class="sm-group"><em>Voice &amp; CRM</em><span class="sm-chip">LiveKit</span><span class="sm-chip">Twilio SIP</span><span class="sm-chip">Salesforce</span></li></ul></div>
-      <div class="sm-row sm-row--rev"><ul class="sm-track"><li class="sm-group"><em>Retrieval</em><span class="sm-chip">LlamaIndex</span><span class="sm-chip">Pinecone</span><span class="sm-chip">FAISS</span></li><li class="sm-group"><em>Evaluation</em><span class="sm-chip">LangSmith</span><span class="sm-chip">MLflow</span></li><li class="sm-group"><em>Serving &amp; cloud</em><span class="sm-chip">FastAPI</span><span class="sm-chip">AWS</span><span class="sm-chip">Vertex AI</span><span class="sm-chip">Docker</span></li></ul><ul class="sm-track" aria-hidden="true"><li class="sm-group"><em>Retrieval</em><span class="sm-chip">LlamaIndex</span><span class="sm-chip">Pinecone</span><span class="sm-chip">FAISS</span></li><li class="sm-group"><em>Evaluation</em><span class="sm-chip">LangSmith</span><span class="sm-chip">MLflow</span></li><li class="sm-group"><em>Serving &amp; cloud</em><span class="sm-chip">FastAPI</span><span class="sm-chip">AWS</span><span class="sm-chip">Vertex AI</span><span class="sm-chip">Docker</span></li></ul><ul class="sm-track" aria-hidden="true"><li class="sm-group"><em>Retrieval</em><span class="sm-chip">LlamaIndex</span><span class="sm-chip">Pinecone</span><span class="sm-chip">FAISS</span></li><li class="sm-group"><em>Evaluation</em><span class="sm-chip">LangSmith</span><span class="sm-chip">MLflow</span></li><li class="sm-group"><em>Serving &amp; cloud</em><span class="sm-chip">FastAPI</span><span class="sm-chip">AWS</span><span class="sm-chip">Vertex AI</span><span class="sm-chip">Docker</span></li></ul></div>
+      <div class="sm-row" data-dir="1" data-velocity="0.5"><ul class="sm-track"><li class="sm-group"><em>Orchestration</em><span class="sm-chip">LangGraph</span><span class="sm-chip">CrewAI</span><span class="sm-chip">Claude SDK</span><span class="sm-chip">MCP</span><span class="sm-chip">Pydantic</span></li><li class="sm-group"><em>Retrieval</em><span class="sm-chip">LlamaIndex</span><span class="sm-chip">Pinecone</span><span class="sm-chip">FAISS</span></li><li class="sm-group"><em>Voice &amp; CRM</em><span class="sm-chip">LiveKit</span><span class="sm-chip">Twilio SIP</span><span class="sm-chip">Salesforce</span></li><li class="sm-group"><em>Evaluation</em><span class="sm-chip">LangSmith</span><span class="sm-chip">MLflow</span></li><li class="sm-group"><em>Serving &amp; cloud</em><span class="sm-chip">FastAPI</span><span class="sm-chip">AWS</span><span class="sm-chip">Vertex AI</span><span class="sm-chip">Docker</span></li></ul></div>
     </div>
   </section>
 
@@ -2203,6 +2201,88 @@ document.getElementById('runEvalBtn').addEventListener('click', () => {
     if (inView && !started) { started = true; select(0); }
   }, { threshold: 0.35 }).observe(deck);
   syncPause();
+})();
+
+/* ===== Stack marquee: scroll-velocity rows =====
+   Vanilla port of <ScrollVelocityRow>: each row drifts at a base speed, a
+   spring-smoothed read of page-scroll velocity multiplies it (up to 6x), and
+   scroll direction flips which way the rows run. Copies are cloned to cover
+   the viewport; motion pauses off-screen, in hidden tabs and on hover. */
+(function scrollVelocityMarquee(){
+  const rows = [...document.querySelectorAll('.stack-marquee .sm-row')];
+  if (!rows.length) return;
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const wrap = (min, max, v) => { const r = max - min; return ((((v - min) % r) + r) % r) + min; };
+
+  // Shared velocity factor: spring(stiffness 400, damping 50) over scrollY velocity
+  let lastY = window.scrollY, rawV = 0, springX = 0, springV = 0;
+  const factor = () => { const v = springX; return Math.sign(v || 1) * Math.min(5, Math.abs(v) / 1000 * 5); };
+
+  const state = rows.map(row => {
+    const block = row.querySelector('.sm-track');
+    const dir = +row.dataset.dir >= 0 ? 1 : -1;
+    return { row, block, base: dir, cur: dir, speed: +row.dataset.velocity || 2, x: 0, unit: 0, copies: 1 };
+  });
+
+  function layout(){
+    const cw = rows[0].parentElement.offsetWidth;
+    state.forEach(s => {
+      s.unit = s.block.scrollWidth;
+      const need = s.unit > 0 ? Math.max(3, Math.ceil(cw / s.unit) + 2) : 1;
+      if (need === s.copies) return;
+      s.row.querySelectorAll('.sm-track[aria-hidden]').forEach(n => n.remove());
+      for (let i = 1; i < need; i++) {
+        const c = s.block.cloneNode(true);
+        c.setAttribute('aria-hidden', 'true');
+        s.row.appendChild(c);
+      }
+      s.copies = need;
+    });
+  }
+
+  let inView = true, hovering = false, running = false, last = 0;
+  const section = rows[0].closest('.stack-marquee');
+  new IntersectionObserver(([e]) => { inView = e.isIntersecting; }).observe(section);
+  section.addEventListener('mouseenter', () => { hovering = true; });
+  section.addEventListener('mouseleave', () => { hovering = false; });
+
+  function frame(now){
+    if (!running) return;
+    const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now;
+    if (dt > 0) {
+      const y = window.scrollY;
+      rawV = (y - lastY) / dt; lastY = y;
+      // spring toward raw scroll velocity (semi-implicit Euler, 4 substeps)
+      for (let i = 0, h = dt / 4; i < 4; i++) {
+        springV += (400 * (rawV - springX) - 50 * springV) * h;
+        springX += springV * h;
+      }
+    }
+    if (inView && !hovering && document.visibilityState === 'visible' && dt > 0) {
+      const vf = factor(), abs = Math.min(5, Math.abs(vf));
+      state.forEach(s => {
+        if (!s.unit) return;
+        if (abs > 0.1) s.cur = s.base * (vf >= 0 ? 1 : -1);
+        s.x += s.cur * (s.unit * s.speed / 100) * (1 + abs) * dt;
+        s.row.style.transform = 'translate3d(' + (-wrap(0, s.unit, s.x)) + 'px,0,0)';
+      });
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function start(){
+    if (mq.matches) {           // reduced motion: static, wrapped rows
+      running = false;
+      state.forEach(s => { s.row.style.transform = ''; s.row.querySelectorAll('.sm-track[aria-hidden]').forEach(n => n.remove()); s.copies = 1; });
+      return;
+    }
+    layout();
+    if (!running) { running = true; last = 0; lastY = window.scrollY; requestAnimationFrame(frame); }
+  }
+  new ResizeObserver(() => { if (!mq.matches) layout(); }).observe(rows[0].parentElement);
+  mq.addEventListener('change', start);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (!mq.matches) layout(); });
+  start();
 })();
 
 /* ===== Portfolio chat (real canned Q&A, matches production PortfolioChat) ===== */
