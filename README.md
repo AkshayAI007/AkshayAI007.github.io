@@ -127,11 +127,11 @@ home page rewrites `/#/…` URLs before first paint.
 
 ## Performance
 
-Lighthouse, mobile emulation, median of 3 runs.
+Lighthouse, mobile emulation (v1: median of 3 runs on the live site; v2: median of 5, local build).
 
 | Page | v1 (live, Phase 0) | v2 (this build) |
 | --- | --- | --- |
-| Home: performance / LCP / TBT | 35 / 6.5 s / 4.0 s | 95 / 2.9 s / < 0.1 s |
+| Home: performance / LCP / TBT | 35 / 6.5 s / 4.0 s | 96 / 2.6 s / < 0.1 s |
 | Case study: performance / LCP | 72 / 6.5 s | 99 / 2.1 s |
 | Home JavaScript at load | 168 KB | 7 KB (React loads only when an island is reached) |
 
@@ -145,7 +145,7 @@ Backlog).
   `src/content/projects/cardiovascular.mdx`, then drop its exclusion from `lychee.toml`.
 
 - **LCP target (2.0 s).** With v1's type kept byte-for-byte, LCP waits on the variable Newsreader
-  files (roman ~87 KB, italic ~98 KB after subsetting). Case studies measure ~2.1 s, home ~2.9 s;
+  files (roman ~87 KB, italic ~98 KB after subsetting). Case studies measure ~2.1 s, home ~2.6 s;
   the CI budgets hold those values. Reaching 2.0 s needs a typography decision, e.g.
   `font-display: optional` for Newsreader (first visits on slow networks would show the
   fallback serif) or lighter cuts.

@@ -139,6 +139,7 @@ jobs:
           path: .lighthouseci
           retention-days: 14
           if-no-files-found: ignore
+          include-hidden-files: true
 
   links:
     name: Links (internal + external)

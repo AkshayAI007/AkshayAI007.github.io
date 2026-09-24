@@ -5,7 +5,7 @@ import Photo from '@/components/Photo.astro';
 ---
 
 <section class="hero section-shell" id="heroSection">
-  <div class="hero-ambient" aria-hidden="true"><Photo src={heroAmbient} alt="" sizes="100vw" quality={35} eager /></div>
+  <div class="hero-ambient" aria-hidden="true"><Photo src={heroAmbient} alt="" sizes="(max-width: 1050px) 60vw, 100vw" quality={35} eager /></div>
   <div class="hero-aurora" id="heroAurora" aria-hidden="true"></div>
   <div class="hero-parallax-layer" id="heroParallax" aria-hidden="true"></div>
   <div class="hero-copy" id="heroCopy">
