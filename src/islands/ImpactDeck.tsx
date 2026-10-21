@@ -14,7 +14,7 @@ import { useCallback, useEffect, useLayoutEffect, useReducer, useRef, useState, 
 type Kind = 'queue' | 'stream' | 'grid' | 'ads';
 
 const TABS = [
-  { label: 'Service queue · Voice AI', value: '2 days → 3 min' },
+  { label: 'Service queue · Voice AI', value: '2 days → 30 min' },
   { label: 'Time to first token · ReAct agent', value: '<3s' },
   { label: 'Output accuracy · hybrid RAG', value: '>95%' },
   { label: 'Ad delivery · Google & Meta agent', value: 'days → <10 min' },
@@ -221,15 +221,15 @@ export default function ImpactDeck() {
         {/* className is static on purpose: selection classes are driven imperatively (see useLayoutEffect). */}
         <div className="impact-panel is-active" role="tabpanel" id="impPanel0" aria-labelledby="impTab0" data-kind="queue" hidden={current !== 0} ref={(el) => { panels.current[0] = el; }}>
           <p className="ip-kicker">Service-queue latency &middot; multi-agent voice care</p>
-          <p className="ip-value"><s>2 days</s><span className="ip-arrow" aria-hidden="true">&rarr;</span><strong data-steps="2 days|1 day|12 h|3 h|40 min|3 min">3 min</strong></p>
+          <p className="ip-value"><s>2 days</s><span className="ip-arrow" aria-hidden="true">&rarr;</span><strong data-steps="2 days|1 day|12 h|4 h|1 h|30 min">30 min</strong></p>
           <div className="viz-hours" aria-hidden="true">
             <div className="vh-bars">
               {Array.from({ length: 48 }, (_, h) => <i key={h} style={v('--h', h)}></i>)}
-              <b className="vh-now"><span>now &middot; 3 min</span></b>
+              <b className="vh-now"><span>now &middot; 30 min</span></b>
             </div>
             <div className="vh-axis"><em>0 h</em><em>each outline = one hour of the old queue</em><em>48 h</em></div>
           </div>
-          <ul className="ip-chips"><li><b>&minus;99.9%</b> queue latency</li><li><b>87.5%</b> faster fulfilment</li></ul>
+          <ul className="ip-chips"><li><b>&minus;99%</b> queue latency</li><li><b>87.5%</b> faster fulfilment</li></ul>
         </div>
 
         <div className="impact-panel" role="tabpanel" id="impPanel1" aria-labelledby="impTab1" data-kind="stream" hidden={current !== 1} ref={(el) => { panels.current[1] = el; }}>

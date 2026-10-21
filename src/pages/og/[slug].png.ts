@@ -5,7 +5,7 @@ import { renderOg, type OgCard } from '@/lib/og';
 /** One Open Graph image per route: /og/<slug>.png. */
 export const getStaticPaths = (async () => {
   const pages: { slug: string; card: OgCard }[] = [
-    { slug: 'home', card: { kicker: 'Senior Generative AI & LLM Engineer', title: 'I architect AI systems that', em: 'survive reality.', metric: '2 DAYS → 3 MIN · 3M+ SMBS · 20+ LLM SYSTEMS' } },
+    { slug: 'home', card: { kicker: 'Senior Generative AI & LLM Engineer', title: 'I architect AI systems that', em: 'survive reality.', metric: '2 DAYS → 30 MIN · 3M+ SMBS · 20+ LLM SYSTEMS' } },
     { slug: 'about', card: { kicker: 'About · machine learning to production AI', title: 'Machine learning got me here.', em: 'Generative AI is where I build now.' } },
     { slug: 'writing', card: { kicker: 'Writing · notes from the machine room', title: 'Making complex AI', em: 'harder to misunderstand.' } },
     { slug: 'reach', card: { kicker: 'Reach out · start here', title: 'Have an AI problem that refuses to behave?', em: "Let's talk." } },

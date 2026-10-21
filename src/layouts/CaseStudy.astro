@@ -1,8 +1,9 @@
 ---
-/** A case study: hero + proof, story (MDX body), architecture, decisions, outcome. */
+/** A case study: hero + proof, story (MDX body), architecture (a row of stages, or a bespoke walkthrough), decisions, outcome. */
 import type { CollectionEntry } from 'astro:content';
 import { getEntry, render } from 'astro:content';
 import ArchitectureFlow from '@/components/case/ArchitectureFlow.astro';
+import CallWalkthrough from '@/components/case/CallWalkthrough.astro';
 import DecisionList from '@/components/case/DecisionList.astro';
 import Ledger from '@/components/case/Ledger.astro';
 import ProofMetric from '@/components/case/ProofMetric.astro';
@@ -57,7 +58,9 @@ const jsonLd = [
     <section class="case-story section-shell">
       <Content components={{ Story }} />
     </section>
-    <ArchitectureFlow id={entry.id} title={data.architecture.title} stops={data.architecture.stops} />
+    {data.architecture.figure === 'voice-call'
+      ? <CallWalkthrough id={entry.id} title={data.architecture.title} lede={data.architecture.lede} stops={data.architecture.stops} />
+      : <ArchitectureFlow id={entry.id} title={data.architecture.title} stops={data.architecture.stops} />}
     <DecisionList title={data.decisions.title} items={data.decisions.items} />
     <Ledger {...data.outcome} />
     <section class="next-case reveal"><p>EXPLORE ANOTHER SYSTEM</p><a href={caseHref(next)}>{data.next.label} &rarr;</a></section>

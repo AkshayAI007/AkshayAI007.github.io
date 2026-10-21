@@ -36,7 +36,24 @@ const cases = defineCollection({
     spec: z.array(label).length(4),
     architecture: z.object({
       title: z.string(),
-      stops: z.array(z.object({ label: z.string(), detail: z.string(), hot: z.boolean().default(false) })).min(2),
+      lede: z.string().optional(),
+      /** A bespoke walkthrough from src/components/case instead of the row of stages; its stops become scenes. */
+      figure: z.enum(['voice-call']).optional(),
+      stops: z
+        .array(
+          z.object({
+            label: z.string(),
+            detail: z.string(),
+            hot: z.boolean().default(false),
+            /** Walkthrough only: an illustrative line from the call. */
+            say: z.object({ who: z.string(), text: z.string() }).optional(),
+            /** Walkthrough only: the figure parts this scene lights; the first is the scene's actor. */
+            lights: z.array(z.string()).default([]),
+            /** Walkthrough only: a conditional scene, played only when its toggle is on. */
+            branch: z.boolean().default(false),
+          }),
+        )
+        .min(2),
     }),
     decisions: z.object({
       title: z.string(),

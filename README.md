@@ -57,6 +57,10 @@ build.
 - **Case study** — `src/content/cases/<slug>.mdx` → `/case/<slug>`. Front matter holds the
   structured parts (proof metric and its instrument, spec, architecture stages, decisions,
   outcome ledger, next case); the MDX body holds the prose as `<Story kicker title>` blocks.
+  With `architecture.figure: voice-call` the stages become the scenes of the call walkthrough
+  (`components/case/CallWalkthrough.astro`): each scene's `lights` names the board parts it
+  highlights (the first is the scene's actor), and `branch: true` marks a scene played only
+  when its toggle is on.
 - **Project** — `src/content/projects/<slug>.mdx` → `/projects/<slug>`, plus its card in the
   home-page orbit (`orbit:`). Benchmarks are ranked bars from data (`bench.bars`) or a bespoke
   figure from `src/components/project`. Prose goes in `<Column kicker title>` blocks.

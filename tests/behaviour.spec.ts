@@ -80,11 +80,36 @@ test('project orbit: arrows turn the ring', async ({ page }) => {
 
 test('architecture flow: hovering a stage updates the readout', async ({ page, isMobile }) => {
   test.skip(isMobile, 'hover');
-  await page.goto('/case/voice-ai');
+  await page.goto('/case/agent');
   const stop = page.locator('.flow-stop').first();
   await stop.hover();
   await expect(stop).toHaveClass(/is-hot/);
-  await expect(page.locator('#readout-voice-ai b')).toHaveText('01 · CALLER');
+  await expect(page.locator('#readout-agent b')).toHaveText('01 · QUERY');
+});
+
+test('call walkthrough: steps light the board, the toggle adds the callback scene', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/case/voice-ai');
+  const walk = page.locator('[data-walk]');
+  await walk.scrollIntoViewIfNeeded();
+  await expect(walk.locator('.cw-controls')).toBeVisible();
+  await expect(walk.getByRole('button', { name: 'Play the call' })).toBeVisible();
+  await expect(walk.locator('.cw-scene.is-current b')).toHaveText('01 · CONNECT');
+
+  await walk.getByRole('button', { name: '02 VERIFY' }).click();
+  await expect(walk.locator('.cw-scene.is-current b')).toHaveText('02 · VERIFY');
+  await expect(walk.locator('[data-part="verify"]')).toHaveClass(/is-actor/);
+  await expect(walk.getByRole('button', { name: '02 VERIFY' })).toHaveAttribute('aria-current', 'step');
+
+  const toggle = walk.getByRole('switch', { name: 'Simulate a dropped call' });
+  await expect(toggle).not.toBeChecked();
+  await toggle.check();
+  await expect(walk.locator('.cw-scene.is-current b')).toContainText('05 · CALLBACK');
+  await expect(walk.locator('[data-part="callback"]')).toHaveClass(/is-actor/);
+  await expect(walk).toHaveClass(/is-dropped/);
+  await toggle.uncheck();
+  await expect(walk.locator('.cw-scene.is-current b')).toHaveText('06 · TICKET');
+  await expect(walk).not.toHaveClass(/is-dropped/);
 });
 
 test('reach: copy email', async ({ page, context, browserName }) => {
