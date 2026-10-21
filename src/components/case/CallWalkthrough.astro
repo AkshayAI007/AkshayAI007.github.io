@@ -1,0 +1,236 @@
+---
+/**
+ * A voice call, played through the system. The board shows four lanes: the
+ * call path into the LiveKit room, the agents in the room, recovery for a
+ * dropped line, and the voice loop every turn runs through. Each stop of the
+ * case's architecture is a scene that lights the parts it names (the first is
+ * the scene's actor). Play walks the scenes while the section is in view, the
+ * step buttons jump, and the toggle adds the conditional callback scene.
+ * Without JavaScript the scenes read as a numbered list.
+ */
+interface Props {
+  id: string;
+  title: string;
+  lede?: string;
+  stops: { label: string; detail: string; say?: { who: string; text: string }; lights: string[]; branch: boolean }[];
+}
+const { id, title, lede, stops } = Astro.props;
+
+interface Part {
+  key: string;
+  label: string;
+  sub?: string;
+  idx?: string;
+}
+const LANES: { key: string; label: string; parts: [Part, Part, Part]; links: [Part, Part] }[] = [
+  {
+    key: 'path',
+    label: 'Call path',
+    parts: [
+      { key: 'caller', label: 'Caller', sub: 'phone network' },
+      { key: 'sip', label: 'Twilio SIP trunk', sub: 'SRTP media' },
+      { key: 'room', label: 'LiveKit room', sub: 'WebRTC' },
+    ],
+    links: [
+      { key: 'caller-sip', label: 'SIP' },
+      { key: 'sip-room', label: 'SRTP' },
+    ],
+  },
+  {
+    key: 'agents',
+    label: 'Agents · in the room',
+    parts: [
+      { key: 'verify', idx: '01', label: 'User verification', sub: 'consent · OTP' },
+      { key: 'care', idx: '02', label: 'Website care specialist', sub: 'tools · reasoning' },
+      { key: 'crm', label: 'Integrations', sub: 'Salesforce · CRM · DB' },
+    ],
+    links: [
+      { key: 'verify-care', label: 'handoff + state' },
+      { key: 'care-crm', label: 'tool calls' },
+    ],
+  },
+  {
+    key: 'recover',
+    label: 'Recovery · only if the line drops',
+    parts: [
+      { key: 'state', label: 'Conversation state', sub: 'saved every turn' },
+      { key: 'callback', idx: '03', label: 'Callback agent', sub: 'dials back' },
+      { key: 'resume', label: 'Same call, same step', sub: 'no restart' },
+    ],
+    links: [
+      { key: 'state-callback', label: 'restore' },
+      { key: 'callback-resume', label: 'resume' },
+    ],
+  },
+  {
+    key: 'loop',
+    label: 'Voice loop · every turn',
+    parts: [
+      { key: 'stt', label: 'STT', sub: 'speech → text' },
+      { key: 'llm', label: 'LLM + tools', sub: 'reason · act' },
+      { key: 'tts', label: 'TTS', sub: 'text → speech' },
+    ],
+    links: [
+      { key: 'stt-llm', label: 'transcript' },
+      { key: 'llm-tts', label: 'reply' },
+    ],
+  },
+];
+/** The care specialist's seven moves, lit in order by the `verbs` part. */
+const VERBS = ['Document', 'Verify', 'Reason', 'Suggest', 'Escalate', 'Confirm', 'Summarize'];
+
+const known = new Set(['verbs', ...LANES.flatMap((l) => [...l.parts, ...l.links].map((p) => p.key))]);
+for (const s of stops) {
+  for (const k of s.lights) if (!known.has(k)) throw new Error(`${id}: scene "${s.label}" lights unknown part "${k}"`);
+}
+
+const pad = (i: number) => String(i + 1).padStart(2, '0');
+const boardLabel = `Diagram of the system in four lanes. ${LANES.map((l) => `${l.label}: ${l.parts.map((p) => p.label).join(', ')}.`).join(' ')} The website care specialist works in seven moves: ${VERBS.join(', ')}.`;
+---
+
+<section class="case-architecture call-walk section-shell reveal" data-walk>
+  <p class="section-kicker">THE ARCHITECTURE</p><h2>{title}</h2>
+  {lede && <p class="cw-lede">{lede}</p>}
+
+  <div class="cw-board" role="img" aria-label={boardLabel}>
+    {LANES.map((lane) => (
+      <div class:list={['cw-lane', `cw-lane--${lane.key}`]}>
+        <p class="cw-lane-label">{lane.label}</p>
+        <div class="cw-row">
+          {lane.parts.map((p, i) => (
+            <Fragment>
+              <div class="cw-node" data-part={p.key}>{p.idx && <span class="cw-idx">{p.idx}</span>}<strong>{p.label}</strong><small>{p.sub}</small></div>
+              {i < 2 && <i class="cw-link" data-part={lane.links[i]!.key}><b></b><em>{lane.links[i]!.label}</em></i>}
+            </Fragment>
+          ))}
+          {lane.key === 'agents' && <ol class="cw-verbs" data-part="verbs">{VERBS.map((v, i) => <li style={`--v:${i}`}>{v}</li>)}</ol>}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="cw-console">
+    <div class="cw-controls" hidden>
+      <button type="button" class="cw-play"><span class="cw-play-icon" aria-hidden="true"></span><span class="cw-play-text">Play the call</span></button>
+      <ol class="cw-steps">
+        {stops.map((s, i) => (
+          <li><button type="button" class:list={['cw-step', { 'is-branch': s.branch }]} aria-current={i === 0 ? 'step' : undefined}><span>{pad(i)}</span> {s.label}{s.branch && <span class="visually-hidden"> (only if the line drops)</span>}<i aria-hidden="true"></i></button></li>
+        ))}
+      </ol>
+      <label class="cw-toggle"><input type="checkbox" role="switch" /><span>Simulate a dropped call</span></label>
+    </div>
+    <ol class="cw-scenes" aria-live="polite">
+      {stops.map((s, i) => (
+        <li class:list={['cw-scene', { 'is-current': i === 0 }]} data-lights={s.lights.join(' ')} data-branch={s.branch ? '' : undefined}>
+          <b>{pad(i)} · {s.label}{s.branch && <span class="cw-tag">Only if the line drops</span>}</b>
+          <p>{s.detail}</p>
+          {s.say && <p class="cw-say"><span>{s.say.who}</span>&ldquo;{s.say.text}&rdquo;</p>}
+        </li>
+      ))}
+    </ol>
+    <p class="flow-hint">Caller and agent lines are illustrative · client under NDA</p>
+  </div>
+</section>
+
+<script>
+  /** How long each scene holds while playing (ms); the step's progress bar matches it. */
+  const DWELL = 5600;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-walk]')) {
+    const scenes = [...root.querySelectorAll<HTMLElement>('.cw-scene')];
+    const steps = [...root.querySelectorAll<HTMLButtonElement>('.cw-step')];
+    const parts = [...root.querySelectorAll<HTMLElement>('[data-part]')];
+    const live = root.querySelector<HTMLElement>('.cw-scenes')!;
+    const controls = root.querySelector<HTMLElement>('.cw-controls')!;
+    const play = root.querySelector<HTMLButtonElement>('.cw-play')!;
+    const toggle = root.querySelector<HTMLInputElement>('.cw-toggle input')!;
+    const branch = scenes.findIndex((s) => s.hasAttribute('data-branch'));
+    let current = 0;
+    let timer = 0;
+    let playing = false;
+    // Autoplay while in view, unless the visitor prefers less motion or has taken over.
+    let wantPlay = !reduce.matches;
+
+    const enabled = (i: number) => i !== branch || toggle.checked;
+    const after = (from: number) => {
+      for (let k = 1; k <= scenes.length; k++) {
+        const i = (from + k) % scenes.length;
+        if (enabled(i)) return i;
+      }
+      return from;
+    };
+
+    const tick = () => {
+      clearTimeout(timer);
+      root.classList.remove('is-ticking');
+      void root.offsetWidth; // restart the progress bar
+      root.classList.add('is-ticking');
+      timer = window.setTimeout(() => show(after(current)), DWELL);
+    };
+
+    const show = (i: number) => {
+      current = i;
+      const lights = scenes[i]!.dataset.lights!.split(' ').filter(Boolean);
+      const lit = new Set(lights);
+      for (const p of parts) {
+        p.classList.toggle('is-on', lit.has(p.dataset.part!));
+        p.classList.toggle('is-actor', p.dataset.part === lights[0]);
+      }
+      scenes.forEach((s, k) => s.classList.toggle('is-current', k === i));
+      steps.forEach((b, k) => {
+        b.classList.toggle('is-current', k === i);
+        if (k === i) b.setAttribute('aria-current', 'step');
+        else b.removeAttribute('aria-current');
+      });
+      root.classList.toggle('is-dropped', i === branch);
+      if (playing) tick();
+    };
+
+    const setPlaying = (on: boolean) => {
+      playing = on;
+      play.querySelector('.cw-play-text')!.textContent = on ? 'Pause' : 'Play the call';
+      play.classList.toggle('is-playing', on);
+      // Announce scene changes the visitor asks for, not every automatic one.
+      live.setAttribute('aria-live', on ? 'off' : 'polite');
+      if (on) tick();
+      else {
+        clearTimeout(timer);
+        root.classList.remove('is-ticking');
+      }
+    };
+
+    play.addEventListener('click', () => {
+      wantPlay = !playing;
+      setPlaying(wantPlay);
+    });
+    const setBranch = (on: boolean) => {
+      toggle.checked = on;
+      root.classList.toggle('has-branch', on);
+    };
+    steps.forEach((b, k) =>
+      b.addEventListener('click', () => {
+        wantPlay = false;
+        setPlaying(false);
+        if (k === branch) setBranch(true);
+        show(k);
+      }),
+    );
+    toggle.addEventListener('change', () => {
+      setBranch(toggle.checked);
+      if (toggle.checked && branch >= 0) show(branch);
+      else if (!enabled(current)) show(after(current));
+    });
+
+    root.style.setProperty('--dwell', `${DWELL}ms`);
+    root.classList.add('is-live');
+    controls.hidden = false;
+    show(0);
+
+    new IntersectionObserver(([entry]) => {
+      if (entry!.isIntersecting) {
+        if (wantPlay && !playing) setPlaying(true);
+      } else if (playing) setPlaying(false);
+    }, { threshold: 0.35 }).observe(root);
+  }
+</script>

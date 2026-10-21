@@ -1,21 +1,21 @@
 ---
-title: 'Voice AI: a two-day queue to three minutes'
-description: A three-agent voice AI workflow on LiveKit, Twilio SIP and Salesforce that cut a two-day service queue to three minutes and won an enterprise contract.
+title: 'Voice AI: a two-day queue to thirty minutes'
+description: 'A three-agent voice AI system on Twilio SIP and LiveKit that verifies callers, resolves requests and resumes dropped calls: a two-day queue cut to 30 minutes.'
 order: 1
 kicker: CASE STUDY 01 / VOICE AI · MULTI-AGENT · ENTERPRISE
-heading: From a two-day service queue to three minutes.
-lede: A three-agent voice workflow that verifies the caller, understands the request, enforces compliance and files the Salesforce ticket before the call ends. I scoped the use case and demoed the proof of concept that won the contract.
+heading: From a two-day service queue to thirty minutes.
+lede: Three voice agents share one call. One verifies the caller, one resolves the request and files the ticket, and one calls back if the line drops, picking up exactly where the conversation stopped. I scoped the use case and demoed the proof of concept that won the contract.
 proof:
   label: Service-queue latency
   value:
     from: 2 days
-    to: 3 min
-    seq: 2 days|1 day|12 h|3 h|40 min|3 min
-    spoken: from 2 days to 3 minutes
+    to: 30 min
+    seq: 2 days|1 day|12 h|4 h|1 h|30 min
+    spoken: from 2 days to 30 minutes
   viz:
     kind: collapse
-    after: 1.5%
-  foot: −99.9% queue latency
+    after: 1.04%
+  foot: −99% queue latency
   support:
   - label: Fulfilment time
     value: 87.5% faster
@@ -27,44 +27,73 @@ spec:
 - label: Role
   value: Use-case scoping, POC demo, architecture
 - label: Stack
-  value: LiveKit · Twilio SIP · Salesforce
+  value: Twilio SIP · LiveKit · STT → LLM → TTS · Salesforce
 - label: Guardrails
-  value: Real-time, aligned to HIPAA & PCI DSS
+  value: SRTP-encrypted audio, OTP verification, US call-recording consent
 - label: Client
   value: Enterprise, under NDA
 architecture:
-  title: Three agents. Five checkpoints.
+  title: Three agents. One unbroken call.
+  lede: Every turn runs the same loop — speech-to-text, an LLM that reasons and calls tools, text-to-speech — streamed over WebRTC inside a LiveKit room. Follow one call through it, or step through it yourself.
+  figure: voice-call
   stops:
-  - label: CALLER
-    detail: Inbound call over Twilio SIP, streamed through LiveKit for real-time turn-taking and interruption handling.
-  - label: VERIFICATION
-    detail: URL lookup and OTP validation. No account context enters the conversation until identity is proven.
-  - label: CARE AGENT
-    detail: Understands the service request and gathers what fulfilment needs, in natural conversation.
-    hot: true
-  - label: COMPLIANCE
-    detail: Real-time guardrails aligned to HIPAA and PCI DSS check what is said, captured and stored.
-  - label: SALESFORCE
-    detail: Validated intent becomes a structured ticket through a controlled tool call — no re-keying.
+  - label: CONNECT
+    detail: The caller dials the support line. Twilio’s SIP trunk bridges the call into a LiveKit room. SRTP encrypts the audio on the SIP leg and WebRTC carries it inside the room, the low-latency path every later step depends on.
+    lights: [sip, caller, room, caller-sip, sip-room]
+  - label: VERIFY
+    detail: The User Verification agent opens with the recording disclosure and asks for consent, as US all-party-consent states require. It then texts a one-time code to the mobile number on file and checks what the caller reads back. No account details enter the conversation until the code matches.
+    say:
+      who: AGENT
+      text: This call is recorded for quality — is that alright? I’ve just texted a code to the number on your account.
+    lights: [verify, caller, sip, room, caller-sip, sip-room, stt, llm, tts, stt-llm, llm-tts]
+  - label: HAND OFF
+    detail: Verification hands the call to the Website Care Specialist along with the verified identity, the consent record and everything said so far. The caller never repeats themselves.
+    say:
+      who: AGENT
+      text: Thanks, you’re verified. Let’s take a look at your website.
+    lights: [care, verify, verify-care, state, caller, sip, room, caller-sip, sip-room]
+  - label: RESOLVE
+    detail: The Website Care Specialist works the request in seven moves — document, verify, reason, suggest, escalate, confirm, summarize — using its tools to look things up and act as it goes. The conversation state is saved on every turn.
+    say:
+      who: CALLER
+      text: The contact form on my site stopped sending me leads.
+    lights: [care, verbs, state, caller, sip, room, caller-sip, sip-room, stt, llm, tts, stt-llm, llm-tts]
+  - label: CALLBACK
+    detail: If the line drops mid-call, the Callback agent loads the state saved at the last turn, dials the verified number back and resumes at the same step. A one-line recording notice, then straight back to the request. No second code, no starting over; to the caller, it is the same conversation.
+    say:
+      who: AGENT
+      text: Sorry, we got cut off. We were confirming the fix for your contact form.
+    branch: true
+    lights: [callback, state, state-callback, resume, callback-resume, caller, sip, room, caller-sip, sip-room, stt, llm, tts, stt-llm, llm-tts]
+  - label: TICKET
+    detail: The Specialist confirms the summary with the caller, then files a structured ticket through tool calls to Salesforce and the other CRM, ticketing and database integrations. The request clears the queue in 30 minutes instead of two days.
+    say:
+      who: AGENT
+      text: Here’s what I’ve logged for you. Anything to add before I submit it?
+    lights: [crm, care, care-crm, verbs, caller, sip, room, caller-sip, sip-room, stt, llm, tts, stt-llm, llm-tts]
 decisions:
   title: Verification comes before the conversation does.
   items:
-  - title: Split verification, care and compliance into three agents.
-    insteadOf: One voice agent carrying every policy in a single prompt.
-    because: Compliance rules stop competing with conversation flow for the same context, and each agent can be tested on its own.
-    tradeoff: More handoffs to engineer — each one a latency and state-transfer risk.
-  - title: Prove identity before any account context is exposed.
-    insteadOf: Verifying lazily, once the caller asks for something sensitive.
-    because: PII never enters the model’s context for an unverified caller, which is what HIPAA and PCI DSS alignment demands.
-    tradeoff: A few seconds of friction at the start of every call.
-  - title: Run the whole exchange in real time on LiveKit and Twilio SIP.
-    insteadOf: Capturing the request and calling back once it was processed.
-    because: Resolving the request on the first call is what removes the queue entirely.
+  - title: Split the call across three specialised agents.
+    insteadOf: One voice agent carrying verification, support and recovery in a single prompt.
+    because: Each agent gets a narrow job and only the tools it needs, so verification can’t drift into support, and each one is tested on its own.
+    tradeoff: Handoffs to engineer, each one a latency and state-transfer risk.
+  - title: Verify with a one-time code, after recording consent.
+    insteadOf: Security questions, or verifying lazily once the caller asks for something sensitive.
+    because: A code sent to the number on file proves the caller holds that phone, and no account data reaches the model until it matches. Disclosure and consent open every call, as all-party-consent states require.
+    tradeoff: A few seconds of friction up front, and a dependency on SMS delivery.
+  - title: Stream STT → LLM → TTS over WebRTC, with SRTP on the SIP leg.
+    insteadOf: A press-1 phone menu, or recording the request and processing it later.
+    because: Turn-taking and interruptions only feel natural when every hop is streamed, and resolving the request on the first call is what removes the queue.
     tradeoff: A strict latency budget that constrains every model and tool choice.
-  - title: File tickets through a controlled, structured tool call.
+  - title: Save the conversation state every turn, so a dropped call resumes.
+    insteadOf: Asking the caller to ring back and start again from verification.
+    because: The Callback agent picks up at the exact step with full context, so the caller never notices the break.
+    tradeoff: A write on every turn, and tool calls made idempotent so a resumed call never files a ticket twice.
+  - title: File tickets through structured tool calls.
     insteadOf: A free-text call summary for a human to re-key.
-    because: The ticket is actionable the moment the call ends, and every field is validated.
-    tradeoff: Schemas must be kept in sync with Salesforce, with a fallback when intent is ambiguous.
+    because: The ticket is actionable the moment the call ends, and every field is validated before it reaches Salesforce or the other integrations.
+    tradeoff: Schemas to keep in sync with each integration, and an escalation path when intent is ambiguous.
 outcome:
   lede: The queue stopped being a queue — and the proof of concept became a signed contract.
   caption: Voice AI outcomes, before and after
@@ -76,12 +105,16 @@ outcome:
   rows:
   - - Service-queue latency
     - 2 days
-    - 3 minutes
-    - −99.9%
+    - 30 minutes
+    - −99%
   - - Fulfilment time
     - Manual, multi-team
     - Autonomous, with escalation
     - 87.5% faster
+  - - Dropped calls
+    - Caller redials and starts over
+    - Callback resumes mid-conversation
+    - No restart
   - - Availability
     - Queue-bound
     - 24/7
@@ -99,5 +132,5 @@ next:
 Inbound service requests entered a manual queue. Customers waited up to two days before work began, while identity checks, information capture and ticket creation crossed several systems and teams.
 </Story>
 <Story kicker="THE CONSTRAINT" title="Real-time doesn’t forgive mistakes.">
-The system had to hold a live conversation, hand off between agents without losing state, keep PII out of reach until identity was proven, and stay observable enough for enterprise production support.
+The system had to hold a natural conversation with no audible lag, prove who the caller was before touching their account, follow US call-recording consent rules on every call, and survive a dropped line without making the caller start again.
 </Story>

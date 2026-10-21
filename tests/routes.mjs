@@ -6,7 +6,7 @@ export const ROUTES = [
   { name: 'writing', path: '/writing', legacy: '/#/writing', h1: 'Making complex AI harder to misunderstand.' },
   { name: 'reach', path: '/reach', legacy: '/#/reach', h1: 'Have an AI problem that refuses to behave?' },
   { name: 'resume', path: '/resume', legacy: '/#/resume', h1: 'Everything above, compressed to one page.' },
-  { name: 'case-voice-ai', path: '/case/voice-ai', legacy: '/#/case/voice-ai', h1: 'From a two-day service queue to three minutes.' },
+  { name: 'case-voice-ai', path: '/case/voice-ai', legacy: '/#/case/voice-ai', h1: 'From a two-day service queue to thirty minutes.' },
   { name: 'case-agent', path: '/case/agent', legacy: '/#/case/agent', h1: 'An autonomous agent answering for 3M+ SMBs in under three seconds.' },
   { name: 'case-onboarding', path: '/case/onboarding', legacy: '/#/case/onboarding', h1: 'Four agents, one validated business profile.' },
   { name: 'project-cardiovascular', path: '/projects/cardiovascular', legacy: '/projects/cardiovascular.html', h1: 'Estimating a patient' },

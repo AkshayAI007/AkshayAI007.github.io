@@ -12,7 +12,7 @@ export interface OgCard {
   title: string;
   /** Second headline line, set in italic accent (the site's <em>). */
   em?: string;
-  /** Proof line at the foot, e.g. "2 days → 3 min · service-queue latency". */
+  /** Proof line at the foot, e.g. "2 days → 30 min · service-queue latency". */
   metric?: string;
 }
 

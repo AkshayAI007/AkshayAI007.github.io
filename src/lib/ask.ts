@@ -14,7 +14,7 @@ export const ASK_PROMPTS = [
   {
     label: 'Voice AI impact',
     answer:
-      'A three-agent Voice AI workflow on LiveKit, Twilio SIP and Salesforce cut request-queue latency from two days to three minutes (99.9%) and fulfilment time by 87.5%, with real-time HIPAA- and PCI-DSS-aligned guardrails.',
+      'A three-agent Voice AI system on Twilio SIP, LiveKit and Salesforce cut request-queue latency from two days to 30 minutes (99%) and fulfilment time by 87.5%. A verification agent checks a one-time code after recording consent, a website care specialist resolves the request and files the ticket, and a callback agent resumes dropped calls where they left off.',
   },
   {
     label: 'Scale',
